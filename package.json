@@ -1,0 +1,19 @@
+{
+  "name": "helpmehelpyou",
+  "version": "1.0.0",
+  "description": "a place to find those with the skills you need",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/menghaoyu2002/helpmehelpyou.git"
+  },
+  "author": "Menghao Yu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/menghaoyu2002/helpmehelpyou/issues"
+  },
+  "homepage": "https://github.com/menghaoyu2002/helpmehelpyou#readme"
+}

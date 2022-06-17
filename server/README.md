@@ -14,7 +14,7 @@ API documentation located [here](https://menghaoyu2002.github.io/helpmehelpyou-d
 
 `npm run build`
 
-**Make sure to build before you try to start the server**
+**Make sure to build before you try to start the server for the first time**
 
 ---
 

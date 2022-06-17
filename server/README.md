@@ -6,7 +6,7 @@ API documentation located [here](https://menghaoyu2002.github.io/helpmehelpyou-d
 
 ---
 
-### Install
+### Install:
 
 `npm install`
 
@@ -18,10 +18,10 @@ API documentation located [here](https://menghaoyu2002.github.io/helpmehelpyou-d
 
 ---
 
-### Start Server for Production
+### Start Server for Production:
 
 `npm run start`
 
-### Start Server for development (hot reloading)
+### Start Server for development (hot reloading):
 
 `npm run dev`

@@ -1,0 +1,12 @@
+services:
+    web:
+        build:
+            context: .
+            target: development
+        ports:
+            - '3000:3000'
+        env_file: ./config/.env
+        volumes:
+            - ./:/app
+            - /app/node_modules
+        command: npm run dev

@@ -1,3 +1,3 @@
 # HelpMeHelpYou API
 
-API documentation located [here](https://menghaoyu2002.github.io/helpmehelpyou-docs/#/api/).
+API documentation located [here](https://helpmehelpyu.github.io/helpmehelpyou-docs/#/api/).

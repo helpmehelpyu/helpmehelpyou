@@ -1,14 +1,20 @@
-import { Pool } from 'pg';
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
 
-const pool = new Pool({
-    user: process.env.POSTGRES_USERNAME,
+export const AppDataSource = new DataSource({
+    type: 'postgres',
     host: process.env.POSTGRES_HOST,
-    database: process.env.POSTGRES_DATABASE,
-    password: process.env.POSTGRES_PASSWORD,
     port: parseInt(process.env.POSTGRES_PORT!, 10),
-    ssl: process.env.POSTGRES_SSL_REQUIRED === 'true',
+    username: process.env.POSTGRES_USERNAME,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DATABASE,
+    ssl: process.env.POSTGRES_SSL_ENABLED === 'true',
+    entities: [],
+    synchronize: true,
+    logging: false,
 });
 
-export const query = async (text: string, params: string[] = []) => {
-    return await pool.query(text, params);
-};
+// to initialize initial connection with the database, register all entities
+// and "synchronize" database schema, call "initialize()" method of a newly created database
+// once in your application bootstrap
+AppDataSource.initialize().catch((error) => console.log(error));

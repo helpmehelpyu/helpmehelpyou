@@ -4,9 +4,9 @@ import mediaController = require('../controllers/MediaController');
 const router = Router();
 
 // GET media by id
-router.get('/:mediaId', mediaController.fetchMediaById);
+router.get('/:mediaId', mediaController.findMediaById);
 
-router.post('/');
+router.post('/', mediaController.uploadMedia);
 
 router.patch('/:mediaId');
 

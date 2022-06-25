@@ -14,7 +14,7 @@ router.post(
     userController.register
 );
 
-router.post('/login', userController.register);
+router.post('/login', userController.login);
 
 router.post('/logout');
 

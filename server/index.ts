@@ -16,7 +16,7 @@ cloudinary.v2.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/media', mediaRouter);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

@@ -34,6 +34,7 @@ export const uploadMedia = async function (
             resource_type: 'auto',
             use_filename: false,
             unique_filename: true,
+            chunk_size: 6000000,
         }
     );
 

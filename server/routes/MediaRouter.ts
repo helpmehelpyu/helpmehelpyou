@@ -11,8 +11,8 @@ router.get('/:mediaId', mediaController.findMediaById);
 
 router.post(
     '/',
-    authenticateUser,
     upload.single('media'),
+    authenticateUser,
     body('title').isLength({ min: 1, max: 500 }).escape(),
     body('description').isLength({ max: 5000 }).escape(),
     mediaController.uploadMedia

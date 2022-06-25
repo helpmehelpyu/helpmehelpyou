@@ -13,6 +13,8 @@ const port = process.env.PORT;
 AppDataSource.initialize().catch((err) => console.log(err));
 cloudinary.v2.config();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use('/media', mediaRouter);
 app.use('/user', userRouter);
 

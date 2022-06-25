@@ -9,8 +9,7 @@ export const findMediaById = (req: Request, res: Response) => {
     if (!retrievedMedia) {
         return res.status(404).json({
             type: 'Media Not Found Error',
-            description:
-                'The media with the specified mediaId could not be found',
+            message: 'The media with the specified mediaId could not be found',
         });
     }
     console.log(retrievedMedia);

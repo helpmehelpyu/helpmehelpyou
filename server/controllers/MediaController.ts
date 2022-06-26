@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
+import { matchedData, validationResult } from 'express-validator';
 import mediaService = require('../services/MediaService');
 
 export const findMediaById = async (req: Request, res: Response) => {
     const mediaId = req.params.mediaId;
-    let retrievedMedia = await mediaService.findById(mediaId);
+    let retrievedMedia = await mediaService.findByMediaId(mediaId);
 
     if (!retrievedMedia) {
         return res.status(404).json({
@@ -35,9 +35,13 @@ export const uploadMedia = async (req: Request, res: Response) => {
 
         const mediaId = await mediaService.uploadMedia(
             req.file,
-            req.body.title,
-            req.body.description,
-            req.body.user
+            req.body.user,
+            mediaService.castMatchedDataToMediaInfo({
+                ...matchedData(req, {
+                    locations: ['body'],
+                    includeOptionals: true,
+                }),
+            })
         );
 
         res.status(201).json({ mediaId: mediaId });
@@ -50,4 +54,44 @@ export const uploadMedia = async (req: Request, res: Response) => {
             validationErrors: [],
         });
     }
+};
+
+export const updateMedia = async (req: Request, res: Response) => {
+    const validationErrors = validationResult(req);
+
+    if (!validationErrors.isEmpty()) {
+        return res.status(400).json({
+            errors: validationErrors.array(),
+        });
+    }
+
+    const mediaId = req.params.mediaId;
+
+    const media = await mediaService.findByMediaId(mediaId);
+
+    if (!media) {
+        return res.status(404).json({
+            message: 'The media with the given mediaId could not be found',
+        });
+    }
+
+    if (!mediaService.isAuthor(req.body.user, media)) {
+        return res.status(403).json({
+            message:
+                'The current user is not authorized to perform this action',
+        });
+    }
+
+    const updatedProperties = mediaService.castMatchedDataToMediaInfo({
+        ...matchedData(req, { locations: ['body'] }),
+    });
+
+    const updatedMedia = await mediaService.updateMedia(
+        media,
+        updatedProperties
+    );
+    const updatedMediaResult =
+        mediaService.castMediaToMediaResult(updatedMedia);
+
+    res.status(200).json(updatedMediaResult);
 };

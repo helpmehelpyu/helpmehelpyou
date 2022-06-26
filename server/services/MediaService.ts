@@ -6,12 +6,12 @@ import path from 'path';
 import { User } from '../models/User';
 import { MediaResult } from '../types/MediaResult';
 import userService = require('../services/UserService');
-import { Author } from '../types/Author';
+import { MediaInfo } from '../types/MediaInfo';
 
-export const findById = async function (
+export const findByMediaId = async function (
     mediaId: string
 ): Promise<Media | null> {
-    const media = await AppDataSource.getRepository(Media).findOne({
+    return AppDataSource.getRepository(Media).findOne({
         where: {
             id: mediaId,
         },
@@ -19,28 +19,12 @@ export const findById = async function (
             author: true,
         },
     });
-
-    return media;
-};
-
-export const castMediaToMediaResult = function (media: Media): MediaResult {
-    const author = userService.castUserToAuthor(media.author);
-
-    return {
-        id: media.id,
-        source: media.source,
-        title: media.title,
-        description: media.description,
-        author: author,
-        uploadDate: media.uploadDate,
-    };
 };
 
 export const uploadMedia = async function (
     file: Express.Multer.File,
-    title: string,
-    description: string,
-    author: User
+    author: User,
+    mediaInfo: MediaInfo
 ): Promise<string> {
     const parser = new DataURIParser();
 
@@ -68,11 +52,42 @@ export const uploadMedia = async function (
         id: uploadedMedia.public_id,
         author: author,
         source: uploadedMedia.url,
-        title: title,
-        description: description,
+        ...mediaInfo,
     });
 
     await mediaRepository.save(media);
 
     return media.id;
+};
+
+export const castMediaToMediaResult = function (media: Media): MediaResult {
+    const author = userService.castUserToAuthor(media.author);
+    return {
+        ...media,
+        author: author,
+    };
+};
+
+export const updateMedia = async function (
+    media: Media,
+    updatedProperties: MediaInfo
+): Promise<Media> {
+    media = {
+        ...media,
+        ...updatedProperties,
+    };
+    return AppDataSource.getRepository(Media).save(media);
+};
+
+export const isAuthor = async function (
+    userId: string,
+    media: Media
+): Promise<boolean> {
+    return media.author.id === userId;
+};
+
+export const castMatchedDataToMediaInfo = function (matchedData: {
+    [x: string]: any;
+}): MediaInfo {
+    return matchedData as MediaInfo;
 };

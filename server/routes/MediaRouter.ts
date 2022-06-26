@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { body } from 'express-validator';
 import mediaController = require('../controllers/MediaController');
 import { authenticateUser } from '../middleware/Authentication';
+import { validateMediaProperties } from '../middleware/MediaValidation';
 import { upload } from '../middleware/Multer';
 
 const router = Router();
@@ -9,16 +9,21 @@ const router = Router();
 // GET media by id
 router.get('/:mediaId', mediaController.findMediaById);
 
+// CREATE a new media object
 router.post(
     '/',
     upload.single('media'),
     authenticateUser,
-    body('title').isLength({ min: 1, max: 500 }).escape(),
-    body('description').isLength({ max: 5000 }).escape(),
+    validateMediaProperties,
     mediaController.uploadMedia
 );
 
-router.patch('/:mediaId', authenticateUser);
+router.patch(
+    '/:mediaId',
+    authenticateUser,
+    validateMediaProperties,
+    mediaController.updateMedia
+);
 
 router.delete('/:mediaId', authenticateUser);
 

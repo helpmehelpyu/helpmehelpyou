@@ -23,11 +23,11 @@ export async function authenticateUser(
 
         const user = await userService.findUserById(userId);
         if (!user) {
-            return res.sendStatus(403);
+            return res.sendStatus(401);
         }
         req.body.user = user;
         next();
     } catch (err) {
-        return res.sendStatus(403);
+        return res.sendStatus(401);
     }
 }

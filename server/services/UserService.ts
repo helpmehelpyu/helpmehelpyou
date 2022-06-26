@@ -3,6 +3,7 @@ import { User } from '../models/User';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { UserInfo } from '../types/UserInfo';
+import { Author } from '../types/Author';
 
 export const findUserById = async function (
     userId: string
@@ -45,4 +46,11 @@ export const login = async function (
     return [true, token];
 };
 
+export const castUserToAuthor = function (user: User): Author {
+    return {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+    };
+};
 export const logout = async function () {};

@@ -4,11 +4,36 @@ import DataURIParser from 'datauri/parser';
 import cloudinary from 'cloudinary';
 import path from 'path';
 import { User } from '../models/User';
+import { MediaResult } from '../types/MediaResult';
+import userService = require('../services/UserService');
+import { Author } from '../types/Author';
 
 export const findById = async function (
     mediaId: string
 ): Promise<Media | null> {
-    return await AppDataSource.getRepository(Media).findOneBy({ id: mediaId });
+    const media = await AppDataSource.getRepository(Media).findOne({
+        where: {
+            id: mediaId,
+        },
+        relations: {
+            author: true,
+        },
+    });
+
+    return media;
+};
+
+export const castMediaToMediaResult = function (media: Media): MediaResult {
+    const author = userService.castUserToAuthor(media.author);
+
+    return {
+        id: media.id,
+        source: media.source,
+        title: media.title,
+        description: media.description,
+        author: author,
+        uploadDate: media.uploadDate,
+    };
 };
 
 export const uploadMedia = async function (

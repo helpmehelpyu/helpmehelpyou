@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import mediaService = require('../services/MediaService');
 
-export const findMediaById = (req: Request, res: Response) => {
+export const findMediaById = async (req: Request, res: Response) => {
     const mediaId = req.params.mediaId;
-    let retrievedMedia = mediaService.findById(mediaId);
+    let retrievedMedia = await mediaService.findById(mediaId);
 
     if (!retrievedMedia) {
         return res.status(404).json({
@@ -12,9 +12,10 @@ export const findMediaById = (req: Request, res: Response) => {
             message: 'The media with the specified mediaId could not be found',
         });
     }
-    console.log(retrievedMedia);
 
-    res.status(200).json(retrievedMedia);
+    const mediaResult = mediaService.castMediaToMediaResult(retrievedMedia);
+
+    res.status(200).json(mediaResult);
 };
 
 export const uploadMedia = async (req: Request, res: Response) => {
@@ -41,7 +42,7 @@ export const uploadMedia = async (req: Request, res: Response) => {
 
         res.status(201).json({ mediaId: mediaId });
     } catch (err) {
-        res.status(400).json({
+        res.status(500).json({
             fileError: {
                 type: 'FileParseError',
                 message: 'File could not be parsed',

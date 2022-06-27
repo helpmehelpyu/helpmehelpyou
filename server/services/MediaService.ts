@@ -70,7 +70,7 @@ export const castMediaToMediaResult = function (media: Media): MediaResult {
 
 export const updateMedia = async function (
     media: Media,
-    updatedProperties: MediaInfo
+    updatedProperties: { [x: string]: any }
 ): Promise<Media> {
     media = {
         ...media,
@@ -84,12 +84,6 @@ export const isAuthor = async function (
     media: Media
 ): Promise<boolean> {
     return media.author.id === userId;
-};
-
-export const castMatchedDataToMediaInfo = function (matchedData: {
-    [x: string]: any;
-}): MediaInfo {
-    return matchedData as MediaInfo;
 };
 
 export const deleteMedia = async function (

@@ -36,12 +36,7 @@ export const uploadMedia = async (req: Request, res: Response) => {
         const mediaId = await mediaService.uploadMedia(
             req.file,
             res.locals.user,
-            mediaService.castMatchedDataToMediaInfo({
-                ...matchedData(req, {
-                    locations: ['body'],
-                    includeOptionals: true,
-                }),
-            })
+            req.body
         );
 
         res.status(201).json({ mediaId: mediaId });
@@ -93,14 +88,9 @@ export const updateMedia = async (req: Request, res: Response) => {
 
     const media = res.locals.media;
 
-    const updatedProperties = mediaService.castMatchedDataToMediaInfo({
+    const updatedMedia = await mediaService.updateMedia(media, {
         ...matchedData(req, { locations: ['body'] }),
     });
-
-    const updatedMedia = await mediaService.updateMedia(
-        media,
-        updatedProperties
-    );
     const updatedMediaResult =
         mediaService.castMediaToMediaResult(updatedMedia);
 

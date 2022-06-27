@@ -91,3 +91,12 @@ export const castMatchedDataToMediaInfo = function (matchedData: {
 }): MediaInfo {
     return matchedData as MediaInfo;
 };
+
+export const deleteMedia = async function (
+    media: Media
+): Promise<number | null | undefined> {
+    const res = await AppDataSource.getRepository(Media).delete({
+        id: media.id,
+    });
+    return res.affected;
+};

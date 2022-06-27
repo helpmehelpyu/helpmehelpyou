@@ -106,3 +106,17 @@ export const updateMedia = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedMediaResult);
 };
+
+export const deleteMedia = async (req: Request, res: Response) => {
+    const media = res.locals.media;
+
+    const rowsAffected = await mediaService.deleteMedia(media!);
+
+    if (rowsAffected != 1) {
+        return res.status(500).json({
+            message: 'unable to delete the specified media id',
+        });
+    }
+
+    res.sendStatus(200);
+};

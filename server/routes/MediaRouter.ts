@@ -18,13 +18,21 @@ router.post(
     mediaController.uploadMedia
 );
 
+// UPDATE an existing media
 router.patch(
     '/:mediaId',
     authenticateUser,
+    mediaController.authorizeUser,
     validateMediaProperties,
     mediaController.updateMedia
 );
 
-router.delete('/:mediaId', authenticateUser);
+// DELETE an existing media
+router.delete(
+    '/:mediaId',
+    authenticateUser,
+    mediaController.authorizeUser,
+    mediaController.deleteMedia
+);
 
 export default router;

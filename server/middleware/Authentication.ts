@@ -25,7 +25,7 @@ export async function authenticateUser(
         if (!user) {
             return res.sendStatus(401);
         }
-        req.body.user = user;
+        res.locals.user = user;
         next();
     } catch (err) {
         return res.sendStatus(401);

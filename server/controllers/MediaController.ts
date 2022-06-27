@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { matchedData, validationResult } from 'express-validator';
 import mediaService = require('../services/MediaService');
 
@@ -56,15 +56,11 @@ export const uploadMedia = async (req: Request, res: Response) => {
     }
 };
 
-export const updateMedia = async (req: Request, res: Response) => {
-    const validationErrors = validationResult(req);
-
-    if (!validationErrors.isEmpty()) {
-        return res.status(400).json({
-            errors: validationErrors.array(),
-        });
-    }
-
+export const authorizeUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     const mediaId = req.params.mediaId;
 
     const media = await mediaService.findByMediaId(mediaId);
@@ -75,12 +71,27 @@ export const updateMedia = async (req: Request, res: Response) => {
         });
     }
 
-    if (!mediaService.isAuthor(req.body.user, media)) {
+    res.locals.media = media;
+
+    if (!mediaService.isAuthor(res.locals.user.id, media)) {
         return res.status(403).json({
             message:
                 'The current user is not authorized to perform this action',
         });
     }
+    next();
+};
+
+export const updateMedia = async (req: Request, res: Response) => {
+    const validationErrors = validationResult(req);
+
+    if (!validationErrors.isEmpty()) {
+        return res.status(400).json({
+            errors: validationErrors.array(),
+        });
+    }
+
+    const media = res.locals.media;
 
     const updatedProperties = mediaService.castMatchedDataToMediaInfo({
         ...matchedData(req, { locations: ['body'] }),

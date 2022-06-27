@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
 import userController = require('../controllers/UserController');
+import { authenticateUser } from '../middleware/Authentication';
 
 const router = Router();
 
@@ -18,7 +19,21 @@ router.post('/login', userController.login);
 
 router.post('/logout');
 
-router.put('/:userId');
+router.patch(
+    '/:userId',
+    authenticateUser,
+    userController.authorizeUser,
+    body('firstName').trim().isLength({ min: 1 }).isAlpha().escape().optional(),
+    body('lastName').trim().isLength({ min: 1 }).isAlpha().escape().optional(),
+    body('email').isEmail().normalizeEmail().escape().optional(),
+    body('password')
+        .isLength({ min: 6 })
+        .isStrongPassword()
+        .escape()
+        .optional(),
+    body('phoneNumber').optional().isMobilePhone('any').escape(),
+    userController.updateUserInfo
+);
 
 router.delete('/:userId');
 

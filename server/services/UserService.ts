@@ -53,4 +53,16 @@ export const castUserToAuthor = function (user: User): Author {
         lastName: user.lastName,
     };
 };
+
+export const updateUserInfo = async function (
+    user: User,
+    newProperties: { [x: string]: any }
+): Promise<User> {
+    user = {
+        ...user,
+        ...newProperties,
+    };
+    return await AppDataSource.getRepository(User).save(user);
+};
+
 export const logout = async function () {};

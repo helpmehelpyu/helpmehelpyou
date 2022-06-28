@@ -1,9 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import {
-    matchedData,
-    ValidationError,
-    validationResult,
-} from 'express-validator';
+import { matchedData, validationResult } from 'express-validator';
 import userService = require('../services/UserService');
 import mediaService = require('../services/MediaService');
 import linkService = require('../services/LinkService');

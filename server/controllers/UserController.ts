@@ -5,6 +5,8 @@ import {
     validationResult,
 } from 'express-validator';
 import userService = require('../services/UserService');
+import mediaService = require('../services/MediaService');
+import linkService = require('../services/LinkService');
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -87,6 +89,27 @@ export const updateUserInfo = async (req: Request, res: Response) => {
                     message: 'A User with this email address already exists',
                 },
             ],
+        });
+    }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+    try {
+        await mediaService.deleteAssociatedMedia(res.locals.user.id);
+        await linkService.deleteAssociatedLinks(res.locals.user.id);
+
+        const rowsAffected = await userService.deleteUser(res.locals.user);
+        if (rowsAffected != 1) {
+            return res.status(500).json({
+                message: 'unabled to delete the requested resource',
+            });
+        }
+
+        res.sendStatus(204);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: 'Unabled to delete the requested resource',
         });
     }
 };

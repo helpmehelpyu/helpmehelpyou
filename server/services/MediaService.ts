@@ -94,3 +94,13 @@ export const deleteMedia = async function (
     });
     return res.affected;
 };
+
+export const deleteAssociatedMedia = async function (userId: string) {
+    const mediaRepository = AppDataSource.getRepository(Media);
+    const associatedMedia = await mediaRepository
+        .createQueryBuilder('user')
+        .where('user.authorId = :userId', { userId: userId })
+        .getMany();
+
+    await mediaRepository.remove(associatedMedia);
+};

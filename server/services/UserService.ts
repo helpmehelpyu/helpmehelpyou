@@ -65,4 +65,9 @@ export const updateUserInfo = async function (
     return await AppDataSource.getRepository(User).save(user);
 };
 
-export const logout = async function () {};
+export const deleteUser = async function (
+    user: User
+): Promise<number | null | undefined> {
+    const res = await AppDataSource.getRepository(User).delete({ id: user.id });
+    return res.affected;
+};

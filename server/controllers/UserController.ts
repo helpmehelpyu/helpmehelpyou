@@ -29,12 +29,7 @@ export const register = async (req: Request, res: Response) => {
 
         if (!errors.isEmpty()) {
             return res.status(400).json({
-                errors: errors.array().map((err: ValidationError) => {
-                    type: 'ValidationError';
-                    message: err.msg;
-                    value: err.value;
-                    location: err.location;
-                }),
+                errors: errors.array(),
             });
         }
 

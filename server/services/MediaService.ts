@@ -6,7 +6,6 @@ import path from 'path';
 import { User } from '../models/User';
 import { MediaResult } from '../types/MediaResult';
 import userService = require('../services/UserService');
-import { MediaInfo } from '../types/MediaInfo';
 
 export const findByMediaId = async function (
     mediaId: string
@@ -24,7 +23,7 @@ export const findByMediaId = async function (
 export const uploadMedia = async function (
     file: Express.Multer.File,
     author: User,
-    mediaInfo: MediaInfo
+    mediaInfo: { [x: string]: any }
 ): Promise<string> {
     const parser = new DataURIParser();
 

@@ -1,3 +1,4 @@
+import { match } from 'assert';
 import { NextFunction, Request, Response } from 'express';
 import { matchedData, validationResult } from 'express-validator';
 import mediaService = require('../services/MediaService');
@@ -36,7 +37,12 @@ export const uploadMedia = async (req: Request, res: Response) => {
         const mediaId = await mediaService.uploadMedia(
             req.file,
             res.locals.user,
-            req.body
+            {
+                ...matchedData(req, {
+                    locations: ['body'],
+                    includeOptionals: true,
+                }),
+            }
         );
 
         res.status(201).json({ mediaId: mediaId });

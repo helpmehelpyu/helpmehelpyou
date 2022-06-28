@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { AppDataSource } from './database/DataSource';
 import mediaRouter from './routes/MediaRouter';
 import userRouter from './routes/UserRouter';
+import linksRouter from './routes/LinkRouter';
 import cloudinary from 'cloudinary';
 
 dotenv.config({ path: './config/.env' });
@@ -15,8 +16,10 @@ cloudinary.v2.config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use('/media', mediaRouter);
 app.use('/users', userRouter);
+app.use('/links', linksRouter);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

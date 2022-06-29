@@ -29,7 +29,12 @@ export const register = async (req: Request, res: Response) => {
             });
         }
 
-        const newUser = await userService.createUser(req.body);
+        const newUser = await userService.createUser({
+            ...matchedData(req, {
+                locations: ['body'],
+                includeOptionals: true,
+            }),
+        });
         res.status(201).json({ userId: newUser.id });
     } catch (err: any) {
         res.status(400).json({

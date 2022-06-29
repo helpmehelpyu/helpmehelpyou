@@ -1,23 +1,16 @@
 import { Media } from '../models/Media';
-import { AppDataSource } from '../database/DataSource';
 import DataURIParser from 'datauri/parser';
 import cloudinary from 'cloudinary';
 import path from 'path';
 import { User } from '../models/User';
 import { MediaResult } from '../types/MediaResult';
 import userService = require('../services/UserService');
+import mediaRepository = require('../repository/MediaRepository');
 
-export const findByMediaId = async function (
+export const findById = async function (
     mediaId: string
 ): Promise<Media | null> {
-    return AppDataSource.getRepository(Media).findOne({
-        where: {
-            id: mediaId,
-        },
-        relations: {
-            author: true,
-        },
-    });
+    return mediaRepository.findById(mediaId);
 };
 
 export const uploadMedia = async function (
@@ -46,17 +39,14 @@ export const uploadMedia = async function (
         }
     );
 
-    const mediaRepository = AppDataSource.getRepository(Media);
-    const media = mediaRepository.create({
-        id: uploadedMedia.public_id,
-        author: author,
-        source: uploadedMedia.url,
-        ...mediaInfo,
-    });
+    const newMedia = await mediaRepository.createNewMedia(
+        uploadedMedia.public_id,
+        author,
+        uploadedMedia.url,
+        { ...mediaInfo }
+    );
 
-    await mediaRepository.save(media);
-
-    return media.id;
+    return newMedia.id;
 };
 
 export const castMediaToMediaResult = function (media: Media): MediaResult {
@@ -75,7 +65,8 @@ export const updateMedia = async function (
         ...media,
         ...updatedProperties,
     };
-    return AppDataSource.getRepository(Media).save(media);
+
+    return mediaRepository.updateMedia(media);
 };
 
 export const isAuthor = async function (
@@ -85,21 +76,13 @@ export const isAuthor = async function (
     return media.author.id === userId;
 };
 
-export const deleteMedia = async function (
-    media: Media
+export const deleteById = async function (
+    mediaId: string
 ): Promise<number | null | undefined> {
-    const res = await AppDataSource.getRepository(Media).delete({
-        id: media.id,
-    });
+    const res = await mediaRepository.deleteById(mediaId);
     return res.affected;
 };
 
 export const deleteAssociatedMedia = async function (userId: string) {
-    const mediaRepository = AppDataSource.getRepository(Media);
-    const associatedMedia = await mediaRepository
-        .createQueryBuilder('user')
-        .where('user.authorId = :userId', { userId: userId })
-        .getMany();
-
-    await mediaRepository.remove(associatedMedia);
+    mediaRepository.deleteAllByAuthorId(userId);
 };

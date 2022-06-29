@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authenticateUser } from '../middleware/Authentication';
 import linkController = require('../controllers/LinkController');
-import { body } from 'express-validator';
+import { validateNameAndUrl } from '../middleware/LinkValidation';
 
 const router = Router();
 
@@ -9,19 +9,7 @@ const router = Router();
 router.post(
     '/',
     authenticateUser,
-    body('name')
-        .exists()
-        .withMessage('Name is a required field')
-        .isAlphanumeric()
-        .withMessage('Name has to be alphanumeric')
-        .isLength({ min: 1, max: 500 })
-        .withMessage('Name must be between length 1 to 500 characters')
-        .escape(),
-    body('url')
-        .exists()
-        .withMessage('Url is a required field')
-        .isURL({ protocols: ['https'], require_protocol: true })
-        .withMessage('Invalid Url. Make sure that the link is in https'),
+    validateNameAndUrl,
     linkController.createNewLink
 );
 
@@ -29,19 +17,7 @@ router.post(
 router.put(
     '/:linkId',
     authenticateUser,
-    body('name')
-        .exists()
-        .withMessage('Name is a required field')
-        .isAlphanumeric()
-        .withMessage('Name has to be alphanumeric')
-        .isLength({ max: 500 })
-        .withMessage('Maximum length 500 characters')
-        .escape(),
-    body('url')
-        .exists()
-        .withMessage('Url is a required field')
-        .isURL({ protocols: ['https'], require_protocol: true })
-        .withMessage('Invalid Url. Make sure that the link is in https'),
+    validateNameAndUrl,
     linkController.authorizeUser,
     linkController.updateExistingLink
 );

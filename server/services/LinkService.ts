@@ -44,3 +44,12 @@ export const updateLink = async function (
 
     return AppDataSource.getRepository(Link).save(link);
 };
+
+export const deleteLink = async function (
+    linkId: number
+): Promise<number | null | undefined> {
+    const result = await AppDataSource.getRepository(Link).delete({
+        id: linkId,
+    });
+    return result.affected;
+};

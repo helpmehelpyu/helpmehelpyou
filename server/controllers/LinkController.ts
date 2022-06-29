@@ -67,3 +67,17 @@ export const authorizeUser = async (
 
     next();
 };
+
+export const deleteLink = async (req: Request, res: Response) => {
+    const rowsDeleted = await linkService.deleteLink(
+        parseInt(req.params.linkId, 10)
+    );
+
+    if (rowsDeleted !== 1) {
+        return res.status(500).json({
+            message: 'unable to delete the requested resource',
+        });
+    }
+
+    res.sendStatus(200);
+};

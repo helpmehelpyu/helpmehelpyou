@@ -22,4 +22,10 @@ router.put(
     linkController.updateExistingLink
 );
 
+router.delete(
+    '/:linkId',
+    authenticateUser,
+    linkController.authorizeUser,
+    linkController.deleteLink
+);
 export default router;

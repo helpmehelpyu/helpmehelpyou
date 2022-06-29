@@ -24,3 +24,23 @@ export const createNewLink = async function (
     await linkRepository.save(newLink);
     return newLink;
 };
+
+export const findLinkById = async function (
+    linkId: number
+): Promise<Link | null> {
+    return AppDataSource.getRepository(Link).findOne({
+        where: { id: linkId },
+        relations: { owner: true },
+    });
+};
+
+export const updateLink = async function (
+    link: Link,
+    name: string,
+    url: string
+): Promise<Link> {
+    link.name = name;
+    link.url = url;
+
+    return AppDataSource.getRepository(Link).save(link);
+};

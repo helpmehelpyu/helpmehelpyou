@@ -14,4 +14,14 @@ router.post(
     linkController.createNewLink
 );
 
+// UPDATE an existing Link
+router.put(
+    '/:linkId',
+    authenticateUser,
+    body('name').isAlphanumeric().isLength({ max: 500 }).escape().exists(),
+    body('url').isURL().escape().exists(),
+    linkController.authorizeUser,
+    linkController.updateExistingLink
+);
+
 export default router;

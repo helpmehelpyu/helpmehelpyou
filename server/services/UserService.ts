@@ -2,7 +2,6 @@ import { AppDataSource } from '../database/DataSource';
 import { User } from '../models/User';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { UserInfo } from '../types/UserInfo';
 import { Author } from '../types/Author';
 
 export const findUserById = async function (

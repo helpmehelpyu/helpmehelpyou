@@ -46,9 +46,7 @@ export const authorizeUser = async (
     res: Response,
     next: NextFunction
 ) => {
-    const link = await linkService.findLinkById(
-        parseInt(req.params.linkId, 10)
-    );
+    const link = await linkService.findById(parseInt(req.params.linkId, 10));
 
     if (!link) {
         return res.status(400).json({

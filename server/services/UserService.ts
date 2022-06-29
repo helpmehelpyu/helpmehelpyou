@@ -1,13 +1,11 @@
-import { AppDataSource } from '../database/DataSource';
 import { User } from '../models/User';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Author } from '../types/Author';
+import userRepository = require('../repository/UserRepository');
 
-export const findUserById = async function (
-    userId: string
-): Promise<User | null> {
-    return AppDataSource.getRepository(User).findOneBy({ id: userId });
+export const findById = async function (userId: string): Promise<User | null> {
+    return userRepository.findById(userId);
 };
 
 export const createUser = async function (userInfo: {
@@ -17,27 +15,24 @@ export const createUser = async function (userInfo: {
     userInfo.password = await bcrypt.hash(userInfo.password, salt);
 
     userInfo.phoneNumber = userInfo.phoneNumber;
-    const userRepository = AppDataSource.getRepository(User);
 
-    const newUser = userRepository.create(userInfo);
-    return userRepository.save(newUser);
+    return userRepository.createNewUser(userInfo);
 };
 
 export const login = async function (
     email: string,
     password: string
-): Promise<[boolean, string?]> {
-    const user = await AppDataSource.getRepository(User).findOneBy({
-        email: email,
-    });
+): Promise<[boolean, string]> {
+    const user = await userRepository.findByEmail(email);
+
     if (!user) {
-        return [false];
+        return [false, ''];
     }
 
     const isCorrectPassword = await bcrypt.compare(password, user.password);
 
     if (!isCorrectPassword) {
-        return [false];
+        return [false, ''];
     }
 
     const token = await jwt.sign({ id: user.id }, process.env.TOKEN_SECRET!, {
@@ -63,12 +58,12 @@ export const updateUserInfo = async function (
         ...user,
         ...newProperties,
     };
-    return await AppDataSource.getRepository(User).save(user);
+    return await userRepository.updateUser(user);
 };
 
 export const deleteUser = async function (
     user: User
 ): Promise<number | null | undefined> {
-    const res = await AppDataSource.getRepository(User).delete({ id: user.id });
+    const res = await userRepository.deleteUser(user);
     return res.affected;
 };

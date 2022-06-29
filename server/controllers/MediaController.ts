@@ -5,7 +5,7 @@ import mediaService = require('../services/MediaService');
 
 export const findMediaById = async (req: Request, res: Response) => {
     const mediaId = req.params.mediaId;
-    let retrievedMedia = await mediaService.findByMediaId(mediaId);
+    let retrievedMedia = await mediaService.findById(mediaId);
 
     if (!retrievedMedia) {
         return res.status(404).json({
@@ -64,7 +64,7 @@ export const authorizeUser = async (
 ) => {
     const mediaId = req.params.mediaId;
 
-    const media = await mediaService.findByMediaId(mediaId);
+    const media = await mediaService.findById(mediaId);
 
     if (!media) {
         return res.status(404).json({
@@ -106,7 +106,7 @@ export const updateMedia = async (req: Request, res: Response) => {
 export const deleteMedia = async (req: Request, res: Response) => {
     const media = res.locals.media;
 
-    const rowsAffected = await mediaService.deleteMedia(media!);
+    const rowsAffected = await mediaService.deleteById(media.id);
 
     if (rowsAffected != 1) {
         return res.status(500).json({

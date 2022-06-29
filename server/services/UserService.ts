@@ -11,11 +11,13 @@ export const findUserById = async function (
     return AppDataSource.getRepository(User).findOneBy({ id: userId });
 };
 
-export const createUser = async function (userInfo: UserInfo): Promise<User> {
+export const createUser = async function (userInfo: {
+    [x: string]: any;
+}): Promise<User> {
     const salt = await bcrypt.genSalt(10);
     userInfo.password = await bcrypt.hash(userInfo.password, salt);
 
-    userInfo.phoneNumber = userInfo.phoneNumber || '';
+    userInfo.phoneNumber = userInfo.phoneNumber;
     const userRepository = AppDataSource.getRepository(User);
 
     const newUser = userRepository.create(userInfo);

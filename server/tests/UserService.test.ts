@@ -1,6 +1,7 @@
 import {
     castUserToAuthor,
     createUser,
+    deleteUser,
     findById,
     login,
     updateUser,
@@ -61,11 +62,20 @@ jest.mock('../repository/UserRepository', () => {
         return user;
     });
 
+    const deleteUserMock = jest.fn((user: User) => {
+        const res = { affected: 0 };
+        if (user.id === mockUser.id) {
+            res.affected = 1;
+        }
+        return res;
+    });
+
     return {
         findById: findByIdMock,
         createNewUser: createNewUserMock,
         findByEmail: findByEmailMock,
         updateUser: updateUserMock,
+        deleteUser: deleteUserMock,
     };
 });
 
@@ -247,5 +257,48 @@ describe('updating an existing user', () => {
         await expect(
             updateUser(mockUser, { email: 'testuser@email.com' })
         ).rejects.toThrow();
+    });
+});
+
+describe('deleting a User', () => {
+    test('that exists', async () => {
+        const mockUser = {
+            id: '1',
+            firstName: 'test',
+            lastName: 'user',
+            email: 'testuser@email.com',
+            password: 'password',
+            phoneNumber: '123-456-7890',
+            rating: 50,
+            workSamples: [],
+            links: [],
+            skills: [],
+        };
+
+        const rowsAffected = await deleteUser(mockUser);
+        expect(rowsAffected).not.toBeNull();
+        expect(rowsAffected).toBeDefined();
+        expect(rowsAffected).toEqual(1);
+    });
+
+    test('that does not exist', async () => {
+        const mockUser = {
+            id: '2',
+            firstName: 'test',
+            lastName: 'user',
+            email: 'nonexistent@email.com',
+            password: 'password',
+            phoneNumber: '123-456-7890',
+            rating: 50,
+            workSamples: [],
+            links: [],
+            skills: [],
+        };
+
+        const rowsAffected = await deleteUser(mockUser);
+
+        expect(rowsAffected).not.toBeNull();
+        expect(rowsAffected).toBeDefined();
+        expect(rowsAffected).toEqual(0);
     });
 });

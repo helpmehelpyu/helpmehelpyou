@@ -23,13 +23,6 @@ export const validateUpdatedProperties = [
         .withMessage('Invalid Email')
         .normalizeEmail()
         .escape(),
-    body('password')
-        .optional()
-        .isLength({ min: 6 })
-        .withMessage('Password needs to be at least 6 characters')
-        .isStrongPassword()
-        .withMessage('Password is not strong enough')
-        .escape(),
     body('phoneNumber')
         .optional()
         .isMobilePhone('any')

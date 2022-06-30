@@ -12,10 +12,6 @@ on:
 jobs:
   build-server:
     runs-on: ubuntu-latest
-    
-    defaults:
-      run: 
-        working-directory: server
         
     strategy:
       matrix:
@@ -23,11 +19,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Install Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Install Dependencies
+      working-directory: server
+      run: npm ci
+    
+    - name: Build Server
+      working-directory: server
+      run: npm run build --if-present
+    - name: Run Tests
+      run: npm test -- --coverage

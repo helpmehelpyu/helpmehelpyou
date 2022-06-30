@@ -14,8 +14,6 @@ export const createUser = async function (userInfo: {
     const salt = await bcrypt.genSalt(10);
     userInfo.password = await bcrypt.hash(userInfo.password, salt);
 
-    userInfo.phoneNumber = userInfo.phoneNumber;
-
     return userRepository.createNewUser(userInfo);
 };
 
@@ -50,7 +48,7 @@ export const castUserToAuthor = function (user: User): Author {
     };
 };
 
-export const updateUserInfo = async function (
+export const updateUser = async function (
     user: User,
     newProperties: { [x: string]: any }
 ): Promise<User> {

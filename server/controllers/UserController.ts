@@ -72,7 +72,7 @@ export const updateUserInfo = async (req: Request, res: Response) => {
             });
         }
 
-        const updatedUser = await userService.updateUserInfo(res.locals.user, {
+        const updatedUser = await userService.updateUser(res.locals.user, {
             ...matchedData(req, { locations: ['body'] }),
         });
 

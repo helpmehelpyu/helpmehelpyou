@@ -1,5 +1,6 @@
 # helpmehelpyou
 
+[![Client CI](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/client.yml/badge.svg)](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/client.yml)
 [![Sever CI](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/server.yml/badge.svg)](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/server.yml)
 
 App deployed [here](https://helpmehelpyou.netlify.app/)

@@ -12,14 +12,14 @@ on:
 jobs:
   build-server:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        
+    
     defaults:
       run: 
         working-directory: ./server
+        
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
 
     steps:
     - uses: actions/checkout@v3

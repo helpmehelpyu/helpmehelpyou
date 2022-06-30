@@ -2,11 +2,11 @@ name: Trigger Heroku to wake up
 
 on: 
     schedule:
-        - cron: "57 * * * *"
+        - cron: "*/20 * * * *"
 
 jobs:
     trigger-heroku:
-        runs-on: ubuntu-lastest
+        runs-on: ubuntu-latest
         steps:
             - name: trigger sever
               run: curl https://helpmehelpyou.herokuapp.com/

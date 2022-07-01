@@ -75,7 +75,14 @@ export const updateUserInfo = async (req: Request, res: Response) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
-                errors: errors.array(),
+                errors: errors.array().map((err) => {
+                    return {
+                        type: 'ValidationError',
+                        message: err.msg,
+                        value: err.value,
+                        location: err.location,
+                    };
+                }),
             });
         }
 

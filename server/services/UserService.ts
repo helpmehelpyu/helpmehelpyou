@@ -11,8 +11,7 @@ export const findById = async function (userId: string): Promise<User | null> {
 export const createUser = async function (userInfo: {
     [x: string]: any;
 }): Promise<User> {
-    const salt = await bcrypt.genSalt(10);
-    userInfo.password = await bcrypt.hash(userInfo.password, salt);
+    userInfo.password = await bcrypt.hash(userInfo.password, 10);
 
     return userRepository.createNewUser(userInfo);
 };

@@ -1,3 +1,7 @@
 export default function Home() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <p> Hello World </p>
+    </div>
+  );
 }

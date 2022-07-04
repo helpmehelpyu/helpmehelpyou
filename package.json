@@ -4,7 +4,7 @@
   "description": "a place to find those with the skills you need",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cd server && npm run dev && cd client && npm run dev"
   },
   "repository": {
     "type": "git",

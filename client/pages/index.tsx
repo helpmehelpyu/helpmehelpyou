@@ -1,7 +1,7 @@
-export default function Home() {
+export default function LandingPage() {
   return (
     <div className="flex justify-center items-center h-screen">
-      <p> Hello World </p>
+      <p> HelpMeHelpYou </p>
     </div>
   );
 }

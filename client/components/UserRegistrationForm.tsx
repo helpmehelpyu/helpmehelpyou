@@ -91,62 +91,12 @@ export default function UserRegistrationForm() {
   };
 
   return (
-    <div className="rounded bg-white p-5">
+    <div className="rounded bg-white p-5 border-2 w-1/3">
       <form className="m-auto p-5" onSubmit={submitRegisterRequest} noValidate>
-        <input
-          className="block focus:outline-none w-full focus:border-2"
-          type="text"
-          required={true}
-          placeholder="First Name"
-          onChange={(e) => setFirstName(e.target.value)}
-        ></input>
-        <p className="text-red-500 text-sm">{firstNameError}</p>
-        <input
-          className="block focus:outline-none w-full focus:border-2"
-          type="text"
-          placeholder="Last Name"
-          required={true}
-          onChange={(e) => setLastName(e.target.value)}
-        ></input>
-        <p className="text-red-500 text-sm">{lastNameError}</p>
-        <input
-          className="block focus:outline-none w-full focus:border-2"
-          type="email"
-          placeholder="Email"
-          required={true}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <p className="text-red-500 text-sm">{emailError}</p>
-        <input
-          className="block focus:outline-none w-full focus:border-2"
-          type="password"
-          min={6}
-          placeholder="Password"
-          required={true}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <p className="text-red-500 text-sm">{passwordError}</p>
-        <input
-          className="block focus:outline-none w-full focus:border-2"
-          type="password"
-          min={6}
-          placeholder="Confirm Password"
-          required={true}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        ></input>
-        <p className="text-red-500 text-sm">{confirmPasswordError}</p>
-        <input
-          className="block focus:outline-none w-full focus:border-2"
-          type="tel"
-          required={false}
-          placeholder="Phone Number"
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        ></input>
-        <p className="text-red-500 text-xs">{phoneNumberError}</p>
-        <input type="submit"></input>
         <p
           className={
-            (isExistingUser ? 'block ' : 'hidden ') + 'text-red-500 text-sm'
+            (isExistingUser ? 'block ' : 'hidden ') +
+            'text-red-500 text-sm mx-2 px-1'
           }
         >
           An Account with this email already exists,{' '}
@@ -154,6 +104,69 @@ export default function UserRegistrationForm() {
             log in
           </a>{' '}
           instead
+        </p>
+        <input
+          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          type="text"
+          required={true}
+          placeholder="First Name"
+          onChange={(e) => setFirstName(e.target.value)}
+        ></input>
+        <p className="text-red-500 text-sm mx-2 px-1">{firstNameError}</p>
+        <input
+          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          type="text"
+          placeholder="Last Name"
+          required={true}
+          onChange={(e) => setLastName(e.target.value)}
+        ></input>
+        <p className="text-red-500 text-sm mx-2 px-1">{lastNameError}</p>
+        <input
+          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          type="email"
+          placeholder="Email"
+          required={true}
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <p className="text-red-500 text-sm mx-2 px-1">{emailError}</p>
+        <input
+          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          type="tel"
+          required={false}
+          placeholder="Phone Number"
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        ></input>
+        <p className="text-red-500 text-xs">{phoneNumberError}</p>
+        <input
+          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          type="password"
+          min={6}
+          placeholder="Password"
+          required={true}
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        <p className="text-red-500 text-sm mx-2 px-1">{passwordError}</p>
+        <input
+          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          type="password"
+          min={6}
+          placeholder="Confirm Password"
+          required={true}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        ></input>
+        <p className="text-red-500 text-sm mx-2 px-1">{confirmPasswordError}</p>
+
+        <input
+          type="submit"
+          className="m-2 p-1 text-cyan-500 border-2 rounded border-cyan-500"
+        ></input>
+
+        <p className="mx-2 px-1">
+          Already have an account?{' '}
+          <a className="underline" href="/login">
+            Log in
+          </a>{' '}
+          instead.
         </p>
       </form>
     </div>

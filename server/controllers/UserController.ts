@@ -37,14 +37,11 @@ export const register = async (req: Request, res: Response) => {
     });
     res.status(201).json({ userId: newUser.id });
   } catch (err: any) {
+    console.log(err);
     res.status(400).json({
-      errors: [
-        {
-          type: 'DuplicateEmailError',
-          message:
-            'A User with this account already exists, please log in instead',
-        },
-      ],
+      type: 'DuplicateEmailError',
+      message:
+        'A User with this account already exists, please log in instead',
     });
   }
 };

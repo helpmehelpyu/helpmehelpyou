@@ -13,6 +13,8 @@ export const createUser = async function (userInfo: {
 }): Promise<User> {
     userInfo.password = await bcrypt.hash(userInfo.password, 10);
 
+    userInfo.phoneNumber = userInfo.phoneNumber || '';
+
     return userRepository.createNewUser(userInfo);
 };
 

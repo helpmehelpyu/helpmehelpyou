@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import axios from '../config/axios';
 
@@ -87,6 +88,7 @@ export default function UserRegistrationForm() {
       }
     } else {
       console.log(response.data);
+      // TODO redirect user to another page
     }
   };
 
@@ -100,9 +102,9 @@ export default function UserRegistrationForm() {
           }
         >
           An Account with this email already exists,{' '}
-          <a className="underline" href="/login">
+          <Link className="underline" href="/login">
             log in
-          </a>{' '}
+          </Link>{' '}
           instead
         </p>
         <input
@@ -163,9 +165,9 @@ export default function UserRegistrationForm() {
 
         <p className="mx-2 px-1">
           Already have an account?{' '}
-          <a className="underline" href="/login">
+          <Link className="underline" href="/login">
             Log in
-          </a>{' '}
+          </Link>{' '}
           instead.
         </p>
       </form>

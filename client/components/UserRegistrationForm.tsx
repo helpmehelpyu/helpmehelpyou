@@ -94,7 +94,8 @@ export default function UserRegistrationForm() {
 
   return (
     <div className="rounded bg-white p-5 border-2 w-1/3">
-      <form className="m-auto p-5" onSubmit={submitRegisterRequest} noValidate>
+      <h1 className="p-5 m-2 text-4xl">Register</h1>
+      <form className="m-auto px-5" onSubmit={submitRegisterRequest} noValidate>
         <p
           className={
             (isExistingUser ? 'block ' : 'hidden ') +
@@ -108,7 +109,7 @@ export default function UserRegistrationForm() {
           instead
         </p>
         <input
-          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
           type="text"
           required={true}
           placeholder="First Name"
@@ -116,7 +117,7 @@ export default function UserRegistrationForm() {
         ></input>
         <p className="text-red-500 text-sm mx-2 px-1">{firstNameError}</p>
         <input
-          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
           type="text"
           placeholder="Last Name"
           required={true}
@@ -124,7 +125,7 @@ export default function UserRegistrationForm() {
         ></input>
         <p className="text-red-500 text-sm mx-2 px-1">{lastNameError}</p>
         <input
-          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
           type="email"
           placeholder="Email"
           required={true}
@@ -132,7 +133,7 @@ export default function UserRegistrationForm() {
         ></input>
         <p className="text-red-500 text-sm mx-2 px-1">{emailError}</p>
         <input
-          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
           type="tel"
           required={false}
           placeholder="Phone Number"
@@ -140,7 +141,7 @@ export default function UserRegistrationForm() {
         ></input>
         <p className="text-red-500 text-xs">{phoneNumberError}</p>
         <input
-          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
           type="password"
           min={6}
           placeholder="Password"
@@ -149,7 +150,7 @@ export default function UserRegistrationForm() {
         ></input>
         <p className="text-red-500 text-sm mx-2 px-1">{passwordError}</p>
         <input
-          className="focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
           type="password"
           min={6}
           placeholder="Confirm Password"
@@ -165,8 +166,8 @@ export default function UserRegistrationForm() {
 
         <p className="mx-2 px-1">
           Already have an account?{' '}
-          <Link className="underline" href="/login">
-            Log in
+          <Link href="/login">
+            <a className="underline text-cyan-500">Login</a>
           </Link>{' '}
           instead.
         </p>

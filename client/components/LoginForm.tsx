@@ -1,5 +1,6 @@
 import axios from '../config/axios';
 import { FormEvent, useState } from 'react';
+import Link from 'next/link';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -47,6 +48,13 @@ export default function LoginForm() {
           type="submit"
           className="m-2 p-1 text-cyan-500 border-2 rounded border-cyan-500"
         ></input>
+        <p className="mx-2 px-1">
+          Don&apos;t have an account?{' '}
+          <Link href="/register">
+            <a className="underline text-cyan-500">Register</a>
+          </Link>{' '}
+          instead.
+        </p>
       </form>
     </div>
   );

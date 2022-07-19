@@ -28,6 +28,8 @@ router.patch(
 );
 
 // DELETE an existing user
-router.delete('/:userId', authenticateUser, userController.deleteUser);
+router.delete('/', authenticateUser, userController.deleteUser);
+
+// Log the current user out
 
 export default router;

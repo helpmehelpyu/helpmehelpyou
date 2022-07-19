@@ -42,7 +42,21 @@ export const register = async (req: Request, res: Response) => {
         includeOptionals: true,
       }),
     });
-    res.status(201).json({ userId: newUser.id });
+
+    // if we've made it to here then the login must be a success
+    // the email and password should also exist on the request body
+    const [, token] = await userService.login(
+      req.body.email,
+      req.body.password
+    );
+
+    res
+      .cookie('auth', token, {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        expires: dayjs().add(24, 'hours').toDate(),
+      })
+      .sendStatus(201);
   } catch (err: any) {
     console.log(err);
     res.status(400).json({

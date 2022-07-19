@@ -9,7 +9,12 @@ import {
 const router = Router();
 
 // CREATE a new user
-router.post('/signup', validateUserProperties, userController.register);
+router.post(
+  '/signup',
+  validateUserProperties,
+  userController.register,
+  userController.login
+);
 
 // LOGIN an existing user
 router.post('/login', userController.login);

@@ -2,8 +2,8 @@ import { Router } from 'express';
 import userController = require('../controllers/UserController');
 import { authenticateUser } from '../middleware/Authentication';
 import {
-    validateUpdatedProperties,
-    validateUserProperties,
+  validateUpdatedProperties,
+  validateUserProperties,
 } from '../middleware/UserValidation';
 
 const router = Router();
@@ -16,19 +16,13 @@ router.post('/login', userController.login);
 
 // UPDATE an existing user
 router.patch(
-    '/:userId',
-    authenticateUser,
-    userController.authorizeUser,
-    validateUpdatedProperties,
-    userController.updateUserInfo
+  '/',
+  authenticateUser,
+  validateUpdatedProperties,
+  userController.updateUserInfo
 );
 
 // DELETE an existing user
-router.delete(
-    '/:userId',
-    authenticateUser,
-    userController.authorizeUser,
-    userController.deleteUser
-);
+router.delete('/:userId', authenticateUser, userController.deleteUser);
 
 export default router;

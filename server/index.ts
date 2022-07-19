@@ -6,6 +6,7 @@ import userRouter from './routes/UserRouter';
 import linksRouter from './routes/LinkRouter';
 import cloudinary from 'cloudinary';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 dotenv.config({ path: './config/.env' });
 
@@ -16,6 +17,7 @@ AppDataSource.initialize().catch((err) => console.log(err));
 cloudinary.v2.config();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({

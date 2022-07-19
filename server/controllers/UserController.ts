@@ -1,8 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { matchedData, validationResult } from 'express-validator';
 import userService = require('../services/UserService');
 import mediaService = require('../services/MediaService');
 import linkService = require('../services/LinkService');
+import dayjs = require('dayjs');
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -16,7 +17,13 @@ export const login = async (req: Request, res: Response) => {
     });
   }
 
-  res.status(200).json({ authToken: token });
+  res
+    .cookie('auth', token, {
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      expires: dayjs().add(24, 'hours').toDate(),
+    })
+    .sendStatus(200);
 };
 
 export const register = async (req: Request, res: Response) => {
@@ -35,29 +42,28 @@ export const register = async (req: Request, res: Response) => {
         includeOptionals: true,
       }),
     });
-    res.status(201).json({ userId: newUser.id });
+
+    // if we've made it to here then the login must be a success
+    // the email and password should also exist on the request body
+    const [, token] = await userService.login(
+      req.body.email,
+      req.body.password
+    );
+
+    res
+      .cookie('auth', token, {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        expires: dayjs().add(24, 'hours').toDate(),
+      })
+      .sendStatus(201);
   } catch (err: any) {
     console.log(err);
     res.status(400).json({
       type: 'DuplicateEmailError',
-      message:
-        'A User with this account already exists, please log in instead',
+      message: 'A User with this account already exists, please log in instead',
     });
   }
-};
-
-export const authorizeUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  if (res.locals.user.id !== req.params.userId) {
-    return res.status(403).json({
-      message:
-        'The current user does not have permissions to perform this action',
-    });
-  }
-  next();
 };
 
 export const updateUserInfo = async (req: Request, res: Response) => {
@@ -73,7 +79,12 @@ export const updateUserInfo = async (req: Request, res: Response) => {
       ...matchedData(req, { locations: ['body'] }),
     });
 
-    res.status(200).json(updatedUser);
+    res.status(200).json({
+      ...updatedUser,
+      password: undefined,
+      email: undefined,
+      id: undefined,
+    });
   } catch (err) {
     res.status(400).json({
       errors: [
@@ -94,7 +105,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     const rowsAffected = await userService.deleteUser(res.locals.user);
     if (rowsAffected != 1) {
       return res.status(500).json({
-        message: 'unabled to delete the requested resource',
+        message: 'Unable to delete the requested resource',
       });
     }
 
@@ -102,7 +113,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: 'Unabled to delete the requested resource',
+      message: 'Unable to delete the requested resource',
     });
   }
 };

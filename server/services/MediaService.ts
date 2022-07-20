@@ -71,8 +71,11 @@ export const updateMedia = async function (
 
 export const isAuthor = async function (
     userId: string,
-    media: Media
+    media: Media | null
 ): Promise<boolean> {
+    if (!media) {
+        return false;
+    }
     return media.author.id === userId;
 };
 

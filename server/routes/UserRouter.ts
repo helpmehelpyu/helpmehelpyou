@@ -25,7 +25,7 @@ router.post(
 // LOGIN an existing user
 router.post('/login', userController.login);
 
-// UPDATE an existing user
+// UPDATE an the current user
 router.patch(
     '/',
     authenticateUser,
@@ -33,7 +33,7 @@ router.patch(
     userController.updateUserInfo
 );
 
-// DELETE an existing user
+// DELETE an the current user
 router.delete('/', authenticateUser, userController.deleteUser);
 
 // Log the current user out

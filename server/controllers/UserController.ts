@@ -3,7 +3,6 @@ import { matchedData, validationResult } from 'express-validator';
 import userService = require('../services/UserService');
 import mediaService = require('../services/MediaService');
 import linkService = require('../services/LinkService');
-import dayjs = require('dayjs');
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -17,11 +16,7 @@ export const login = async (req: Request, res: Response) => {
         });
     }
 
-    res.cookie('auth', token, {
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
-        expires: dayjs().add(24, 'hours').toDate(),
-    }).sendStatus(200);
+    res.status(200).json({ auth_token: token });
 };
 
 export const register = async (req: Request, res: Response) => {
@@ -34,7 +29,7 @@ export const register = async (req: Request, res: Response) => {
             });
         }
 
-        const newUser = await userService.createUser({
+        await userService.createUser({
             ...matchedData(req, {
                 locations: ['body'],
                 includeOptionals: true,
@@ -48,11 +43,9 @@ export const register = async (req: Request, res: Response) => {
             req.body.password
         );
 
-        res.cookie('auth', token, {
-            secure: process.env.NODE_ENV === 'production',
-            httpOnly: true,
-            expires: dayjs().add(24, 'hours').toDate(),
-        }).sendStatus(201);
+        res.status(201).json({
+            auth_token: token,
+        });
     } catch (err: any) {
         console.log(err);
         res.status(400).json({

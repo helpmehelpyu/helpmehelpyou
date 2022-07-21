@@ -1,4 +1,4 @@
-import UploadMediaForm from '../components/UploadMediaForm';
+import UploadMediaForm from "../../components/UploadMediaForm";
 
 export default function Upload() {
   return (

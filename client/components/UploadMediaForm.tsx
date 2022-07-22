@@ -1,5 +1,6 @@
 import axios from "../config/axios";
 import { FormEvent, useState } from "react";
+import { getAuthCookie } from "../auth/auth";
 
 export default function UploadMediaForm() {
   const [titleErrors, setTitleErrors] = useState("");
@@ -21,7 +22,9 @@ export default function UploadMediaForm() {
 
     const mediaData = new FormData(event.target as HTMLFormElement);
     const response = await axios.post("/media", mediaData, {
-      withCredentials: true,
+      headers: {
+        Authorization: "Bearer " + getAuthCookie(),
+      },
     });
 
     clearErrors();

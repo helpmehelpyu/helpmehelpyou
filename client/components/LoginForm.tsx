@@ -1,24 +1,25 @@
-import axios from '../config/axios';
-import { FormEvent, useState } from 'react';
-import Link from 'next/link';
+import axios from "../config/axios";
+import { FormEvent, useState } from "react";
+import Link from "next/link";
+import { setAuthCookie } from "../auth/auth";
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginErrors, setLoginErrors] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginErrors, setLoginErrors] = useState("");
 
   const submitLoginRequest = async (event: FormEvent) => {
     event.preventDefault();
 
     // clear all login errors
-    setLoginErrors('');
-    const response = await axios.post('/users/login', {
+    setLoginErrors("");
+    const response = await axios.post("/users/login", {
       email: email,
       password: password,
     });
 
     if (response.status === 200) {
-      console.log(response.data);
+      setAuthCookie(response.data.auth_token);
       // set cookies or something here, handle success
     } else {
       setLoginErrors(response.data.message);
@@ -49,10 +50,10 @@ export default function LoginForm() {
           className="m-2 p-1 text-cyan-500 border-2 rounded border-cyan-500"
         ></input>
         <p className="mx-2 px-1">
-          Don&apos;t have an account?{' '}
+          Don&apos;t have an account?{" "}
           <Link href="/register">
             <a className="underline text-cyan-500">Register</a>
-          </Link>{' '}
+          </Link>{" "}
           instead.
         </p>
       </form>

@@ -122,8 +122,9 @@ export const getUserData = async (req: Request, res: Response) => {
 };
 
 export const getCurrentUserData = async (req: Request, res: Response) => {
+    const user = await userService.findById(res.locals.user.id, true);
     res.status(200).json({
-        ...res.locals.user,
+        ...user,
         password: undefined,
     });
 };

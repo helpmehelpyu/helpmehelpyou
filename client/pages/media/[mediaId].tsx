@@ -1,8 +1,8 @@
-import axios from "../../config/axios";
-import { GetServerSideProps } from "next";
-import Image from "next/image";
-import { MediaResult } from "../../types/MediaResult";
-import Link from "next/link";
+import axios from '../../config/axios';
+import { GetServerSideProps } from 'next';
+import Image from 'next/image';
+import { MediaResult } from '../../types/MediaResult';
+import Link from 'next/link';
 
 interface Props {
   media: MediaResult;
@@ -27,7 +27,7 @@ export default function Media({ media, isAuthor }: Props) {
         </div>
         <div className="w-[20vw] h-[50vh] p-5">
           <h1>{media.title}</h1>
-          <Link href={"/users/" + media.author.id}>
+          <Link href={'/users/' + media.author.id}>
             <a className="my-2">
               {media.author.firstName} {media.author.lastName}
             </a>
@@ -53,9 +53,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   let user = null;
   if (req.headers.cookie) {
-    response = await axios.get("/users/me", {
+    response = await axios.get('/users/me', {
       headers: {
-        Authorization: "Bearer " + req.cookies.auth_token,
+        Authorization: 'Bearer ' + req.cookies.auth_token,
       },
     });
     user = response.data;

@@ -4,8 +4,17 @@ import { User } from '../models/User';
 
 const userDAO = AppDataSource.getRepository(User);
 
-export const findById = async (userId: string): Promise<User | null> => {
-    return userDAO.findOneBy({ id: userId });
+export const findById = async (
+    userId: string,
+    loadRelations: boolean = false
+): Promise<User | null> => {
+    return userDAO.findOne({
+        where: { id: userId },
+        relations: {
+            workSamples: loadRelations,
+            links: loadRelations,
+        },
+    });
 };
 
 export const findByEmail = async (email: string): Promise<User | null> => {

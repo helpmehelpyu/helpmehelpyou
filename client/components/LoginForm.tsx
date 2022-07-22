@@ -30,7 +30,7 @@ export default function LoginForm() {
   return (
     <div className="rounded bg-white p-10 border-2">
       <h1 className="p-1 m-2 text-3xl">Login</h1>
-      <form onSubmit={submitLoginRequest} className="relative" noValidate>
+      <form onSubmit={submitLoginRequest} noValidate>
         <FloatingLabelInput
           type={"email"}
           isRequired={true}

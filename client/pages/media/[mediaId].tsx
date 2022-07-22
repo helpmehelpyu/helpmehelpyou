@@ -14,24 +14,26 @@ export default function Media({ media, isAuthor }: Props) {
     return <h1>No media</h1>;
   }
   return (
-    <div className="flex items-center justify-center h-screen w-screen">
-      <div className="w-[50vw] h-[50vh] relative">
-        <Image
-          src={media.source}
-          layout="fill"
-          objectFit="contain"
-          alt=""
-        ></Image>
-      </div>
-      <div className="w-[20vw] h-[50vh] p-5">
-        <h1>{media.title}</h1>
-        <Link href={"/users/" + media.author.id}>
-          <a className="my-2">
-            {media.author.firstName} {media.author.lastName}
-          </a>
-        </Link>
-        <p className="my-10"> {media.description}</p>
-        <p>{new Date(media.uploadDate).toLocaleDateString()}</p>
+    <div className="flex items-center justify-center h-screen bg-slate-100">
+      <div className="flex items-center justify-center py-10 rounded-lg bg-white border-2">
+        <div className="w-[50vw] h-[50vh] relative">
+          <Image
+            src={media.source}
+            layout="fill"
+            objectFit="contain"
+            alt=""
+          ></Image>
+        </div>
+        <div className="w-[20vw] h-[50vh] p-5">
+          <h1>{media.title}</h1>
+          <Link href={"/users/" + media.author.id}>
+            <a className="my-2">
+              {media.author.firstName} {media.author.lastName}
+            </a>
+          </Link>
+          <p className="my-10"> {media.description}</p>
+          <p>{new Date(media.uploadDate).toLocaleDateString()}</p>
+        </div>
       </div>
     </div>
   );

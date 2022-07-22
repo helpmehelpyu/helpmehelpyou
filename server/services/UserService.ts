@@ -4,8 +4,11 @@ import jwt from 'jsonwebtoken';
 import { Author } from '../types/Author';
 import userRepository = require('../repository/UserRepository');
 
-export const findById = async function (userId: string): Promise<User | null> {
-    return userRepository.findById(userId);
+export const findById = async function (
+    userId: string,
+    loadRelations: boolean = false
+): Promise<User | null> {
+    return userRepository.findById(userId, loadRelations);
 };
 
 export const createUser = async function (userInfo: {

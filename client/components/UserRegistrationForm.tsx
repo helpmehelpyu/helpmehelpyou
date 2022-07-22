@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { setAuthCookie } from "../auth/auth";
 import axios from "../config/axios";
+import FloatingLabelInput from "./FloatingLabelField";
 
 interface UserInfo {
   firstName: string;
@@ -98,7 +99,7 @@ export default function UserRegistrationForm() {
   };
 
   return (
-    <div className="rounded bg-white p-5 border-2 w-1/3">
+    <div className="rounded bg-white p-5 border-2 min-w-fit w-1/3">
       <h1 className="p-5 m-2 text-4xl">Register</h1>
       <form className="m-auto px-5" onSubmit={submitRegisterRequest} noValidate>
         <p
@@ -113,55 +114,47 @@ export default function UserRegistrationForm() {
           </Link>{" "}
           instead
         </p>
-        <input
-          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+        <FloatingLabelInput
           type="text"
-          required={true}
           placeholder="First Name"
-          onChange={(e) => setFirstName(e.target.value)}
-        ></input>
+          isRequired={true}
+          setValue={setFirstName}
+        ></FloatingLabelInput>
         <p className="text-red-500 text-sm mx-2 px-1">{firstNameError}</p>
-        <input
-          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+        <FloatingLabelInput
           type="text"
           placeholder="Last Name"
-          required={true}
-          onChange={(e) => setLastName(e.target.value)}
-        ></input>
+          isRequired={true}
+          setValue={setLastName}
+        ></FloatingLabelInput>
         <p className="text-red-500 text-sm mx-2 px-1">{lastNameError}</p>
-        <input
-          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+        <FloatingLabelInput
           type="email"
           placeholder="Email"
-          required={true}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
+          isRequired={true}
+          setValue={setEmail}
+        ></FloatingLabelInput>
         <p className="text-red-500 text-sm mx-2 px-1">{emailError}</p>
-        <input
-          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+        <FloatingLabelInput
           type="tel"
-          required={false}
           placeholder="Phone Number"
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        ></input>
+          isRequired={false}
+          setValue={setLastName}
+        ></FloatingLabelInput>
         <p className="text-red-500 text-xs">{phoneNumberError}</p>
-        <input
-          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+        <FloatingLabelInput
           type="password"
-          min={6}
           placeholder="Password"
-          required={true}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
+          isRequired={true}
+          setValue={setPassword}
+        ></FloatingLabelInput>
         <p className="text-red-500 text-sm mx-2 px-1">{passwordError}</p>
-        <input
-          className="rounded focus:outline-none w-full border-2 focus:bg-slate-100 p-1 m-2"
+        <FloatingLabelInput
           type="password"
-          min={6}
-          placeholder="Confirm Password"
-          required={true}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        ></input>
+          placeholder="Password"
+          isRequired={true}
+          setValue={setConfirmPassword}
+        ></FloatingLabelInput>
         <p className="text-red-500 text-sm mx-2 px-1">{confirmPasswordError}</p>
 
         <input

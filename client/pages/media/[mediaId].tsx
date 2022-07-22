@@ -10,6 +10,9 @@ interface Props {
 }
 
 export default function Media({ media, isAuthor }: Props) {
+  if (!media) {
+    return <h1>No media</h1>;
+  }
   return (
     <div className="flex items-center justify-center h-screen w-screen">
       <div className="w-[50vw] h-[50vh] relative">
@@ -40,13 +43,16 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   let response = await axios.get(`/media/${query.mediaId}`);
 
-  const media = response.data;
+  let media = null;
+  if (response.status === 200) {
+    media = response.data;
+  }
 
   let user = null;
   if (req.headers.cookie) {
     response = await axios.get("/users/me", {
       headers: {
-        Cookie: req.headers.cookie,
+        Authorization: "Bearer " + req.cookies.auth_token,
       },
     });
     user = response.data;

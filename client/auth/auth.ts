@@ -10,3 +10,7 @@ export function setAuthCookie(authToken: string) {
 export function getAuthCookie(): string | undefined {
   return Cookies.get("auth_token");
 }
+
+export function logout() {
+  Cookies.remove("auth_token");
+}

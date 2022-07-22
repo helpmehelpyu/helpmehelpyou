@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { FormEvent, useState } from "react";
-import { setAuthCookie } from "../auth/auth";
-import axios from "../config/axios";
-import FloatingLabelInput from "./FloatingLabelField";
+import Link from 'next/link';
+import { FormEvent, useState } from 'react';
+import { setAuthCookie } from '../auth/auth';
+import axios from '../config/axios';
+import FloatingLabelInput from './FloatingLabelField';
 
 interface UserInfo {
   firstName: string;
@@ -13,48 +13,48 @@ interface UserInfo {
 }
 
 export default function UserRegistrationForm() {
-  const [firstName, setFirstName] = useState("");
-  const [firstNameError, setFirstNameError] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
   const [isExistingUser, setExistingUser] = useState(false);
   const [allowSubmit, setAllowSubmit] = useState(true);
 
   const handleValidationError = (error: { param: string; msg: string }) => {
     switch (error.param) {
-      case "firstName":
+      case 'firstName':
         setFirstNameError(error.msg);
         break;
-      case "lastName":
+      case 'lastName':
         setLastNameError(error.msg);
         break;
-      case "email":
+      case 'email':
         setEmailError(error.msg);
         break;
-      case "password":
+      case 'password':
         setPasswordError(error.msg);
         break;
-      case "phoneNumber":
+      case 'phoneNumber':
         setPhoneNumberError(error.msg);
         break;
     }
   };
 
   const clearValidationErrors = () => {
-    setFirstNameError("");
-    setLastNameError("");
-    setEmailError("");
-    setPasswordError("");
-    setPhoneNumberError("");
-    setConfirmPasswordError("");
+    setFirstNameError('');
+    setLastNameError('');
+    setEmailError('');
+    setPasswordError('');
+    setPhoneNumberError('');
+    setConfirmPasswordError('');
     setExistingUser(false);
   };
 
@@ -64,7 +64,7 @@ export default function UserRegistrationForm() {
     setAllowSubmit(false);
 
     if (confirmPassword !== password) {
-      setConfirmPasswordError("Passwords do not match");
+      setConfirmPasswordError('Passwords do not match');
       return;
     }
 
@@ -75,15 +75,15 @@ export default function UserRegistrationForm() {
       password: password,
     };
 
-    if (phoneNumber !== "") {
+    if (phoneNumber !== '') {
       data.phoneNumber = phoneNumber;
     }
 
-    const response = await axios.post("/users/signup", data);
+    const response = await axios.post('/users/signup', data);
 
     clearValidationErrors();
     if (response.status === 400) {
-      if (response.data.type === "DuplicateEmailError") {
+      if (response.data.type === 'DuplicateEmailError') {
         setExistingUser(true);
         return;
       }
@@ -100,18 +100,18 @@ export default function UserRegistrationForm() {
 
   return (
     <div className="rounded bg-white p-5 border-2 min-w-fit w-1/3">
-      <h1 className="p-5 m-2 text-4xl">Register</h1>
+      <h1 className="p-5 m-2 text-4xl font-bold">Register</h1>
       <form className="m-auto px-5" onSubmit={submitRegisterRequest} noValidate>
         <p
           className={
-            (isExistingUser ? "block " : "hidden ") +
-            "text-red-500 text-sm mx-2 px-1"
+            (isExistingUser ? 'block ' : 'hidden ') +
+            'text-red-500 text-sm mx-2 px-1'
           }
         >
-          An Account with this email already exists,{" "}
+          An Account with this email already exists,{' '}
           <Link className="underline" href="/login">
             log in
-          </Link>{" "}
+          </Link>{' '}
           instead
         </p>
         <FloatingLabelInput
@@ -163,10 +163,10 @@ export default function UserRegistrationForm() {
         ></input>
 
         <p className="mx-2 px-1">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <Link href="/login">
             <a className="underline text-cyan-500">Login</a>
-          </Link>{" "}
+          </Link>{' '}
           instead.
         </p>
       </form>

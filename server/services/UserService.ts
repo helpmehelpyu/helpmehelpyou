@@ -34,9 +34,13 @@ export const login = async function (
         return [false, ''];
     }
 
-    const token = await jwt.sign({ id: user.id }, process.env.TOKEN_SECRET!, {
-        expiresIn: '24h',
-    });
+    const token = await jwt.sign(
+        { userId: user.id },
+        process.env.TOKEN_SECRET!,
+        {
+            expiresIn: '24h',
+        }
+    );
 
     return [true, token];
 };

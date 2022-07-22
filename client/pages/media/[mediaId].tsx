@@ -15,13 +15,14 @@ export default function Media({ media, isAuthor }: Props) {
   }
   return (
     <div className="flex items-center justify-center h-screen bg-slate-100">
-      <div className="flex items-center justify-center py-10 rounded-lg bg-white border-2">
+      <div className="flex items-center justify-center p-10 rounded-lg bg-white border-2">
         <div className="w-[50vw] h-[50vh] relative">
           <Image
             src={media.source}
             layout="fill"
             objectFit="contain"
             alt=""
+            priority
           ></Image>
         </div>
         <div className="w-[20vw] h-[50vh] p-5">

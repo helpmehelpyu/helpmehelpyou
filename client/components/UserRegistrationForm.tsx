@@ -151,7 +151,7 @@ export default function UserRegistrationForm() {
         <p className="text-red-500 text-sm mx-2 px-1">{passwordError}</p>
         <FloatingLabelInput
           type="password"
-          placeholder="Password"
+          placeholder="Confirm Password"
           isRequired={true}
           setValue={setConfirmPassword}
         ></FloatingLabelInput>

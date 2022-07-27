@@ -14,7 +14,7 @@ export default function FloatingLabelInput({
   return (
     <div className="relative">
       <input
-        className="relative rounded focus:outline-cyan-500 w-full border-2 p-1 m-2 z-10 bg-transparent peer"
+        className="rounded focus:outline-cyan-500 w-full border-2 p-1 m-2 z-10 bg-transparent peer"
         type={type}
         name={placeholder.toLowerCase()}
         required={isRequired}

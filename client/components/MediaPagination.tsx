@@ -36,7 +36,7 @@ export default function MediaPagination({ media }: Props) {
       data.push(
         <li
           key={'filler' + i}
-          className="h-[10px] w-[10px] flex-[0_0_16.3%] hidden md2:invisible"
+          className="h-[10px] w-[10px] flex-[0_0_16.3%] hidden md2:block"
         ></li>
       );
     }

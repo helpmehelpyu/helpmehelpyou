@@ -56,7 +56,7 @@ export function MediaPaginationNav({
   );
 
   return (
-    <div className="flex justify-center w-full">
+    <div className="hidden md2:flex md2:justify-center md2:w-full">
       <ul className="flex justify-center items-center">{pages}</ul>
     </div>
   );

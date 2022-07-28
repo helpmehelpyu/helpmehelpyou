@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        md2: '900px',
+        md2: '970px',
       },
       fontFamily: {
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],

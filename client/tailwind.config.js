@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        md2: '900px',
+      },
       fontFamily: {
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
       },

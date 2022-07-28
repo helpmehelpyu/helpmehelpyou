@@ -16,13 +16,13 @@ export default function MediaPagination({ media }: Props) {
   }
 
   const items = media.map((val) => (
-    <li key={val.id} className="flex-[0_0_17%]">
+    <li key={val.id} className="flex-[0_0_16.3%]">
       <Image
         src={val.source.toString()}
         objectFit="cover"
         height={5000}
         width={5000}
-        className="rounded-2xl aspect-square"
+        className="rounded-2xl aspect-square scale-75 md2:scale-100"
         alt=""
       ></Image>
     </li>
@@ -31,13 +31,13 @@ export default function MediaPagination({ media }: Props) {
   const fillerElements: JSX.Element[] = [];
   for (let i = 0; i < ((-media.length % 5) + 5) % 5; i++) {
     fillerElements.push(
-      <li className="h-[500px] w-[500px] flex-[0_0_17%]"></li>
+      <li className="h-[10px] w-[10px] flex-[0_0_16.3%] hidden md2:block"></li>
     );
   }
 
   return (
     <div>
-      <ul className="flex flex-col xl:flex-row xl:flex-wrap gap-10 justify-center">
+      <ul className="flex flex-col md2:flex-row md2:flex-wrap gap-10 justify-center">
         {items}
         {fillerElements}
       </ul>

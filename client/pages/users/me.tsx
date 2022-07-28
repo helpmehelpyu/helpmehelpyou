@@ -43,10 +43,10 @@ export default function Me({ user }: Props) {
   }, [selectedTab, user]);
 
   return (
-    <div className="bg-gray-50 space-y-10 p-10 min-h-screen md:min-w-0 min-w-min">
-      <div className="flex flex-col xl:flex-row xl:space-x-5 xl:justify-center xl:items-stretch space-y-10 xl:space-y-0">
-        <div className="xl:rounded-r-2xl border-2 xl:bg-white xl:w-1/3 rounded">
-          <div className="relative h-56 bg-slate-200 xl:rounded-tr-xl">
+    <div className="bg-gray-50 space-y-10 p-5 md2:p-10 min-h-screen md2:min-w-0 min-w-min">
+      <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
+        <div className="md2:rounded-r-2md2 border-2 md2:bg-white md2:w-1/3 rounded">
+          <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2">
             <div className="absolute ring-4 ring-white rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
               <Image
                 src="https://res.cloudinary.com/dmtigi69n/image/upload/v1644902654/1644902654314.jpg"
@@ -75,9 +75,9 @@ export default function Me({ user }: Props) {
             </button>
           </div>
         </div>
-        <div className="space-y-10 xl:w-2/3 border-2 xl:rounded-l-2xl bg-white rounded min-w-max pt-5">
+        <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
           <h1 className="text-3xl font-bold text-center">Featured Work</h1>
-          <div className="relative xl:h-[90%] h-[50vw]">
+          <div className="relative md2:h-[90%] h-[50vw]">
             <Image
               alt=""
               layout="fill"
@@ -93,7 +93,7 @@ export default function Me({ user }: Props) {
             <button
               onClick={() => setSelectedTab(Tabs.WorkSamples)}
               className={
-                'xl:text-lg hover:underline p-2 rounded hover:bg-gray-200' +
+                'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
                 (selectedTab === Tabs.WorkSamples
                   ? ' text-cyan-500 border border-cyan-500  font-bold'
                   : '')
@@ -106,7 +106,7 @@ export default function Me({ user }: Props) {
             <button
               onClick={() => setSelectedTab(Tabs.Skills)}
               className={
-                'xl:text-lg hover:underline p-2 rounded hover:bg-gray-200' +
+                'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
                 (selectedTab === Tabs.Skills
                   ? ' text-cyan-500 border border-cyan-500  font-bold'
                   : '')
@@ -119,7 +119,7 @@ export default function Me({ user }: Props) {
             <button
               onClick={() => setSelectedTab(Tabs.Experience)}
               className={
-                'xl:text-lg hover:underline p-2 rounded hover:bg-gray-200' +
+                'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
                 (selectedTab === Tabs.Experience
                   ? ' text-cyan-500 border border-cyan-500  font-bold'
                   : '')
@@ -132,7 +132,7 @@ export default function Me({ user }: Props) {
             <button
               onClick={() => setSelectedTab(Tabs.Education)}
               className={
-                'xl:text-lg hover:underline p-2 rounded hover:bg-gray-200' +
+                'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
                 (selectedTab === Tabs.Education
                   ? ' text-cyan-500 border border-cyan-500 font-bold'
                   : '')

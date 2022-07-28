@@ -22,6 +22,7 @@ export function MediaPaginationNav({
 
   pages.push(
     <li
+      key="prev"
       className="rounded-full flex justify-center items-center aspect-square text-xl select-none hover:bg-slate-200 w-20 h-20 cursor-pointer transition duration-500"
       onClick={() => setCurrentPageNumber(Math.max(currentPageNumber - 1, 0))}
     >
@@ -44,6 +45,7 @@ export function MediaPaginationNav({
   }
   pages.push(
     <li
+      key="next"
       className="rounded-full flex justify-center items-center aspect-square text-xl select-none hover:bg-slate-200 w-20 h-20 cursor-pointer transition duration-500"
       onClick={() =>
         setCurrentPageNumber(Math.min(currentPageNumber + 1, totalPages - 1))

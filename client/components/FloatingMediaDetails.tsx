@@ -37,7 +37,7 @@ export default function FloatingMediaDetails({
           height={500}
           width={500 * ratio}
           quality={100}
-          className="object-contain h-full md2:m-5 md2:w-1/2"
+          className="object-contain md2:m-5 md2:w-1/2 bg-white"
           onClick={(event) => event.stopPropagation()}
           onLoadingComplete={({ naturalWidth, naturalHeight }) =>
             setRatio(naturalWidth / naturalHeight)

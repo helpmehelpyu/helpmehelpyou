@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { WorkSample } from '../types/WorkSample';
-import FloatingMediaDetails from './FloatingMediaDetails';
-import MediaPagination from './MediaPagination';
-import { UserData } from '../types/UserData';
+import { WorkSample } from '../../types/WorkSample';
+import FloatingMediaDetails from './workSamples/FloatingMediaDetails';
+import MediaPagination from './workSamples/MediaPagination';
+import { UserData } from '../../types/UserData';
 import Image from 'next/image';
 
 interface Props {

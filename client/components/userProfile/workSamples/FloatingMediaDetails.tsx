@@ -51,56 +51,7 @@ export default function FloatingMediaDetails({
           onClick={(event) => event.stopPropagation()}
         >
           <h1 className="font-bold">{mediaDetails.title}</h1>
-          <h2>
-            {mediaDetails.description}Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Quisque volutpat, dolor vitae pellentesque
-            volutpat, dolor mi iaculis diam, sit amet maximus est magna nec
-            augue. Sed sit amet rutrum tellus. Praesent vitae nisi pellentesque,
-            tristique nisi eget, auctor quam. Pellentesque semper sollicitudin
-            enim, in dapibus erat bibendum vel. In placerat, ligula vel blandit
-            accumsan, elit nunc mattis nulla, nec volutpat mauris enim ut quam.
-            Proin sodales sagittis est vel rhoncus. Mauris in interdum quam.
-            Etiam malesuada posuere mi eget finibus. Quisque sollicitudin
-            volutpat nunc, sed auctor felis sagittis eu. Sed id orci varius
-            ligula convallis tincidunt. Vivamus sagittis tortor neque, vitae
-            laoreet ex suscipit quis. Suspendisse varius eleifend tellus at
-            aliquam. Maecenas convallis odio et nisi blandit fringilla. Nunc
-            ullamcorper quam non nisi posuere, ac pharetra arcu lobortis. Aenean
-            porttitor tortor tellus, in feugiat ante faucibus id. Praesent
-            pharetra eros ac ultrices auctor. Maecenas interdum sapien in leo
-            rhoncus fringilla. Aliquam scelerisque metus pellentesque libero
-            pellentesque, non tincidunt lacus mollis. Curabitur cursus, nulla id
-            maximus convallis, erat dui hendrerit neque, eu interdum enim turpis
-            a turpis. Nulla tincidunt nunc elit, nec posuere eros dignissim in.
-            Vivamus vel tempor libero, id tincidunt erat. Nulla facilisi.
-            Maecenas malesuada enim non justo cursus, eget auctor velit pretium.
-            Vivamus non justo odio. Vestibulum tempus arcu at odio posuere,
-            vitae faucibus tellus ornare. In interdum auctor arcu. Aenean et
-            blandit diam. Phasellus non diam ut tortor placerat tincidunt non et
-            magna. Donec id quam sit amet nisl placerat efficitur. Aenean
-            malesuada non magna non facilisis. Vestibulum quis sagittis lacus,
-            in dapibus turpis. Donec facilisis laoreet blandit. Nulla id sapien
-            nulla. Praesent at lorem pellentesque leo consequat efficitur.
-            Curabitur dictum neque nec ligula imperdiet maximus. Sed euismod
-            lectus nec elit dignissim euismod. Cras eget porta risus. Orci
-            varius natoque penatibus et magnis dis parturient montes, nascetur
-            ridiculus mus. Nulla malesuada tempor ullamcorper. Ut vel nisl diam.
-            Pellentesque eu volutpat tortor. Aenean enim massa, accumsan vel
-            tempus sit amet, consectetur non libero. Curabitur eget justo
-            elementum, viverra libero porta, consequat leo. Pellentesque
-            eleifend congue nisl, eget tincidunt nulla dapibus non. Integer et
-            luctus ante. Suspendisse congue congue tincidunt. Nunc molestie
-            imperdiet augue, ut pulvinar purus venenatis nec. Fusce varius
-            porttitor ultricies. Duis vehicula aliquam mollis. Quisque eget nisi
-            nec eros feugiat aliquam. Vestibulum egestas neque non nisl posuere
-            rutrum. Suspendisse potenti. Nam pellentesque augue in tempus
-            interdum. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Pellentesque at pellentesque
-            metus, dapibus fermentum lectus. Phasellus aliquam ipsum in massa
-            iaculis, id suscipit dolor facilisis. Etiam tempor purus quis mollis
-            fermentum. Mauris posuere sodales orci, ut consequat tellus
-            pellentesque sit amet. Vivamus non eros eros. Integer ac nisi eros.
-          </h2>
+          <h2>{mediaDetails.description}</h2>
           <h3>{new Date(mediaDetails.uploadDate).toLocaleDateString()}</h3>
         </div>
       </div>

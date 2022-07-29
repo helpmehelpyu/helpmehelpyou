@@ -1,6 +1,6 @@
 import Image from 'next/future/image';
 import { useEffect, useState } from 'react';
-import { WorkSample } from '../types/WorkSample';
+import { WorkSample } from '../../../types/WorkSample';
 
 interface Props {
   mediaDetails: WorkSample;

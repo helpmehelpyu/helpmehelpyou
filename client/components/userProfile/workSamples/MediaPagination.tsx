@@ -1,9 +1,9 @@
-import { MediaResult } from '../types/MediaResult';
-import { WorkSample } from '../types/WorkSample';
+import { MediaResult } from '../../../types/MediaResult';
+import { WorkSample } from '../../../types/WorkSample';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { MediaPaginationNav } from './MediaPaginationNav';
-import useWindowDimensions from '../utils/windowSizeUtils';
+import useWindowDimensions from '../../../utils/windowSizeUtils';
 
 interface Props {
   media: MediaResult[] | WorkSample[];

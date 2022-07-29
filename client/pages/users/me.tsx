@@ -1,7 +1,7 @@
 import axios from '../../config/axios';
 import { UserData } from '../../types/UserData';
 import { GetServerSideProps } from 'next';
-import UserProfile from '../../components/UserProfile';
+import UserProfile from '../../components/userProfile/UserProfile';
 
 interface Props {
   user: UserData;

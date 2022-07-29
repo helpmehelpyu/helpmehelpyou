@@ -22,6 +22,9 @@
   }
 
   .transparent-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #f7f4ed;
+    background: #bac5d6;
+  }
+  .transparent-scrollbar::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }

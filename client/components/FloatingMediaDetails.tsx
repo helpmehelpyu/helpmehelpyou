@@ -37,7 +37,7 @@ export default function FloatingMediaDetails({
           height={500}
           width={500 * ratio}
           quality={100}
-          className="object-contain md2:m-5 md2:w-1/2 bg-white select-none"
+          className="object-contain md2:m-5 w-1/2 select-none"
           onClick={(event) => event.stopPropagation()}
           onLoadingComplete={({ naturalWidth, naturalHeight }) =>
             setRatio(naturalWidth / naturalHeight)
@@ -47,7 +47,7 @@ export default function FloatingMediaDetails({
         ></Image>
 
         <div
-          className="hidden md2:block max-h-[90vh] rounded-sm p-1 sm:p-5 text-white break-word text-sm md:text-2xl overflow-auto space-y-10 transparent-scrollbar"
+          className="block max-h-[90vh] rounded-sm p-1 sm:p-5 text-white break-word text-sm md:text-2xl overflow-auto space-y-10 transparent-scrollbar"
           onClick={(event) => event.stopPropagation()}
         >
           <h1 className="font-bold">{mediaDetails.title}</h1>

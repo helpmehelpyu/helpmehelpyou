@@ -7,9 +7,13 @@ import useWindowDimensions from '../utils/windowSizeUtils';
 
 interface Props {
   media: MediaResult[] | WorkSample[];
+  setMediaDetails: (val: WorkSample) => void;
 }
 
-export default function MediaPagination({ media }: Props) {
+export default function MediaPagination({
+  media,
+  setMediaDetails: setMediaDetails,
+}: Props) {
   const itemsPerPage = 25;
   const totalPages = Math.ceil(media.length / itemsPerPage);
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
@@ -51,16 +55,23 @@ export default function MediaPagination({ media }: Props) {
     );
   }
 
-  const items = splicedList.map((val) => (
-    <li key={val.id} className="flex-[0_0_16.3%] select-none">
+  const items = splicedList.reverse().map((media) => (
+    <li
+      key={media.id}
+      className="flex-[0_0_16.3%] select-none duration-500 hover:scale-105"
+      onClick={() => setMediaDetails(media)}
+    >
       <Image
-        src={val.source.toString()}
+        src={media.source.toString()}
         objectFit="cover"
         height={5000}
         width={5000}
-        className="rounded-2xl aspect-square scale-75 md2:scale-100"
-        alt=""
+        className="rounded-2xl aspect-square scale-[80%] md2:scale-100"
+        alt="Loading..."
       ></Image>
+      <div className="text-ellipsis overflow-hidden text-center text-xl md2:max-w-full">
+        {media.title}
+      </div>
     </li>
   ));
 

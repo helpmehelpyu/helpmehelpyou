@@ -42,6 +42,8 @@ export default function FloatingMediaDetails({
           onLoadingComplete={({ naturalWidth, naturalHeight }) =>
             setRatio(naturalWidth / naturalHeight)
           }
+          placeholder={'blur'}
+          blurDataURL={mediaDetails.source}
         ></Image>
 
         <div className="hidden md2:block max-h-[90vh] rounded-sm p-1 sm:p-5 text-white break-word text-sm md:text-2xl overflow-auto space-y-10 transparent-scrollbar">

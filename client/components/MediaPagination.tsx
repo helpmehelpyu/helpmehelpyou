@@ -7,9 +7,13 @@ import useWindowDimensions from '../utils/windowSizeUtils';
 
 interface Props {
   media: MediaResult[] | WorkSample[];
+  setMediaDetails: (val: WorkSample) => void;
 }
 
-export default function MediaPagination({ media }: Props) {
+export default function MediaPagination({
+  media,
+  setMediaDetails: setMediaDetails,
+}: Props) {
   const itemsPerPage = 25;
   const totalPages = Math.ceil(media.length / itemsPerPage);
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
@@ -54,8 +58,8 @@ export default function MediaPagination({ media }: Props) {
   const items = splicedList.reverse().map((media) => (
     <li
       key={media.id}
-      className="flex-[0_0_16.3%] select-none duration-500 hover:scale-110"
-      onClick={() => showMediaDetails(media)}
+      className="flex-[0_0_16.3%] select-none duration-500 hover:scale-105"
+      onClick={() => setMediaDetails(media)}
     >
       <Image
         src={media.source.toString()}

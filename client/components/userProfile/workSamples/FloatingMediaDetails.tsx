@@ -47,7 +47,7 @@ export default function FloatingMediaDetails({
         ></Image>
 
         <div
-          className="hidden xs:block max-h-[90vh] w-1/2 rounded-sm p-1 sm:p-5 text-white break-word text-sm md:text-2xl overflow-auto space-y-10 transparent-scrollbar"
+          className="hidden xs:block max-h-[90vh] w-1/3 rounded-sm p-1 sm:p-5 text-white break-word text-sm md:text-2xl overflow-auto space-y-10 transparent-scrollbar"
           onClick={(event) => event.stopPropagation()}
         >
           <h1 className="font-bold">{mediaDetails.title}</h1>

@@ -65,7 +65,7 @@ export default function MediaPagination({ media }: Props) {
         className="rounded-2xl aspect-square scale-[80%] md2:scale-100"
         alt="Loading..."
       ></Image>
-      <div className="text-ellipsis overflow-hidden text-center text-xl md2:max-w-[220px]">
+      <div className="text-ellipsis overflow-hidden text-center text-xl md2:max-w-full">
         {media.title}
       </div>
     </li>

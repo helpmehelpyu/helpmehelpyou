@@ -1,18 +1,23 @@
 import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../database/DataSource';
 import { User } from '../models/User';
+import { LoadUserRelations } from '../types/LoadUserRelations';
+import { createDefaultUserProfile } from './UserProfileRepository';
 
 const userDAO = AppDataSource.getRepository(User);
 
 export const findById = async (
     userId: string,
-    loadRelations: boolean = false
+    loadRelations: LoadUserRelations
 ): Promise<User | null> => {
     return userDAO.findOne({
         where: { id: userId },
         relations: {
-            workSamples: loadRelations,
-            links: loadRelations,
+            workSamples: loadRelations.workSamples || false,
+            education: loadRelations.education || false,
+            experience: loadRelations.experience || false,
+            userProfile: loadRelations.userProfile || false,
+            links: loadRelations.links || false,
         },
     });
 };
@@ -26,6 +31,8 @@ export const createNewUser = async (userInfo: {
     [x: string]: any;
 }): Promise<User> => {
     const newUser = userDAO.create(userInfo);
+    const newUserProfile = await createDefaultUserProfile();
+    newUser.userProfile = newUserProfile;
     return userDAO.save(newUser);
 };
 

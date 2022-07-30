@@ -9,20 +9,29 @@ import {
 import bcrypt from 'bcryptjs';
 import { User } from '../models/User';
 
-jest.mock('../repository/UserRepository', () => {
-    const mockUser = {
-        id: '1',
-        firstName: 'test',
-        lastName: 'user',
-        email: 'testuser@email.com',
-        password: 'password',
-        phoneNumber: '123-456-7890',
-        rating: 50,
-        workSamples: [],
-        links: [],
-        skills: [],
-    };
+const mockUser = {
+    id: '1',
+    firstName: 'test',
+    lastName: 'user',
+    email: 'testuser@email.com',
+    password: 'password',
+    phoneNumber: '123-456-7890',
+    rating: 50,
+    workSamples: [],
+    links: [],
+    skills: [],
+    education: [],
+    experience: [],
+    avatar: '',
+    userProfile: {
+        id: 1,
+        featuredWork: '',
+        description: '',
+        headline: '',
+    },
+};
 
+jest.mock('../repository/UserRepository', () => {
     const findByIdMock = jest.fn((userId: string) => {
         if (mockUser.id === userId) {
             return mockUser;
@@ -81,22 +90,9 @@ jest.mock('../repository/UserRepository', () => {
 
 describe('finding a user by id', () => {
     test('where the user corresponding to the id exists', async () => {
-        const expectedUser = {
-            id: '1',
-            firstName: 'test',
-            lastName: 'user',
-            email: 'testuser@email.com',
-            password: 'password',
-            phoneNumber: '123-456-7890',
-            rating: 50,
-            workSamples: [],
-            links: [],
-            skills: [],
-        };
-
         const actualUser = await findById('1');
         expect(actualUser).not.toBeNull();
-        expect(actualUser).toEqual(expectedUser);
+        expect(actualUser).toEqual(mockUser);
     });
 
     test('where the user corresponding to the id does not exist', async () => {
@@ -170,19 +166,6 @@ describe('logging in an existing user', () => {
 });
 
 test('Casting a User to an Author', () => {
-    const mockUser = {
-        id: '1',
-        firstName: 'test',
-        lastName: 'user',
-        email: 'testuser@email.com',
-        password: 'password',
-        phoneNumber: '123-456-7890',
-        rating: 50,
-        workSamples: [],
-        links: [],
-        skills: [],
-    };
-
     const author = castUserToAuthor(mockUser);
     expect(author).toEqual({
         id: mockUser.id,
@@ -205,7 +188,17 @@ describe('updating an existing user', () => {
         workSamples: [],
         links: [],
         skills: [],
+        education: [],
+        experience: [],
+        avatar: '',
+        userProfile: {
+            id: 1,
+            featuredWork: '',
+            description: '',
+            headline: '',
+        },
     };
+
     test('where all user properties are updated', async () => {
         const updatedUser = await updateUser(mockUser, {
             firstName: 'new',
@@ -262,19 +255,6 @@ describe('updating an existing user', () => {
 
 describe('deleting a User', () => {
     test('that exists', async () => {
-        const mockUser = {
-            id: '1',
-            firstName: 'test',
-            lastName: 'user',
-            email: 'testuser@email.com',
-            password: 'password',
-            phoneNumber: '123-456-7890',
-            rating: 50,
-            workSamples: [],
-            links: [],
-            skills: [],
-        };
-
         const rowsAffected = await deleteUser(mockUser);
         expect(rowsAffected).not.toBeNull();
         expect(rowsAffected).toBeDefined();
@@ -293,6 +273,15 @@ describe('deleting a User', () => {
             workSamples: [],
             links: [],
             skills: [],
+            education: [],
+            experience: [],
+            avatar: '',
+            userProfile: {
+                id: 1,
+                featuredWork: '',
+                description: '',
+                headline: '',
+            },
         };
 
         const rowsAffected = await deleteUser(mockUser);

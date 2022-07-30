@@ -21,7 +21,7 @@ export async function authenticateUser(
             process.env.TOKEN_SECRET!
         ) as JwtPayload;
 
-        const user = await userService.findById(userId);
+        const user = await userService.findById(userId, { userProfile: true });
         if (!user) {
             return res.sendStatus(401);
         }

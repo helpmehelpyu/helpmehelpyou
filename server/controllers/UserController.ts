@@ -93,7 +93,7 @@ export const deleteUser = async (req: Request, res: Response) => {
         await linkService.deleteAssociatedLinks(res.locals.user.id);
 
         const rowsAffected = await userService.deleteUser(res.locals.user);
-        if (rowsAffected != 1) {
+        if (rowsAffected !== 1) {
             return res.status(500).json({
                 message: 'Unable to delete the requested resource',
             });

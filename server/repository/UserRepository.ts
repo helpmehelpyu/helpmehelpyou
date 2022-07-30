@@ -1,6 +1,7 @@
 import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../database/DataSource';
 import { User } from '../models/User';
+import { createDefaultUserProfile } from './UserProfileRepository';
 
 const userDAO = AppDataSource.getRepository(User);
 
@@ -26,6 +27,8 @@ export const createNewUser = async (userInfo: {
     [x: string]: any;
 }): Promise<User> => {
     const newUser = userDAO.create(userInfo);
+    const newUserProfile = await createDefaultUserProfile();
+    newUser.userProfile = newUserProfile;
     return userDAO.save(newUser);
 };
 

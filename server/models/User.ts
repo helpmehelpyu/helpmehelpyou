@@ -2,11 +2,16 @@ import {
     Check,
     Column,
     Entity,
+    JoinColumn,
     OneToMany,
+    OneToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Education } from './Education';
+import { Experience } from './Experience';
 import { Link } from './Link';
 import { Media } from './Media';
+import { UserProfile } from './UserProfile';
 
 @Entity('users')
 @Check('0 <= rating AND rating <= 100')
@@ -49,4 +54,17 @@ export class User {
         default: [],
     })
     skills: string[];
+
+    @OneToMany(() => Experience, (experience) => experience.user)
+    experience: Experience[];
+
+    @OneToMany(() => Education, (education) => education.user)
+    education: Education[];
+
+    @Column({ default: '' })
+    avatar: string;
+
+    @OneToOne(() => UserProfile)
+    @JoinColumn()
+    userProfile: UserProfile;
 }

@@ -8,3 +8,7 @@ export const createDefaultUserProfile = async (): Promise<UserProfile> => {
     await userProfileDAO.save(newUserProfile);
     return newUserProfile;
 };
+
+export const deleteById = async (id: number) => {
+    userProfileDAO.delete({ id: id });
+};

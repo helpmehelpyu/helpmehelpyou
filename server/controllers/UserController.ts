@@ -3,6 +3,7 @@ import { matchedData, validationResult } from 'express-validator';
 import userService = require('../services/UserService');
 import mediaService = require('../services/MediaService');
 import linkService = require('../services/LinkService');
+import userProfileService = require('../services/UserProfileService');
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -91,6 +92,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     try {
         await mediaService.deleteAssociatedMedia(res.locals.user.id);
         await linkService.deleteAssociatedLinks(res.locals.user.id);
+        await userProfileService.deleteById(res.locals.user.userProfile.id);
 
         const rowsAffected = await userService.deleteUser(res.locals.user);
         if (rowsAffected !== 1) {
@@ -109,7 +111,13 @@ export const deleteUser = async (req: Request, res: Response) => {
 };
 
 export const getUserData = async (req: Request, res: Response) => {
-    const user = await userService.findById(req.params.userId);
+    const user = await userService.findById(req.params.userId, {
+        workSamples: true,
+        education: true,
+        experience: true,
+        userProfile: true,
+        links: true,
+    });
     if (!user) {
         res.status(404).json({
             message: 'The user with this ID does not exist',
@@ -122,7 +130,13 @@ export const getUserData = async (req: Request, res: Response) => {
 };
 
 export const getCurrentUserData = async (req: Request, res: Response) => {
-    const user = await userService.findById(res.locals.user.id, true);
+    const user = await userService.findById(res.locals.user.id, {
+        workSamples: true,
+        education: true,
+        experience: true,
+        userProfile: true,
+        links: true,
+    });
     res.status(200).json({
         ...user,
         password: undefined,

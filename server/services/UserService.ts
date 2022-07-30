@@ -3,10 +3,11 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Author } from '../types/Author';
 import userRepository = require('../repository/UserRepository');
+import { LoadUserRelations } from '../types/LoadUserRelations';
 
 export const findById = async function (
     userId: string,
-    loadRelations: boolean = false
+    loadRelations: LoadUserRelations = {}
 ): Promise<User | null> {
     return userRepository.findById(userId, loadRelations);
 };

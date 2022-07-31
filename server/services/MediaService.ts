@@ -79,13 +79,32 @@ export const isAuthor = async function (
     return media.author.id === userId;
 };
 
-export const deleteById = async function (
-    mediaId: string
-): Promise<number | null | undefined> {
+export const deleteById = async function (mediaId: string): Promise<boolean> {
+    const success = await deleteCloudImageById(mediaId);
+    if (!success) {
+        return false;
+    }
+
     const res = await mediaRepository.deleteById(mediaId);
-    return res.affected;
+    return res.affected === 1;
 };
 
 export const deleteAssociatedMedia = async function (userId: string) {
+    const user = await userService.findById(userId, { workSamples: true });
+    for (const media of user!.workSamples) {
+        const success = await deleteCloudImageById(media.id);
+        if (!success) {
+            throw Error(`Image with id ${media.id} could not be deleted`);
+        }
+    }
     mediaRepository.deleteAllByAuthorId(userId);
+};
+
+const deleteCloudImageById = async (mediaId: string): Promise<boolean> => {
+    const { error } = await cloudinary.v2.uploader.destroy(mediaId);
+    if (error) {
+        return false;
+    }
+
+    return true;
 };

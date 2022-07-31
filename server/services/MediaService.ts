@@ -18,26 +18,7 @@ export const uploadMedia = async function (
     author: User,
     mediaInfo: { [x: string]: any }
 ): Promise<string> {
-    const parser = new DataURIParser();
-
-    const parsedFile = parser.format(
-        path.extname(file.originalname),
-        file.buffer
-    ).content;
-
-    if (!parsedFile) {
-        throw Error('File could not be parsed');
-    }
-
-    const uploadedMedia = await cloudinary.v2.uploader.upload_large(
-        parsedFile,
-        {
-            resource_type: 'auto',
-            use_filename: false,
-            unique_filename: true,
-            chunk_size: 6000000,
-        }
-    );
+    const uploadedMedia = await uploadImageToCloud(file);
 
     const newMedia = await mediaRepository.createNewMedia(
         uploadedMedia.public_id,
@@ -80,7 +61,7 @@ export const isAuthor = async function (
 };
 
 export const deleteById = async function (mediaId: string): Promise<boolean> {
-    const success = await deleteCloudImageById(mediaId);
+    const success = await deleteImageFromCloudById(mediaId);
     if (!success) {
         return false;
     }
@@ -92,7 +73,7 @@ export const deleteById = async function (mediaId: string): Promise<boolean> {
 export const deleteAssociatedMedia = async function (userId: string) {
     const user = await userService.findById(userId, { workSamples: true });
     for (const media of user!.workSamples) {
-        const success = await deleteCloudImageById(media.id);
+        const success = await deleteImageFromCloudById(media.id);
         if (!success) {
             throw Error(`Image with id ${media.id} could not be deleted`);
         }
@@ -100,11 +81,33 @@ export const deleteAssociatedMedia = async function (userId: string) {
     mediaRepository.deleteAllByAuthorId(userId);
 };
 
-const deleteCloudImageById = async (mediaId: string): Promise<boolean> => {
+const deleteImageFromCloudById = async (mediaId: string): Promise<boolean> => {
     const { error } = await cloudinary.v2.uploader.destroy(mediaId);
     if (error) {
         return false;
     }
 
     return true;
+};
+
+const uploadImageToCloud = async (
+    file: Express.Multer.File
+): Promise<cloudinary.UploadApiResponse> => {
+    const parser = new DataURIParser();
+
+    const parsedFile = parser.format(
+        path.extname(file.originalname),
+        file.buffer
+    ).content;
+
+    if (!parsedFile) {
+        throw Error('File could not be parsed');
+    }
+
+    return await cloudinary.v2.uploader.upload_large(parsedFile, {
+        resource_type: 'auto',
+        use_filename: false,
+        unique_filename: true,
+        chunk_size: 6000000,
+    });
 };

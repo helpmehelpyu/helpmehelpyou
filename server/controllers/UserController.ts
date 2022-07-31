@@ -152,6 +152,16 @@ export const updateAvatar = async (req: Request, res: Response) => {
             });
         }
 
+        // delete the current avatar before we update and upload a new one
+        const isDeleted = await mediaService.deleteImageFromCloudById(
+            res.locals.user.avatar.id
+        );
+        if (!isDeleted) {
+            return res.status(500).json({
+                message: 'Failed to delete old avatar',
+            });
+        }
+
         const avatarInfo = await mediaService.uploadImageToCloud(req.file);
         const updatedUser = await userService.uploadAvatar(
             res.locals.user,

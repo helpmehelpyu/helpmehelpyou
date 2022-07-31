@@ -22,7 +22,7 @@ const mockUser = {
     skills: [],
     education: [],
     experience: [],
-    avatar: '',
+    avatar: { source: '', id: '' },
     userProfile: {
         id: 1,
         featuredWork: '',
@@ -190,7 +190,7 @@ describe('updating an existing user', () => {
         skills: [],
         education: [],
         experience: [],
-        avatar: '',
+        avatar: { source: '', id: '' },
         userProfile: {
             id: 1,
             featuredWork: '',
@@ -275,7 +275,7 @@ describe('deleting a User', () => {
             skills: [],
             education: [],
             experience: [],
-            avatar: '',
+            avatar: { source: '', id: '' },
             userProfile: {
                 id: 1,
                 featuredWork: '',

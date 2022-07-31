@@ -144,4 +144,34 @@ export const getCurrentUserData = async (req: Request, res: Response) => {
     });
 };
 
-export const updateAvatar = async () => {};
+export const updateAvatar = async (req: Request, res: Response) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                message: 'Invalid file format or no data uploaded',
+            });
+        }
+
+        // delete the current avatar before we update and upload a new one
+        const isDeleted = await mediaService.deleteImageFromCloudById(
+            res.locals.user.avatar.id
+        );
+        if (!isDeleted) {
+            return res.status(500).json({
+                message: 'Failed to delete old avatar',
+            });
+        }
+
+        const avatarInfo = await mediaService.uploadImageToCloud(req.file);
+        const updatedUser = await userService.uploadAvatar(
+            res.locals.user,
+            avatarInfo.url,
+            avatarInfo.public_id
+        );
+        return res.status(201).json({ ...updatedUser, password: undefined });
+    } catch (err) {
+        return res.status(500).json({
+            message: 'Image could not be parsed or uploaded',
+        });
+    }
+};

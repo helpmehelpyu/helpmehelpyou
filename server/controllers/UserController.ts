@@ -92,7 +92,6 @@ export const deleteUser = async (req: Request, res: Response) => {
     try {
         await mediaService.deleteAssociatedMedia(res.locals.user.id);
         await linkService.deleteAssociatedLinks(res.locals.user.id);
-        await userProfileService.deleteById(res.locals.user.userProfile.id);
 
         const rowsAffected = await userService.deleteUser(res.locals.user);
         if (rowsAffected !== 1) {
@@ -100,6 +99,8 @@ export const deleteUser = async (req: Request, res: Response) => {
                 message: 'Unable to delete the requested resource',
             });
         }
+
+        await userProfileService.deleteById(res.locals.user.userProfile.id);
 
         res.sendStatus(200);
     } catch (err) {
@@ -142,3 +143,5 @@ export const getCurrentUserData = async (req: Request, res: Response) => {
         password: undefined,
     });
 };
+
+export const updateAvatar = async () => {};

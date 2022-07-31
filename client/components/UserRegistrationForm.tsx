@@ -65,6 +65,7 @@ export default function UserRegistrationForm() {
 
     if (confirmPassword !== password) {
       setConfirmPasswordError('Passwords do not match');
+      setAllowSubmit(true);
       return;
     }
 
@@ -85,6 +86,7 @@ export default function UserRegistrationForm() {
     if (response.status === 400) {
       if (response.data.type === 'DuplicateEmailError') {
         setExistingUser(true);
+        setAllowSubmit(true);
         return;
       }
 
@@ -101,7 +103,12 @@ export default function UserRegistrationForm() {
   return (
     <div className="rounded bg-white p-5 border-2 min-w-fit w-1/3">
       <h1 className="p-5 m-2 text-4xl font-bold">Register</h1>
-      <form className="m-auto px-5" onSubmit={submitRegisterRequest} noValidate>
+      <form
+        className="m-auto px-5"
+        onSubmit={submitRegisterRequest}
+        noValidate
+        autoComplete="off"
+      >
         <p
           className={
             (isExistingUser ? 'block ' : 'hidden ') +
@@ -139,7 +146,7 @@ export default function UserRegistrationForm() {
           type="tel"
           placeholder="Phone Number"
           isRequired={false}
-          setValue={setLastName}
+          setValue={setPhoneNumber}
         ></FloatingLabelInput>
         <p className="text-red-500 text-xs">{phoneNumberError}</p>
         <FloatingLabelInput

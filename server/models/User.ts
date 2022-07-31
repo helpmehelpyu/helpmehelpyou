@@ -61,8 +61,8 @@ export class User {
     @OneToMany(() => Education, (education) => education.user)
     education: Education[];
 
-    @Column({ default: '' })
-    avatar: string;
+    @Column('json', { default: { source: '', id: '' } })
+    avatar: { source: string; id: string };
 
     @OneToOne(() => UserProfile)
     @JoinColumn()

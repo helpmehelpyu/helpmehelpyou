@@ -81,7 +81,9 @@ export const deleteAssociatedMedia = async function (userId: string) {
     mediaRepository.deleteAllByAuthorId(userId);
 };
 
-const deleteImageFromCloudById = async (mediaId: string): Promise<boolean> => {
+export const deleteImageFromCloudById = async (
+    mediaId: string
+): Promise<boolean> => {
     const { error } = await cloudinary.v2.uploader.destroy(mediaId);
     if (error) {
         return false;
@@ -90,7 +92,7 @@ const deleteImageFromCloudById = async (mediaId: string): Promise<boolean> => {
     return true;
 };
 
-const uploadImageToCloud = async (
+export const uploadImageToCloud = async (
     file: Express.Multer.File
 ): Promise<cloudinary.UploadApiResponse> => {
     const parser = new DataURIParser();

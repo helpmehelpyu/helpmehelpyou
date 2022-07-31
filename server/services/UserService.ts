@@ -74,3 +74,14 @@ export const deleteUser = async function (
     const res = await userRepository.deleteUser(user);
     return res.affected;
 };
+
+export const uploadAvatar = async function (
+    user: User,
+    avatarUrl: string,
+    avatarId: string
+): Promise<User> {
+    user.avatar.id = avatarId;
+    user.avatar.source = avatarUrl;
+
+    return await userRepository.updateUser(user);
+};

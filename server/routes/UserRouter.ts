@@ -5,6 +5,7 @@ import {
     validateUpdatedProperties,
     validateUserProperties,
 } from '../middleware/UserValidation';
+import { upload } from '../middleware/Multer';
 
 const router = Router();
 
@@ -31,6 +32,14 @@ router.patch(
     authenticateUser,
     validateUpdatedProperties,
     userController.updateUserInfo
+);
+
+// UPDATE the user avatar
+router.put(
+    '/avatar',
+    upload.single('avatar'),
+    authenticateUser,
+    userController.updateAvatar
 );
 
 // DELETE an the current user

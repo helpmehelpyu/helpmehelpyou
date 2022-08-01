@@ -89,7 +89,26 @@ export default function UserProfile({ user, canEdit }: Props) {
       <div className="bg-gray-50 space-y-10 p-5 md2:p-10 min-h-screen md2:min-w-0 min-w-min">
         <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
           <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
-            <Avatar user={user} canEdit={canEdit}></Avatar>
+            <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2 select-none">
+              <div className="peer absolute ring-4 ring-sky-600 rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
+                <div className="flex justify-center items-center h-full text-7xl">
+                  <Avatar user={user}></Avatar>
+                </div>
+              </div>
+              {canEdit && (
+                <div className="hidden peer-hover:block hover:block absolute rounded-full -bottom-20 left-0 right-0 m-auto h-60 w-60 bg-black bg-opacity-90">
+                  <div className="flex justify-center items-center h-full">
+                    <Image
+                      src="/edit.svg"
+                      height={90}
+                      width={90}
+                      alt="Edit Icon"
+                      className="filter invert"
+                    ></Image>
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="flex flex-col p-10 pt-28 space-y-5 justify-center items-center">
               <h1 className="text-5xl font-bold">
                 {user.firstName + ' ' + user.lastName}

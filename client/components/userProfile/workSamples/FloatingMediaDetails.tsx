@@ -15,7 +15,10 @@ export default function FloatingMediaDetails({
   const [ratio, setRatio] = useState(16 / 9);
 
   return (
-    <PopupOverlay setShowPopup={() => setMediaDetails(null)}>
+    <PopupOverlay
+      setShowPopup={() => setMediaDetails(null)}
+      stopPropagation={false}
+    >
       <div className="flex h-full left-0 right-0 top-0 bottom-0 m-auto z-20 space-x-5 p-10 justify-center items-center">
         <Image
           src={mediaDetails.source}

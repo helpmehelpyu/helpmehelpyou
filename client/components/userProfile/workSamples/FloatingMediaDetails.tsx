@@ -1,6 +1,7 @@
 import Image from 'next/future/image';
 import { useEffect, useState } from 'react';
 import { WorkSample } from '../../../types/WorkSample';
+import PopupOverlay from '../../PopupOverlay';
 
 interface Props {
   mediaDetails: WorkSample;
@@ -23,17 +24,11 @@ export default function FloatingMediaDetails({
   }, []);
 
   return (
-    <div
-      className="fixed w-full h-full bg-black bg-opacity-90 z-10"
-      onClick={() => setMediaDetails(null)}
-    >
-      <div className="fixed top-0 left-2 text-white text-xl md:text-3xl mt-2 ml-2 text-center duration-300 transition-colors hover:text-red-400 cursor-pointer select-none">
-        ✕
-      </div>
+    <PopupOverlay setShowPopup={() => setMediaDetails(null)}>
       <div className="flex h-full left-0 right-0 top-0 bottom-0 m-auto z-20 space-x-5 p-10 justify-center items-center">
         <Image
           src={mediaDetails.source}
-          alt="Loading"
+          alt="Work Sample"
           height={500}
           width={500 * ratio}
           quality={100}
@@ -55,6 +50,6 @@ export default function FloatingMediaDetails({
           <h3>{new Date(mediaDetails.uploadDate).toLocaleDateString()}</h3>
         </div>
       </div>
-    </div>
+    </PopupOverlay>
   );
 }

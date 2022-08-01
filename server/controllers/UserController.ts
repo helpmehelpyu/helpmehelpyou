@@ -163,7 +163,7 @@ export const updateAvatar = async (req: Request, res: Response) => {
         }
 
         const avatarInfo = await mediaService.uploadImageToCloud(req.file);
-        const updatedUser = await userService.uploadAvatar(
+        const updatedUser = await userService.setAvatar(
             res.locals.user,
             avatarInfo.url,
             avatarInfo.public_id

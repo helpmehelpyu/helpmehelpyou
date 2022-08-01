@@ -75,7 +75,7 @@ export const deleteUser = async function (
     return res.affected;
 };
 
-export const uploadAvatar = async function (
+export const setAvatar = async function (
     user: User,
     avatarUrl: string,
     avatarId: string

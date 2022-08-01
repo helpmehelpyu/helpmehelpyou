@@ -53,6 +53,23 @@ export default function UserProfile({ user, canEdit }: Props) {
     }
   }, [selectedTab, user]);
 
+  let featuredWork = <div className="hidden"></div>;
+  if (user.userProfile.featuredWork !== '') {
+    featuredWork = (
+      <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
+        <h1 className="text-3xl font-bold text-center">Featured Work</h1>
+        <div className="relative md2:h-[70%] h-[50vw]">
+          <Image
+            alt=""
+            layout="fill"
+            objectFit="contain"
+            src={user.userProfile.featuredWork}
+          ></Image>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-full">
       {showContactInfo && (
@@ -74,34 +91,25 @@ export default function UserProfile({ user, canEdit }: Props) {
           <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
             <Avatar user={user} canEdit={canEdit}></Avatar>
             <div className="flex flex-col p-10 pt-28 space-y-5 justify-center items-center">
-              <h1 className="mb-5 text-5xl font-bold">
+              <h1 className="text-5xl font-bold">
                 {user.firstName + ' ' + user.lastName}
               </h1>
-              <p className="text-xl pb-10">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <h1 className="text-xl font-medium">
+                {user.userProfile.headline}
+              </h1>
+              <p className="text-xl pb-10 w-full">
+                {user.userProfile.description}
+                Description Here
               </p>
-              <button className="text-cyan-500 text-2xl rounded-full ring-2 ring-cyan-500 w-full p-4 hover:bg-cyan-50 font-semibold">
+              <button
+                onClick={() => setShowContactInfo(true)}
+                className="text-cyan-500 text-2xl rounded-full ring-2 ring-cyan-500 w-full p-4 hover:bg-cyan-50 font-semibold"
+              >
                 Contact
               </button>
             </div>
           </div>
-          <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
-            <h1 className="text-3xl font-bold text-center">Featured Work</h1>
-            <div className="relative md2:h-[90%] h-[50vw]">
-              <Image
-                alt=""
-                layout="fill"
-                objectFit="contain"
-                src="https://res.cloudinary.com/dmtigi69n/image/upload/v1658469339/pxycjjhlxjnnidjl4or6.jpg"
-              ></Image>
-            </div>
-          </div>
+          {featuredWork}
         </div>
         <div className="w-full border-2 rounded p-10">
           <ul className="flex w-full justify-center items-center space-x-20 text-center">

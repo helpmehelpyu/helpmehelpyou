@@ -84,6 +84,10 @@ export const deleteAssociatedMedia = async function (userId: string) {
 export const deleteImageFromCloudById = async (
     mediaId: string
 ): Promise<boolean> => {
+    if (mediaId === '') {
+        return true;
+    }
+
     const { error } = await cloudinary.v2.uploader.destroy(mediaId);
     if (error) {
         return false;

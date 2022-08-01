@@ -18,7 +18,7 @@ enum Tabs {
   Education,
 }
 
-export default function UserProfile({ user }: Props) {
+export default function UserProfile({ user, canEdit }: Props) {
   const [selectedTab, setSelectedTab] = useState(Tabs.WorkSamples);
   const [mediaDetails, setMediaDetails] = useState<WorkSample | null>(null);
 

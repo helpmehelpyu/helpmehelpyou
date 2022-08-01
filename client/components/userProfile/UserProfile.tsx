@@ -4,9 +4,11 @@ import FloatingMediaDetails from './workSamples/FloatingMediaDetails';
 import MediaPagination from './workSamples/MediaPagination';
 import { UserData } from '../../types/UserData';
 import Image from 'next/image';
+import Avatar from './Avatar';
 
 interface Props {
   user: UserData;
+  canEdit: boolean;
 }
 
 enum Tabs {
@@ -59,18 +61,8 @@ export default function UserProfile({ user }: Props) {
       )}
       <div className="bg-gray-50 space-y-10 p-5 md2:p-10 min-h-screen md2:min-w-0 min-w-min">
         <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
-          <div className="md2:rounded-r-2md2 border-2 md2:bg-white md2:w-1/3 rounded">
-            <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2">
-              <div className="absolute ring-4 ring-white rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
-                <Image
-                  src="https://res.cloudinary.com/dmtigi69n/image/upload/v1644902654/1644902654314.jpg" // TODO replace this with an actual avatar
-                  layout="fill"
-                  objectFit="cover"
-                  alt="loading..."
-                  className="rounded-full"
-                ></Image>
-              </div>
-            </div>
+          <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
+            <Avatar user={user} canEdit={canEdit}></Avatar>
             <div className="flex flex-col p-10 pt-28 space-y-5 justify-center items-center">
               <h1 className="mb-5 text-5xl font-bold">
                 {user.firstName + ' ' + user.lastName}

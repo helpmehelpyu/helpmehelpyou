@@ -168,7 +168,7 @@ export const updateAvatar = async (req: Request, res: Response) => {
             avatarInfo.url,
             avatarInfo.public_id
         );
-        return res.status(201).json({ ...updatedUser, password: undefined });
+        return res.status(200).json({ ...updatedUser, password: undefined });
     } catch (err) {
         return res.status(500).json({
             message: 'Image could not be parsed or uploaded',

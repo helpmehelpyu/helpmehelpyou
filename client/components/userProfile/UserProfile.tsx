@@ -91,19 +91,20 @@ export default function UserProfile({ user, canEdit }: Props) {
           <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
             <Avatar user={user} canEdit={canEdit}></Avatar>
             <div className="flex flex-col p-10 pt-28 space-y-5 justify-center items-center">
-              <h1 className="mb-5 text-5xl font-bold">
+              <h1 className="text-5xl font-bold">
                 {user.firstName + ' ' + user.lastName}
               </h1>
-              <p className="text-xl pb-10">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <h1 className="text-xl font-medium">
+                {user.userProfile.headline}
+              </h1>
+              <p className="text-xl pb-10 w-full">
+                {user.userProfile.description}
+                Description Here
               </p>
-              <button className="text-cyan-500 text-2xl rounded-full ring-2 ring-cyan-500 w-full p-4 hover:bg-cyan-50 font-semibold">
+              <button
+                onClick={() => setShowContactInfo(true)}
+                className="text-cyan-500 text-2xl rounded-full ring-2 ring-cyan-500 w-full p-4 hover:bg-cyan-50 font-semibold"
+              >
                 Contact
               </button>
             </div>

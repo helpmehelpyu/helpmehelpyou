@@ -5,6 +5,7 @@ import MediaPagination from './workSamples/MediaPagination';
 import { UserData } from '../../types/UserData';
 import Image from 'next/image';
 import Avatar from './Avatar';
+import ContactInfo from './contact/ContactInfo';
 
 interface Props {
   user: UserData;
@@ -21,6 +22,7 @@ enum Tabs {
 export default function UserProfile({ user, canEdit }: Props) {
   const [selectedTab, setSelectedTab] = useState(Tabs.WorkSamples);
   const [mediaDetails, setMediaDetails] = useState<WorkSample | null>(null);
+  const [showContactInfo, setShowContactInfo] = useState(false);
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <MediaPagination
@@ -53,6 +55,14 @@ export default function UserProfile({ user, canEdit }: Props) {
 
   return (
     <div className="w-full h-full">
+      {showContactInfo && (
+        <ContactInfo
+          setShowContactInfo={setShowContactInfo}
+          email={user.email}
+          phoneNumber={user.phoneNumber}
+          links={user.links}
+        ></ContactInfo>
+      )}
       {mediaDetails && (
         <FloatingMediaDetails
           mediaDetails={mediaDetails}

@@ -53,6 +53,23 @@ export default function UserProfile({ user, canEdit }: Props) {
     }
   }, [selectedTab, user]);
 
+  let featuredWork = <div className="hidden"></div>;
+  if (user.userProfile.featuredWork !== '') {
+    featuredWork = (
+      <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
+        <h1 className="text-3xl font-bold text-center">Featured Work</h1>
+        <div className="relative md2:h-[70%] h-[50vw]">
+          <Image
+            alt=""
+            layout="fill"
+            objectFit="contain"
+            src={user.userProfile.featuredWork}
+          ></Image>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-full">
       {showContactInfo && (
@@ -91,17 +108,7 @@ export default function UserProfile({ user, canEdit }: Props) {
               </button>
             </div>
           </div>
-          <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
-            <h1 className="text-3xl font-bold text-center">Featured Work</h1>
-            <div className="relative md2:h-[90%] h-[50vw]">
-              <Image
-                alt=""
-                layout="fill"
-                objectFit="contain"
-                src="https://res.cloudinary.com/dmtigi69n/image/upload/v1658469339/pxycjjhlxjnnidjl4or6.jpg"
-              ></Image>
-            </div>
-          </div>
+          {featuredWork}
         </div>
         <div className="w-full border-2 rounded p-10">
           <ul className="flex w-full justify-center items-center space-x-20 text-center">

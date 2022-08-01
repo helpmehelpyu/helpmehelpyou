@@ -175,3 +175,16 @@ export const updateAvatar = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const resetAvatar = async (req: Request, res: Response) => {
+    const isDeleted = await mediaService.deleteImageFromCloudById(
+        res.locals.user.avatar.id
+    );
+    if (!isDeleted) {
+        return res.status(500).json({
+            message: 'Failed to delete old avatar',
+        });
+    }
+    const updatedUser = await userService.setAvatar(res.locals.user, '', '');
+    return res.status(200).json({ ...updatedUser, password: undefined });
+};

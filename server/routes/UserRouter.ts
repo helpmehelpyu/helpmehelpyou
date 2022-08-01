@@ -42,9 +42,10 @@ router.put(
     userController.updateAvatar
 );
 
+// DELETE the current avatar (i.e. reset the avatar)
+router.delete('/avatar', authenticateUser, userController.resetAvatar);
+
 // DELETE an the current user
 router.delete('/', authenticateUser, userController.deleteUser);
-
-// Log the current user out
 
 export default router;

@@ -4,7 +4,7 @@ import FloatingMediaDetails from './workSamples/FloatingMediaDetails';
 import MediaPagination from './workSamples/MediaPagination';
 import { UserData } from '../../types/UserData';
 import Image from 'next/image';
-import Avatar from './Avatar';
+import Avatar from '../Avatar';
 import ContactInfo from './contact/ContactInfo';
 
 interface Props {

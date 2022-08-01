@@ -4,8 +4,9 @@ import FloatingMediaDetails from './workSamples/FloatingMediaDetails';
 import MediaPagination from './workSamples/MediaPagination';
 import { UserData } from '../../types/UserData';
 import Image from 'next/image';
-import Avatar from './Avatar';
+import Avatar from '../Avatar';
 import ContactInfo from './contact/ContactInfo';
+import EditAvatarPopup from './avatar/EditAvatarPopup';
 
 interface Props {
   user: UserData;
@@ -23,6 +24,7 @@ export default function UserProfile({ user, canEdit }: Props) {
   const [selectedTab, setSelectedTab] = useState(Tabs.WorkSamples);
   const [mediaDetails, setMediaDetails] = useState<WorkSample | null>(null);
   const [showContactInfo, setShowContactInfo] = useState(false);
+  const [showEditAvatarPopup, setShowEditAvatarPopup] = useState(false);
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <MediaPagination
@@ -86,17 +88,26 @@ export default function UserProfile({ user, canEdit }: Props) {
           setMediaDetails={setMediaDetails}
         ></FloatingMediaDetails>
       )}
+      {showEditAvatarPopup && (
+        <EditAvatarPopup
+          currentAvatar={user.avatar.source}
+          setShowEditAvatarPopup={setShowEditAvatarPopup}
+        ></EditAvatarPopup>
+      )}
       <div className="bg-gray-50 space-y-10 p-5 md2:p-10 min-h-screen md2:min-w-0 min-w-min">
         <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
           <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
             <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2 select-none">
-              <div className="peer absolute ring-4 ring-sky-600 rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
+              <div className="peer absolute ring-4 ring-white shadow-[0_0_4px_0px_white] rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
                 <div className="flex justify-center items-center h-full text-7xl">
                   <Avatar user={user}></Avatar>
                 </div>
               </div>
               {canEdit && (
-                <div className="hidden peer-hover:block hover:block absolute rounded-full -bottom-20 left-0 right-0 m-auto h-60 w-60 bg-black bg-opacity-90">
+                <div
+                  className="hidden peer-hover:block hover:block absolute rounded-full -bottom-20 left-0 right-0 m-auto h-60 w-60 bg-black bg-opacity-90"
+                  onClick={() => setShowEditAvatarPopup(true)}
+                >
                   <div className="flex justify-center items-center h-full">
                     <Image
                       src="/edit.svg"

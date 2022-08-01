@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import { Link } from '../../../types/Link';
+import PopupOverlay from '../../PopupOverlay';
 import ContactInfoItem from './ContactInfoItem';
 
 interface Props {
@@ -41,26 +41,12 @@ export default function ContactInfo({
     );
   }
 
-  useEffect(() => {
-    const oldOverflowStyle = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = 'hidden';
-    return function addScrollBack() {
-      document.documentElement.style.overflow = oldOverflowStyle;
-    };
-  }, []);
-
   return (
-    <div
-      className="fixed w-full h-full bg-black bg-opacity-90 z-10"
-      onClick={() => setShowContactInfo(false)}
-    >
-      <div
-        className="fixed rounded w-2/3 md2:w-1/2 h-5/6 p-10 left-0 right-0 top-0 bottom-0 m-auto bg-white space-y-10 overflow-auto"
-        onClick={(event) => event.stopPropagation()}
-      >
+    <PopupOverlay setShowPopup={setShowContactInfo}>
+      <div className="fixed rounded w-2/3 md2:w-1/2 h-5/6 p-10 left-0 right-0 top-0 bottom-0 m-auto bg-white space-y-10 overflow-auto">
         <h1 className="text-3xl text-center font-semibold">Contact Info</h1>
         <ul>{contactItems}</ul>
       </div>
-    </div>
+    </PopupOverlay>
   );
 }

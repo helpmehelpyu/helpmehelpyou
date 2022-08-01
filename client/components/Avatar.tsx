@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { UserData } from '../../types/UserData';
+import { UserData } from '../types/UserData';
 
 interface Props {
   user: UserData;

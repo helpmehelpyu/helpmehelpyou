@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from '../../../types/Link';
 import PopupOverlay from '../../PopupOverlay';
 import ContactInfoItem from './ContactInfoItem';
@@ -41,14 +40,6 @@ export default function ContactInfo({
       ></ContactInfoItem>
     );
   }
-
-  useEffect(() => {
-    const oldOverflowStyle = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = 'hidden';
-    return function addScrollBack() {
-      document.documentElement.style.overflow = oldOverflowStyle;
-    };
-  }, []);
 
   return (
     <PopupOverlay setShowPopup={setShowContactInfo}>

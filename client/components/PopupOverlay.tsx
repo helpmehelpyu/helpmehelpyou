@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
+
 interface Props {
   setShowPopup: (val: boolean) => void;
-  children: JSX.Element;
+  children?: JSX.Element | JSX.Element[];
 }
 
 export default function PopupOverlay({ setShowPopup, children }: Props) {
+  useEffect(() => {
+    const oldOverflowStyle = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    return function addScrollBack() {
+      document.documentElement.style.overflow = oldOverflowStyle;
+    };
+  }, []);
+
   return (
     <div
       className="fixed w-full h-full bg-black bg-opacity-90 z-10"

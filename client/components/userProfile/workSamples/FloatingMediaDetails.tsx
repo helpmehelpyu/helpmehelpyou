@@ -1,5 +1,5 @@
 import Image from 'next/future/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { WorkSample } from '../../../types/WorkSample';
 import PopupOverlay from '../../PopupOverlay';
 
@@ -13,15 +13,6 @@ export default function FloatingMediaDetails({
   setMediaDetails,
 }: Props) {
   const [ratio, setRatio] = useState(16 / 9);
-
-  // disable background scrolling when the details overlay is visible
-  useEffect(() => {
-    const oldOverflowStyle = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = 'hidden';
-    return function addScrollBack() {
-      document.documentElement.style.overflow = oldOverflowStyle;
-    };
-  }, []);
 
   return (
     <PopupOverlay setShowPopup={() => setMediaDetails(null)}>

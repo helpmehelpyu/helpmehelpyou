@@ -60,6 +60,20 @@ export default function EditAvatarPopup({
     document.location.href = document.URL;
   };
 
+  const resetAvatar = async () => {
+    const response = await axios.delete('/users/avatar', {
+      headers: {
+        Authorization: 'Bearer ' + getAuthCookie(),
+      },
+    });
+
+    if (response.status >= 400) {
+      setUploadErrors(response.data.message);
+      return;
+    }
+    document.location.href = document.URL;
+  };
+
   return (
     <PopupOverlay setShowPopup={setShowEditAvatarPopup}>
       <div className="absolute flex flex-col space-y-2 justify-center w-2/5 items-center top-0 bottom-0 right-0 left-0 m-auto p-2 bg-white rounded z-20 overflow-auto transparent-scrollbar aspect-square box-border">
@@ -69,10 +83,10 @@ export default function EditAvatarPopup({
             height={300}
             width={300}
             alt="Avatar"
-            className="aspect-square mt-36 md:mt-20 md2:mt-0"
+            className="aspect-square mt-36 md:mt-20 md2:mt-0 rounded-full sm:mb-10"
           ></Image>
         ) : (
-          <h1 className="w-full flex justify-center items-center aspect-square">
+          <h1 className="w-full flex justify-center text-center items-center aspect-square mt-36 p-10 sm:mt-0">
             No Avatar Selected
           </h1>
         )}
@@ -85,7 +99,7 @@ export default function EditAvatarPopup({
             className="hidden"
           ></input>
         </form>
-        <div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-2">
+        <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 justify-center sm:space-x-2">
           <button
             className="block p-1 text-cyan-500 border-2 rounded border-cyan-500 hover:bg-slate-200"
             onClick={(event) => browseFiles(event)}
@@ -100,7 +114,7 @@ export default function EditAvatarPopup({
           </button>
           <button
             className="block p-1 text-slate-500 border-2 rounded border-slate-500 hover:bg-slate-200"
-            onClick={saveAvatar}
+            onClick={resetAvatar}
           >
             Restore Default
           </button>

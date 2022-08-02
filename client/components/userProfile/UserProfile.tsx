@@ -98,7 +98,7 @@ export default function UserProfile({ user, canEdit }: Props) {
         <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
           <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
             <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2 select-none">
-              <div className="peer absolute ring-4 ring-white shadow-[0_0_4px_0px_white] rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
+              <div className="peer absolute border-4 border-slate-900 shadow rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
                 <div className="flex justify-center items-center h-full text-7xl">
                   <Avatar user={user}></Avatar>
                 </div>

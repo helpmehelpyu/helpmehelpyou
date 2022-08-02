@@ -7,8 +7,17 @@ import {
 } from 'typeorm';
 import { User } from './User';
 
+export enum DegreeType {
+    BACHELORS = "Bachelor's",
+    MASTERS = "Master's",
+    DOCTORAL = 'Doctoral',
+    ASSOCIATE = 'Associate',
+    HIGHSCHOOL = 'High School Diploma',
+}
+
 @Entity()
 @Check('0 <= gpa AND gpa <= 4.0')
+@Check('startYear <= endYear')
 export class Education {
     @PrimaryGeneratedColumn()
     id: number;
@@ -19,8 +28,12 @@ export class Education {
     @Column({ nullable: false })
     school: string;
 
-    @Column({ nullable: false })
-    degree: string;
+    @Column({
+        type: 'enum',
+        enum: DegreeType,
+        nullable: false,
+    })
+    degree: DegreeType;
 
     @Column({ nullable: false })
     fieldOfStudy: string;

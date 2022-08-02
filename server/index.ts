@@ -4,6 +4,8 @@ import { AppDataSource } from './database/DataSource';
 import mediaRouter from './routes/MediaRouter';
 import userRouter from './routes/UserRouter';
 import linksRouter from './routes/LinkRouter';
+import educationRouter from './routes/EducationRouter';
+
 import cloudinary from 'cloudinary';
 import cors from 'cors';
 
@@ -18,16 +20,17 @@ cloudinary.v2.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL!],
-    credentials: true,
-  })
+    cors({
+        origin: [process.env.FRONTEND_URL!],
+        credentials: true,
+    })
 );
 
 app.use('/media', mediaRouter);
 app.use('/users', userRouter);
 app.use('/links', linksRouter);
+app.use('/education', educationRouter);
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at http://localhost:${port}`);
 });

@@ -71,10 +71,7 @@ export const updateUserInfo = async (req: Request, res: Response) => {
         });
 
         res.status(200).json({
-            ...updatedUser,
-            password: undefined,
-            email: undefined,
-            id: undefined,
+            ...userService.scrubUserData(updatedUser),
         });
     } catch (err) {
         res.status(400).json({
@@ -138,10 +135,7 @@ export const getCurrentUserData = async (req: Request, res: Response) => {
         userProfile: true,
         links: true,
     });
-    res.status(200).json({
-        ...user,
-        password: undefined,
-    });
+    res.status(200).json(userService.scrubUserData(user!));
 };
 
 export const updateAvatar = async (req: Request, res: Response) => {
@@ -168,7 +162,7 @@ export const updateAvatar = async (req: Request, res: Response) => {
             avatarInfo.url,
             avatarInfo.public_id
         );
-        return res.status(200).json({ ...updatedUser, password: undefined });
+        return res.status(200).json(userService.scrubUserData(updatedUser));
     } catch (err) {
         return res.status(500).json({
             message: 'Image could not be parsed or uploaded',
@@ -186,5 +180,5 @@ export const resetAvatar = async (req: Request, res: Response) => {
         });
     }
     const updatedUser = await userService.setAvatar(res.locals.user, '', '');
-    return res.status(200).json({ ...updatedUser, password: undefined });
+    return res.status(200).json(userService.scrubUserData(updatedUser));
 };

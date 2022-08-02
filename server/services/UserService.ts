@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { Author } from '../types/Author';
 import userRepository = require('../repository/UserRepository');
 import { LoadUserRelations } from '../types/LoadUserRelations';
+import { ScrubbedUserData } from '../types/ScrubbedUserData';
 
 export const findById = async function (
     userId: string,
@@ -84,4 +85,9 @@ export const setAvatar = async function (
     user.avatar.source = avatarUrl;
 
     return await userRepository.updateUser(user);
+};
+
+export const scrubUserData = function (user: User): ScrubbedUserData {
+    const scrubbedUser = { ...user, password: undefined };
+    return scrubbedUser;
 };

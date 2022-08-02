@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { matchedData, validationResult } from 'express-validator';
 import educationService = require('../services/EducationService');
+import { scrubUserData } from '../services/UserService';
 
 export const addEducation = async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -16,5 +17,8 @@ export const addEducation = async (req: Request, res: Response) => {
             ...matchedData(req, { locations: ['body'] }),
         }
     );
-    res.status(200).json({ newEducation });
+    res.status(200).json({
+        ...newEducation,
+        user: scrubUserData(newEducation.user),
+    });
 };

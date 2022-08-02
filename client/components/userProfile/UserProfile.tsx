@@ -129,7 +129,6 @@ export default function UserProfile({ user, canEdit }: Props) {
               </h1>
               <p className="text-xl pb-10 w-full">
                 {user.userProfile.description}
-                Description Here
               </p>
               <button
                 onClick={() => setShowContactInfo(true)}

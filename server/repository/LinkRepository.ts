@@ -34,10 +34,9 @@ export const createNewLink = async function (
 };
 
 export const deleteAllLinksByOwnerId = async (ownerId: string) => {
-    const associatedLinks = await linkDAO
-        .createQueryBuilder('user')
-        .where('user.ownerId = :ownerId', { ownerId: ownerId })
-        .getMany();
-
-    await linkDAO.remove(associatedLinks);
+    await linkDAO
+        .createQueryBuilder()
+        .delete()
+        .where('ownerId = :ownerId', { ownerId: ownerId })
+        .execute();
 };

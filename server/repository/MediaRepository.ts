@@ -43,10 +43,9 @@ export const deleteById = async (mediaId: string): Promise<DeleteResult> => {
 };
 
 export const deleteAllByAuthorId = async (authorId: string) => {
-    const associatedMedia = await mediaDAO
-        .createQueryBuilder('user')
-        .where('user.authorId = :authorId', { authorId: authorId })
-        .getMany();
-
-    await mediaDAO.remove(associatedMedia);
+    await mediaDAO
+        .createQueryBuilder()
+        .delete()
+        .where('authorId = :authorId', { authorId: authorId })
+        .execute();
 };

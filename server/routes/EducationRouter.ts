@@ -13,4 +13,15 @@ router.post(
     educationController.addEducation
 );
 
+// DELETE an existing education
+router.delete('/', authenticateUser, educationController.deleteById);
+
+// EDIT an existing education
+router.put(
+    '/',
+    authenticateUser,
+    validateEducation,
+    educationController.updateEducation
+);
+
 export default router;

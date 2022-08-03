@@ -11,9 +11,7 @@ export const createNewLink = async (req: Request, res: Response) => {
         });
     }
 
-    const newLink = await linkService.createNewLink(res.locals.user, {
-        ...matchedData(req, { locations: ['body'] }),
-    });
+    const newLink = await linkService.createNewLink(res.locals.user, req.body);
 
     return res.status(201).json({
         ...newLink,

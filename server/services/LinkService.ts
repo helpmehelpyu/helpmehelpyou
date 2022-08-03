@@ -1,6 +1,7 @@
 import { Link } from '../models/Link';
 import { User } from '../models/User';
 import linkRepository = require('../repository/LinkRepository');
+import { LinkInfo } from '../types/LinkInfo';
 
 export const deleteAssociatedLinks = async function (userId: string) {
     linkRepository.deleteAllLinksByOwnerId(userId);
@@ -8,7 +9,7 @@ export const deleteAssociatedLinks = async function (userId: string) {
 
 export const createNewLink = async function (
     user: User,
-    linkInfo: { [x: string]: any }
+    linkInfo: LinkInfo
 ): Promise<Link> {
     const newLink = linkRepository.createNewLink(user, linkInfo);
     return newLink;

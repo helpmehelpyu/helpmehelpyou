@@ -12,3 +12,14 @@ export const createEducation = async (
 export const deleteAssociatedEduction = async (userId: string) => {
     await educationRepository.deleteByUserId(userId);
 };
+
+export const deleteById = async (educationId: number) => {
+    console.log(educationId);
+    await educationRepository.deleteById(educationId);
+};
+
+export const findById = async (
+    educationId: number
+): Promise<Education | null> => {
+    return await educationRepository.findById(educationId);
+};

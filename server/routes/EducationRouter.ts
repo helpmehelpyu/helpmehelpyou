@@ -13,4 +13,10 @@ router.post(
     educationController.addEducation
 );
 
+router.delete(
+    '/:educationId',
+    authenticateUser,
+    educationController.deleteById
+);
+
 export default router;

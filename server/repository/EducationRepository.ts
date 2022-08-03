@@ -4,6 +4,19 @@ import { User } from '../models/User';
 
 const educationDAO = AppDataSource.getRepository(Education);
 
+export const findById = async (
+    educationId: number
+): Promise<Education | null> => {
+    return await educationDAO.findOne({
+        where: {
+            id: educationId,
+        },
+        relations: {
+            user: true,
+        },
+    });
+};
+
 export const createEducation = async (
     user: User,
     educationDetails: { [x: string]: any }
@@ -18,5 +31,13 @@ export const deleteByUserId = async (userId: string) => {
         .createQueryBuilder()
         .delete()
         .where('userId = :userId', { userId: userId })
+        .execute();
+};
+
+export const deleteById = async (educationId: number) => {
+    await educationDAO
+        .createQueryBuilder()
+        .delete()
+        .where('id = :educationId', { educationId: educationId })
         .execute();
 };

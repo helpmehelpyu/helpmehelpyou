@@ -1,10 +1,11 @@
 import { Education } from '../models/Education';
 import { User } from '../models/User';
 import educationRepository = require('../repository/EducationRepository');
+import { EducationDetails } from '../types/EducationDetails';
 
 export const createEducation = async (
     user: User,
-    educationDetails: { [x: string]: any }
+    educationDetails: EducationDetails
 ): Promise<Education> => {
     return educationRepository.createEducation(user, educationDetails);
 };

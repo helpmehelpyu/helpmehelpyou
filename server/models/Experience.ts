@@ -18,7 +18,7 @@ export class Experience {
     @Column({ nullable: false })
     startDate: Date;
 
-    @Column({ nullable: false })
+    @Column({ nullable: true })
     endDate: Date;
 
     @Column({ default: '', nullable: false })

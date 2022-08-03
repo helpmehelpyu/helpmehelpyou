@@ -6,6 +6,7 @@ import { User } from '../models/User';
 import { MediaResult } from '../types/MediaResult';
 import userService = require('../services/UserService');
 import mediaRepository = require('../repository/MediaRepository');
+import { MediaInfo } from '../types/MediaInfo';
 
 export const findById = async function (
     mediaId: string
@@ -16,7 +17,7 @@ export const findById = async function (
 export const uploadMedia = async function (
     file: Express.Multer.File,
     author: User,
-    mediaInfo: { [x: string]: any }
+    mediaInfo: MediaInfo
 ): Promise<string> {
     const uploadedMedia = await uploadImageToCloud(file);
 
@@ -24,7 +25,7 @@ export const uploadMedia = async function (
         uploadedMedia.public_id,
         author,
         uploadedMedia.url,
-        { ...mediaInfo }
+        mediaInfo
     );
 
     return newMedia.id;

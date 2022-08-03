@@ -2,6 +2,7 @@ import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../database/DataSource';
 import { Media } from '../models/Media';
 import { User } from '../models/User';
+import { MediaInfo } from '../types/MediaInfo';
 
 const mediaDAO = AppDataSource.getRepository(Media);
 
@@ -20,7 +21,7 @@ export const createNewMedia = async (
     mediaId: string,
     author: User,
     source: string,
-    mediaInfo: { [x: string]: any }
+    mediaInfo: MediaInfo
 ): Promise<Media> => {
     const media = mediaDAO.create({
         id: mediaId,

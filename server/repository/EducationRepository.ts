@@ -1,6 +1,7 @@
 import { AppDataSource } from '../database/DataSource';
 import { Education } from '../models/Education';
 import { User } from '../models/User';
+import { EducationDetails } from '../types/EducationDetails';
 
 const educationDAO = AppDataSource.getRepository(Education);
 
@@ -19,7 +20,7 @@ export const findById = async (
 
 export const createEducation = async (
     user: User,
-    educationDetails: { [x: string]: any }
+    educationDetails: EducationDetails
 ): Promise<Education> => {
     const newEducationEntry = educationDAO.create(educationDetails);
     newEducationEntry.user = user;

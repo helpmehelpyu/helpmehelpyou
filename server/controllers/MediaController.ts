@@ -36,12 +36,7 @@ export const uploadMedia = async (req: Request, res: Response) => {
         const mediaId = await mediaService.uploadMedia(
             req.file,
             res.locals.user,
-            {
-                ...matchedData(req, {
-                    locations: ['body'],
-                    includeOptionals: true,
-                }),
-            }
+            req.body
         );
 
         res.status(201).json({ mediaId: mediaId });

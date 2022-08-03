@@ -2,6 +2,7 @@ import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../database/DataSource';
 import { Link } from '../models/Link';
 import { User } from '../models/User';
+import { LinkInfo } from '../types/LinkInfo';
 
 const linkDAO = AppDataSource.getRepository(Link);
 
@@ -24,7 +25,7 @@ export const deleteById = async (linkId: number): Promise<DeleteResult> => {
 
 export const createNewLink = async function (
     owner: User,
-    linkInfo: { [x: string]: any }
+    linkInfo: LinkInfo
 ): Promise<Link> {
     const newLink = await linkDAO.create(linkInfo);
 

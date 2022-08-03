@@ -13,9 +13,7 @@ export const addEducation = async (req: Request, res: Response) => {
 
     const newEducation = await educationService.createEducation(
         res.locals.user,
-        {
-            ...matchedData(req, { locations: ['body'] }),
-        }
+        req.body
     );
     res.status(200).json({
         ...newEducation,

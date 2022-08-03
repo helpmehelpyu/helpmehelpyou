@@ -31,12 +31,7 @@ export const register = async (req: Request, res: Response) => {
             });
         }
 
-        await userService.createUser({
-            ...matchedData(req, {
-                locations: ['body'],
-                includeOptionals: true,
-            }),
-        });
+        await userService.createUser(req.body);
 
         // if we've made it to here then the login must be a success
         // the email and password should also exist on the request body

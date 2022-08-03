@@ -2,6 +2,7 @@ import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../database/DataSource';
 import { User } from '../models/User';
 import { LoadUserRelations } from '../types/LoadUserRelations';
+import { UserData } from '../types/UserData';
 import { createDefaultUserProfile } from './UserProfileRepository';
 
 const userDAO = AppDataSource.getRepository(User);
@@ -27,9 +28,7 @@ export const findByEmail = async (email: string): Promise<User | null> => {
         email: email,
     });
 };
-export const createNewUser = async (userInfo: {
-    [x: string]: any;
-}): Promise<User> => {
+export const createNewUser = async (userInfo: UserData): Promise<User> => {
     const newUser = userDAO.create(userInfo);
     const newUserProfile = await createDefaultUserProfile();
     newUser.userProfile = newUserProfile;

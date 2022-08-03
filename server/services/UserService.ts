@@ -5,6 +5,7 @@ import { Author } from '../types/Author';
 import userRepository = require('../repository/UserRepository');
 import { LoadUserRelations } from '../types/LoadUserRelations';
 import { ScrubbedUserData } from '../types/ScrubbedUserData';
+import { UserData } from '../types/UserData';
 
 export const findById = async function (
     userId: string,
@@ -13,14 +14,12 @@ export const findById = async function (
     return userRepository.findById(userId, loadRelations);
 };
 
-export const createUser = async function (userInfo: {
-    [x: string]: any;
-}): Promise<User> {
-    userInfo.password = await bcrypt.hash(userInfo.password, 10);
-
-    userInfo.phoneNumber = userInfo.phoneNumber || '';
-
-    return userRepository.createNewUser(userInfo);
+export const createUser = async function (userInfo: UserData): Promise<User> {
+    return userRepository.createNewUser({
+        ...userInfo,
+        password: await bcrypt.hash(userInfo.password, 10),
+        phoneNumber: userInfo.phoneNumber || '',
+    });
 };
 
 export const login = async function (

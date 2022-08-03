@@ -41,3 +41,9 @@ export const deleteById = async (educationId: number) => {
         .where('id = :educationId', { educationId: educationId })
         .execute();
 };
+
+export const updateEducation = async (
+    updatedEducation: Education
+): Promise<Education> => {
+    return await educationDAO.save(updatedEducation);
+};

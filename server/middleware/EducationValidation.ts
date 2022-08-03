@@ -25,10 +25,15 @@ export const validateEducation = [
         .escape(),
     body('gpa')
         .optional()
-        .isFloat({ min: 0, max: 4.0 })
-        .withMessage('GPA must be a numeric value')
-        .trim()
-        .escape(),
+        .custom((gpa) => {
+            if (gpa !== null && typeof gpa !== 'number') {
+                throw Error('GPA must be a number or null');
+            }
+            if (gpa && (gpa > 4.0 || gpa < 0)) {
+                throw Error('GPA must be between 0.0 and 4.0');
+            }
+            return true;
+        }),
     body('startYear')
         .exists()
         .withMessage('start year is a required field')

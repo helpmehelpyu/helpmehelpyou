@@ -13,10 +13,15 @@ router.post(
     educationController.addEducation
 );
 
-router.delete(
-    '/:educationId',
+// DELETE an existing education
+router.delete('/', authenticateUser, educationController.deleteById);
+
+// EDIT an existing education
+router.put(
+    '/',
     authenticateUser,
-    educationController.deleteById
+    validateEducation,
+    educationController.updateEducation
 );
 
 export default router;

@@ -23,3 +23,10 @@ export const findById = async (
 ): Promise<Education | null> => {
     return await educationRepository.findById(educationId);
 };
+
+export const updateEducation = async (
+    education: Education,
+    newEducation: Education
+) => {
+    return await educationRepository.updateEducation(newEducation);
+};

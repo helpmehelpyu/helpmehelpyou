@@ -4,6 +4,7 @@ import userService = require('../services/UserService');
 import mediaService = require('../services/MediaService');
 import linkService = require('../services/LinkService');
 import userProfileService = require('../services/UserProfileService');
+import educationService = require('../services/EducationService');
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -87,6 +88,7 @@ export const updateUserInfo = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
     try {
+        await educationService.deleteAssociatedEduction(res.locals.user.id);
         await mediaService.deleteAssociatedMedia(res.locals.user.id);
         await linkService.deleteAssociatedLinks(res.locals.user.id);
 

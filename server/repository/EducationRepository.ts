@@ -12,3 +12,11 @@ export const createEducation = async (
     newEducationEntry.user = user;
     return educationDAO.save(newEducationEntry);
 };
+
+export const deleteByUserId = async (userId: string) => {
+    await educationDAO
+        .createQueryBuilder()
+        .delete()
+        .where('userId = :userId', { userId: userId })
+        .execute();
+};

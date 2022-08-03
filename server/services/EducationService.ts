@@ -8,3 +8,7 @@ export const createEducation = async (
 ): Promise<Education> => {
     return educationRepository.createEducation(user, educationDetails);
 };
+
+export const deleteAssociatedEduction = async (userId: string) => {
+    await educationRepository.deleteByUserId(userId);
+};

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { matchedData, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import educationService = require('../services/EducationService');
 import { scrubUserData } from '../services/UserService';
 

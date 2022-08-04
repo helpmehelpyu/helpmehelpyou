@@ -69,9 +69,7 @@ export const updateEducation = async (req: Request, res: Response) => {
         });
     }
 
-    const updatedEducation = await educationService.updateEducation(education, {
-        ...req.body,
-    });
+    const updatedEducation = await educationService.updateEducation(req.body);
 
     res.status(200).json({
         ...updatedEducation,

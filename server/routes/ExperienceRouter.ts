@@ -13,4 +13,10 @@ router.post(
     experienceController.addNewExperience
 );
 
+router.delete(
+    '/',
+    authenticateUser,
+    experienceController.deleteExistingExperience
+);
+
 export default router;

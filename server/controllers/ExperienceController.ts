@@ -20,3 +20,26 @@ export const addNewExperience = async (req: Request, res: Response) => {
         user: scrubUserData(newExperience.user),
     });
 };
+
+export const deleteExistingExperience = async (req: Request, res: Response) => {
+    const experience = await experienceService.findById(req.body.experienceId);
+    if (!experience) {
+        return res.status(404).json({
+            message: 'Experience with this specified id does not exist',
+        });
+    }
+    if (
+        !(await experienceService.hasAuthorization(
+            res.locals.user.id,
+            req.body.experienceId
+        ))
+    ) {
+        return res.status(403).json({
+            message: 'current user is not authorized to perform this action',
+        });
+    }
+
+    await experienceService.deleteById(req.body.experienceId);
+
+    res.sendStatus(200);
+};

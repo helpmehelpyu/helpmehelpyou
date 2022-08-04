@@ -13,3 +13,22 @@ export const createExperience = async (
     newExperience.user = user;
     return experienceDAO.save(newExperience);
 };
+
+export const findById = async (
+    experienceId: number
+): Promise<Experience | null> => {
+    return await experienceDAO.findOne({
+        where: { id: experienceId },
+        relations: {
+            user: true,
+        },
+    });
+};
+
+export const deleteById = async (experienceId: number) => {
+    await experienceDAO
+        .createQueryBuilder()
+        .delete()
+        .where('id = :id', { id: experienceId })
+        .execute();
+};

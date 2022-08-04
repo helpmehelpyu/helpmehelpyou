@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { matchedData, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import educationService = require('../services/EducationService');
 import { scrubUserData } from '../services/UserService';
 
@@ -69,9 +69,7 @@ export const updateEducation = async (req: Request, res: Response) => {
         });
     }
 
-    const updatedEducation = await educationService.updateEducation(education, {
-        ...req.body,
-    });
+    const updatedEducation = await educationService.updateEducation(req.body);
 
     res.status(200).json({
         ...updatedEducation,

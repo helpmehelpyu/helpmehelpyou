@@ -25,9 +25,6 @@ export const findById = async (
     return await educationRepository.findById(educationId);
 };
 
-export const updateEducation = async (
-    education: Education,
-    newEducation: Education
-) => {
+export const updateEducation = async (newEducation: Education) => {
     return await educationRepository.updateEducation(newEducation);
 };

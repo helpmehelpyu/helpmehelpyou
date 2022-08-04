@@ -17,7 +17,7 @@ export enum DegreeType {
 
 @Entity()
 @Check('0 <= gpa AND gpa <= 4.0')
-@Check('startYear <= endYear')
+@Check('"startYear" <= "endYear"')
 export class Education {
     @PrimaryGeneratedColumn()
     id: number;

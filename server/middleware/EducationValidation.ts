@@ -20,9 +20,7 @@ export const validateEducation = [
         .exists()
         .withMessage('degree is a required field')
         .isIn(Object.values(DegreeType))
-        .withMessage('Invalid Degree Type')
-        .trim()
-        .escape(),
+        .withMessage('Invalid Degree Type'),
     body('gpa')
         .optional()
         .custom((gpa) => {

@@ -45,6 +45,3 @@ export const validateExperience = [
         .trim()
         .escape(),
 ];
-function isISO8601(endDate: any) {
-    throw new Error('Function not implemented.');
-}

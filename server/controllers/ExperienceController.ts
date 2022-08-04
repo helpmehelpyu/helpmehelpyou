@@ -43,3 +43,32 @@ export const deleteExistingExperience = async (req: Request, res: Response) => {
 
     res.sendStatus(200);
 };
+
+export const editExistingExperience = async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors: errors.array(),
+        });
+    }
+
+    const experience = await experienceService.findById(req.body.id);
+
+    if (!experience) {
+        return res.status(404).json({
+            message: 'experience with this id could not be found',
+        });
+    }
+
+    if (experience.user.id !== res.locals.user.id) {
+        return res.status(403).json({
+            message: 'User is not authorized to perform this action',
+        });
+    }
+
+    const newExperience = await experienceService.updateExperience(req.body);
+    res.status(200).json({
+        ...newExperience,
+        user: scrubUserData(newExperience.user),
+    });
+};

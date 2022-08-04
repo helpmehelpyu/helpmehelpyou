@@ -30,3 +30,9 @@ export const hasAuthorization = async (
 export const deleteById = async (experienceId: number) => {
     await experienceRepository.deleteById(experienceId);
 };
+
+export const updateExperience = async (
+    newExperience: Experience
+): Promise<Experience> => {
+    return await experienceRepository.updateExperience(newExperience);
+};

@@ -32,3 +32,9 @@ export const deleteById = async (experienceId: number) => {
         .where('id = :id', { id: experienceId })
         .execute();
 };
+
+export const updateExperience = async (
+    experience: Experience
+): Promise<Experience> => {
+    return await experienceDAO.save(experience);
+};

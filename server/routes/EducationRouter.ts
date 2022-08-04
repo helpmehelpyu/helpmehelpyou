@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { authenticateUser } from '../middleware/Authentication';
 import educationController = require('../controllers/EducationController');
 import { validateEducation } from '../middleware/EducationValidation';
+import { body } from 'express-validator';
 
 const router = Router();
 
@@ -21,6 +22,11 @@ router.put(
     '/',
     authenticateUser,
     validateEducation,
+    body('id')
+        .exists()
+        .withMessage('id is a required field')
+        .isNumeric()
+        .withMessage('id must be a numeric value'),
     educationController.updateEducation
 );
 

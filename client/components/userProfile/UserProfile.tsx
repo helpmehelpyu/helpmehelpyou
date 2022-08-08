@@ -7,21 +7,23 @@ import Image from 'next/image';
 import Avatar from '../Avatar';
 import ContactInfo from './contact/ContactInfo';
 import EditAvatarPopup from './avatar/EditAvatarPopup';
+import TabItem from '../TabItem';
 
 interface Props {
   user: UserData;
   canEdit: boolean;
 }
 
-enum Tabs {
-  WorkSamples,
-  Skills,
-  Experience,
-  Education,
+export enum Tabs {
+  WorkSamples = 'Work Samples',
+  Skills = 'Skills',
+  Experience = 'Experience',
+  Education = 'Education',
 }
 
 export default function UserProfile({ user, canEdit }: Props) {
   const [selectedTab, setSelectedTab] = useState(Tabs.WorkSamples);
+  const [tabs, setTabs] = useState<JSX.Element[]>([]);
   const [mediaDetails, setMediaDetails] = useState<WorkSample | null>(null);
   const [showContactInfo, setShowContactInfo] = useState(false);
   const [showEditAvatarPopup, setShowEditAvatarPopup] = useState(false);
@@ -53,6 +55,19 @@ export default function UserProfile({ user, canEdit }: Props) {
         setSelectedTabComponent(<h1>Education tab is selected</h1>);
         break;
     }
+
+    const newTabs = [];
+    for (let tab of Object.values(Tabs)) {
+      newTabs.push(
+        <TabItem
+          key={tab}
+          tab={tab}
+          setSelectedTab={setSelectedTab}
+          isSelected={tab === selectedTab}
+        ></TabItem>
+      );
+    }
+    setTabs(newTabs);
   }, [selectedTab, user]);
 
   let featuredWork = <div className="hidden"></div>;
@@ -142,58 +157,7 @@ export default function UserProfile({ user, canEdit }: Props) {
         </div>
         <div className="w-full border-2 rounded p-10">
           <ul className="flex w-full justify-center items-center space-x-20 text-center">
-            <li>
-              <button
-                onClick={() => setSelectedTab(Tabs.WorkSamples)}
-                className={
-                  'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
-                  (selectedTab === Tabs.WorkSamples
-                    ? ' text-cyan-500 border border-cyan-500  font-bold'
-                    : '')
-                }
-              >
-                Work Samples
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setSelectedTab(Tabs.Skills)}
-                className={
-                  'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
-                  (selectedTab === Tabs.Skills
-                    ? ' text-cyan-500 border border-cyan-500  font-bold'
-                    : '')
-                }
-              >
-                Skills
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setSelectedTab(Tabs.Experience)}
-                className={
-                  'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
-                  (selectedTab === Tabs.Experience
-                    ? ' text-cyan-500 border border-cyan-500  font-bold'
-                    : '')
-                }
-              >
-                Experience
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setSelectedTab(Tabs.Education)}
-                className={
-                  'text-lg hover:underline p-2 rounded hover:bg-gray-200' +
-                  (selectedTab === Tabs.Education
-                    ? ' text-cyan-500 border border-cyan-500 font-bold'
-                    : '')
-                }
-              >
-                Education
-              </button>
-            </li>
+            {tabs}
           </ul>
           <div></div>
         </div>

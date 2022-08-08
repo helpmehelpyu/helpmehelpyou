@@ -105,7 +105,7 @@ export default function UserProfile({ user, canEdit }: Props) {
               </div>
               {canEdit && (
                 <div
-                  className="hidden peer-hover:block hover:block absolute rounded-full -bottom-20 left-0 right-0 m-auto h-60 w-60 bg-black bg-opacity-90"
+                  className="hidden peer-hover:block hover:block absolute rounded-full -bottom-20 left-0 right-0 m-auto h-60 w-60 bg-black bg-opacity-90 select-none"
                   onClick={() => setShowEditAvatarPopup(true)}
                 >
                   <div className="flex justify-center items-center h-full">
@@ -114,7 +114,7 @@ export default function UserProfile({ user, canEdit }: Props) {
                       height={90}
                       width={90}
                       alt="Edit Icon"
-                      className="filter invert"
+                      className="filter invert cursor-pointer"
                     ></Image>
                   </div>
                 </div>

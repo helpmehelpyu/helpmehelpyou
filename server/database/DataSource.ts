@@ -8,7 +8,7 @@ export const AppDataSource = new DataSource({
         process.env.NODE_ENV === 'production'
             ? { rejectUnauthorized: false }
             : false,
-    entities: ['dist/models/*.js'],
+    entities: ['dist/**/*.entity.js'],
     migrations: ['dist/database/migrations/*.js'],
     synchronize: false,
     // logging: true,

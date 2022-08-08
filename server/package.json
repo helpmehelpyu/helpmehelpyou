@@ -10,7 +10,7 @@
         "start": "node dist/index.js",
         "dev-server": "concurrently \"tsc --preserveWatchOutput --watch\" \"nodemon -q dist/index.js\"",
         "dev": "docker compose up --build",
-        "test": "jest --verbose /server/tests ",
+        "test": "jest --verbose /server/.*\\.test.ts",
         "typeorm": "typeorm-ts-node-commonjs"
     },
     "author": "",

@@ -1,11 +1,8 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import { AppDataSource } from './database/DataSource';
-import mediaRouter from './routes/MediaRouter';
-import userRouter from './routes/UserRouter';
-import linksRouter from './routes/LinkRouter';
-import educationRouter from './routes/EducationRouter';
-import experienceRouter from './routes/ExperienceRouter';
+import mediaRouter from './media/MediaRouter';
+import userRouter from './users/UserRouter';
 
 import cloudinary from 'cloudinary';
 import cors from 'cors';
@@ -29,9 +26,6 @@ app.use(
 
 app.use('/media', mediaRouter);
 app.use('/users', userRouter);
-app.use('/links', linksRouter);
-app.use('/education', educationRouter);
-app.use('/experience', experienceRouter);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

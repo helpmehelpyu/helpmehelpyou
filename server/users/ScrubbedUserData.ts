@@ -3,31 +3,32 @@ import { Education } from './education/Education.entity';
 import { Experience } from './experience/Experience.entity';
 import { Link } from './link/Link.entity';
 import { UserProfile } from './profile/UserProfile.entity';
+import { Skill } from './skills/Skill.entity';
 
 export interface ScrubbedUserData {
-    id: string;
+  id: string;
 
-    firstName: string;
+  firstName: string;
 
-    lastName: string;
+  lastName: string;
 
-    email: string;
+  email: string;
 
-    phoneNumber: string;
+  phoneNumber: string;
 
-    rating: number;
+  rating: number;
 
-    workSamples?: Media[];
+  workSamples?: Media[];
 
-    links?: Link[];
+  links?: Link[];
 
-    skills: string[];
+  skills: Skill[];
 
-    experience?: Experience[];
+  experience?: Experience[];
 
-    education?: Education[];
+  education?: Education[];
 
-    avatar: { source: string; id: string };
+  avatar: { source: string; id: string };
 
-    userProfile?: UserProfile;
+  userProfile?: UserProfile;
 }

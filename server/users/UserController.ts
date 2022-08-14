@@ -5,6 +5,7 @@ import mediaService = require('../media/MediaService');
 import linkService = require('./link/LinkService');
 import userProfileService = require('./profile/UserProfileService');
 import educationService = require('./education/EducationService');
+import experienceService = require('./experience/ExperienceService');
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -83,9 +84,11 @@ export const updateUserInfo = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
     try {
-        await educationService.deleteAssociatedEduction(res.locals.user.id);
-        await mediaService.deleteAssociatedMedia(res.locals.user.id);
-        await linkService.deleteAssociatedLinks(res.locals.user.id);
+        const userId = res.locals.user.id;
+        await educationService.deleteAssociatedEduction(userId);
+        await experienceService.deleteAssociatedExperience(userId);
+        await mediaService.deleteAssociatedMedia(userId);
+        await linkService.deleteAssociatedLinks(userId);
 
         const rowsAffected = await userService.deleteUser(res.locals.user);
         if (rowsAffected !== 1) {
@@ -106,6 +109,13 @@ export const deleteUser = async (req: Request, res: Response) => {
 };
 
 export const getUserData = async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors: errors.array(),
+        });
+    }
+
     const user = await userService.findById(req.params.userId, {
         workSamples: true,
         education: true,

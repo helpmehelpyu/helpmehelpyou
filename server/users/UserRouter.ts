@@ -68,4 +68,5 @@ router.delete('/avatar', authenticateUser, userController.resetAvatar);
 // DELETE an the current user
 router.delete('/', authenticateUser, userController.deleteUser);
 
+router.get('', userController.getUsers);
 export default router;

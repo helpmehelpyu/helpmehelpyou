@@ -18,7 +18,6 @@ export const addSkill = async (req: Request, res: Response) => {
     }
 
     const existingSkill = await skillService.findByName(req.body.name);
-    console.log(existingSkill);
     let updatedSkill = {};
     if (existingSkill) {
         updatedSkill = await skillService.addUserToExistingSkill(

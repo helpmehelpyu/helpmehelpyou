@@ -1,4 +1,5 @@
 import { AppDataSource } from '../../database/DataSource';
+import { User } from '../User.entity';
 import { Skill } from './Skill.entity';
 
 const skillsDAO = AppDataSource.getRepository(Skill);
@@ -47,4 +48,33 @@ export const deleteSkillById = async (skillId: number) => {
         .delete()
         .where('id = :id', { id: skillId })
         .execute();
+};
+
+export const getUsersWithSkill = async (
+    skillName: string,
+    limit: number,
+    page: number
+): Promise<User[]> => {
+    const skill = await skillsDAO
+        .createQueryBuilder('skill')
+        .select([
+            'skill.id',
+            'User.id',
+            'User.firstName',
+            'User.lastName',
+            'User.email',
+            'User.phoneNumber',
+            'User.rating',
+            'User.avatar',
+        ])
+        .innerJoin('skill.users', 'User')
+        .where('name = :skillName', { skillName: skillName })
+        .offset(page * limit)
+        .limit(limit)
+        .getOne();
+
+    if (!skill) {
+        return [];
+    }
+    return skill.users;
 };

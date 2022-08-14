@@ -43,3 +43,20 @@ export const updateUser = async (updatedUser: User): Promise<User> => {
 export const deleteUser = async (user: User): Promise<DeleteResult> => {
     return userDAO.delete({ id: user.id });
 };
+
+export const getUsers = (limit: number, page: number) => {
+    return userDAO
+        .createQueryBuilder('users')
+        .select([
+            'users.id',
+            'users.firstName',
+            'users.lastName',
+            'users.email',
+            'users.phoneNumber',
+            'users.rating',
+            'users.avatar',
+        ])
+        .offset(limit * page)
+        .limit(limit)
+        .getMany();
+};

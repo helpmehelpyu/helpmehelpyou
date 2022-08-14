@@ -90,3 +90,7 @@ export const scrubUserData = function (user: User): ScrubbedUserData {
     const scrubbedUser = { ...user, password: undefined };
     return scrubbedUser;
 };
+
+export const getUsers = (limit: number, page: number): Promise<User[]> => {
+    return userRepository.getUsers(limit, page);
+};

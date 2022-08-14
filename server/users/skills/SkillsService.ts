@@ -47,3 +47,11 @@ export const deleteSkillFromUser = async (
 
     return rowsDelete;
 };
+
+export const getUsersWithSkill = (
+    skillName: string,
+    limit: number,
+    page: number
+): Promise<User[]> => {
+    return skillsRepository.getUsersWithSkill(skillName, limit, page);
+};

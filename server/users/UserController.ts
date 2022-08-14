@@ -6,6 +6,8 @@ import linkService = require('./link/LinkService');
 import userProfileService = require('./profile/UserProfileService');
 import educationService = require('./education/EducationService');
 import experienceService = require('./experience/ExperienceService');
+import skillsService = require('./skills/SkillsService');
+import { User } from './User.entity';
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -188,4 +190,39 @@ export const resetAvatar = async (req: Request, res: Response) => {
     }
     const updatedUser = await userService.setAvatar(res.locals.user, '', '');
     return res.status(200).json(userService.scrubUserData(updatedUser));
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+    const filterBy = req.query.filterBy;
+    if (!req.query.limit || !req.query.page) {
+        return res.status(400).json({
+            message: 'limit and page are required query parameters',
+        });
+    }
+
+    const limit = Number.parseInt(req.query.limit.toString());
+    const page = Number.parseInt(req.query.page.toString()) - 1;
+
+    if (limit < 0 || page < 0) {
+        return res.status(400).json({
+            message: 'limit and page must be positive numbers',
+        });
+    }
+
+    let users: User[] = [];
+    if (filterBy === 'skills') {
+        if (!req.query.name) {
+            return res.status(400).json({
+                message: 'the skill name is required',
+            });
+        }
+        const skillName = req.query.name.toString();
+        users = await skillsService.getUsersWithSkill(skillName, limit, page);
+    } else {
+        users = await userService.getUsers(limit, page);
+    }
+
+    res.status(200).json({
+        users: users,
+    });
 };

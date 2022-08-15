@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import userController = require('./UserController');
 import { authenticateUser } from '../authentication/Authentication';
-import {
-    validateUpdatedProperties,
-    validateUserProperties,
-} from './UserValidation';
+import { validateUpdatedProperties } from './UserValidation';
 import { upload } from '../media/Multer';
 
 import experienceRouter from './experience/ExperienceRouter';
@@ -34,17 +31,6 @@ router.get(
         .withMessage('userId is invalid'),
     userController.getUserData
 );
-
-// CREATE a new user
-router.post(
-    '/signup',
-    validateUserProperties,
-    userController.register,
-    userController.login
-);
-
-// LOGIN an existing user
-router.post('/login', userController.login);
 
 // UPDATE an the current user
 router.patch(

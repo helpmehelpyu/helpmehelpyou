@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { AppDataSource } from './database/DataSource';
 import mediaRouter from './media/MediaRouter';
 import userRouter from './users/UserRouter';
+import authRouter from './authentication/AuthRouter';
 
 import cloudinary from 'cloudinary';
 import cors from 'cors';
@@ -26,6 +27,7 @@ app.use(
 
 app.use('/media', mediaRouter);
 app.use('/users', userRouter);
+app.use('/auth', authRouter);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

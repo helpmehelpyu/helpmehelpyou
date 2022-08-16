@@ -11,7 +11,7 @@ interface Props {
   setMediaDetails: (val: WorkSample) => void;
 }
 
-export default function MediaPagination({
+export default function WorkSamplesTab({
   media,
   setMediaDetails: setMediaDetails,
 }: Props) {

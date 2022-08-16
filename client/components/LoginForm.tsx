@@ -14,7 +14,7 @@ export default function LoginForm() {
 
     // clear all login errors
     setLoginErrors('');
-    const response = await axios.post('/users/login', {
+    const response = await axios.post('/auth/login', {
       email: email,
       password: password,
     });

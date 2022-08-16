@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { WorkSample } from '../../types/WorkSample';
 import FloatingMediaDetails from './workSamples/FloatingMediaDetails';
-import MediaPagination from './workSamples/MediaPagination';
+import MediaPagination from './workSamples/WorkSamples';
 import { UserData } from '../../types/UserData';
 import Image from 'next/image';
 import Avatar from '../Avatar';

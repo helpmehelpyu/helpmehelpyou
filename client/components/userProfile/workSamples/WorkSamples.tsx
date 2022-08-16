@@ -2,7 +2,7 @@ import { MediaResult } from '../../../types/MediaResult';
 import { WorkSample } from '../../../types/WorkSample';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { MediaPaginationNav } from './MediaPaginationNav';
+import { MediaPaginationNav } from './WorkSamplePagination';
 import useWindowDimensions from '../../../utils/windowSizeUtils';
 import Link from 'next/link';
 

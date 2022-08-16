@@ -80,7 +80,7 @@ export default function UserRegistrationForm() {
       data.phoneNumber = phoneNumber;
     }
 
-    const response = await axios.post('/users/signup', data);
+    const response = await axios.post('/auth/signup', data);
 
     clearValidationErrors();
     if (response.status === 400) {

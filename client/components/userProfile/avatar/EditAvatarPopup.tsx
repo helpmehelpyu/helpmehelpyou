@@ -83,7 +83,7 @@ export default function EditAvatarPopup({
             height={300}
             width={300}
             alt="Avatar"
-            className="aspect-square mt-36 md:mt-20 md2:mt-0 rounded-full sm:mb-10"
+            className="aspect-square mt-36 md:mt-20 md2:mt-0 rounded-full sm:mb-10 select-none"
           ></Image>
         ) : (
           <h1 className="w-full flex justify-center text-center items-center aspect-square mt-36 p-10 sm:mt-0">

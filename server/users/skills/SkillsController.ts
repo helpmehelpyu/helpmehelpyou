@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import skillService = require('./SkillsService');
 import userService = require('../UserService');
+import { Skill } from './Skill.entity';
 
 export const addSkill = async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -18,7 +19,7 @@ export const addSkill = async (req: Request, res: Response) => {
     }
 
     const existingSkill = await skillService.findByName(req.body.name);
-    let updatedSkill = {};
+    let updatedSkill: Skill;
     if (existingSkill) {
         updatedSkill = await skillService.addUserToExistingSkill(
             res.locals.user,
@@ -31,7 +32,7 @@ export const addSkill = async (req: Request, res: Response) => {
             newSkill
         );
     }
-    res.status(200).json(updatedSkill);
+    res.status(200).json({ id: updatedSkill.id });
 };
 
 export const removeSkill = async (req: Request, res: Response) => {

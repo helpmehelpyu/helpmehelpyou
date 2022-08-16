@@ -88,7 +88,7 @@ export default function UserProfile({ user, canEdit }: Props) {
   }
 
   return (
-    <div className="w-full h-full">
+    <div>
       {showContactInfo && (
         <ContactInfo
           setShowContactInfo={setShowContactInfo}
@@ -159,7 +159,6 @@ export default function UserProfile({ user, canEdit }: Props) {
           <ul className="flex w-full justify-center items-center space-x-20 text-center">
             {tabs}
           </ul>
-          <div></div>
         </div>
         <div className="min-h-[50vh]">{selectedTabComponent}</div>
       </div>

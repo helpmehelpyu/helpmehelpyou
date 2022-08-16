@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { MediaPaginationNav } from './MediaPaginationNav';
 import useWindowDimensions from '../../../utils/windowSizeUtils';
+import Link from 'next/link';
 
 interface Props {
   media: MediaResult[] | WorkSample[];
@@ -49,9 +50,14 @@ export default function MediaPagination({
 
   if (media.length === 0) {
     return (
-      <h1 className="w-full text-center text-4xl font-light p-16">
-        No Work Samples
-      </h1>
+      <div className="text-center">
+        <h1 className="text-4xl font-light p-16">No Work Samples</h1>
+        <Link href={'/media/upload'}>
+          <p className="inline-block text-3xl font-light underline p-2 hover:text-cyan-400 duration-200 hover:cursor-pointer">
+            Add Some Here
+          </p>
+        </Link>
+      </div>
     );
   }
 

@@ -76,6 +76,7 @@ export const getUserData = async (req: Request, res: Response) => {
         education: true,
         experience: true,
         userProfile: true,
+        skills: true,
         links: true,
     });
     if (!user) {

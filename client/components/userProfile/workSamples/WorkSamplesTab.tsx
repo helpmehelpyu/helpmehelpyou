@@ -82,7 +82,7 @@ export default function WorkSamplesTab({
   ));
 
   return (
-    <div>
+    <div className="mb-16">
       <ul className="flex flex-col md2:flex-row md2:flex-wrap gap-10 justify-center items-center">
         {items}
         {fillerElements}

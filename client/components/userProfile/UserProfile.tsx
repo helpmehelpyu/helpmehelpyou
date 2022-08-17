@@ -8,6 +8,7 @@ import Avatar from '../Avatar';
 import ContactInfo from './contact/ContactInfo';
 import EditAvatarPopup from './avatar/EditAvatarPopup';
 import TabItem from '../TabItem';
+import SkillsTab from './skills/SkillsTab';
 
 interface Props {
   user: UserData;
@@ -46,7 +47,7 @@ export default function UserProfile({ user, canEdit }: Props) {
         );
         break;
       case Tabs.Skills:
-        setSelectedTabComponent(<h1>Skill tab is selected</h1>);
+        setSelectedTabComponent(<SkillsTab skills={user.skills}></SkillsTab>);
         break;
       case Tabs.Experience:
         setSelectedTabComponent(<h1>Experience tab is selected</h1>);
@@ -78,7 +79,7 @@ export default function UserProfile({ user, canEdit }: Props) {
         <h1 className="text-3xl font-bold text-center">Featured Work</h1>
         <div className="relative md2:h-[70%] h-[50vw]">
           <Image
-            alt=""
+            alt="Featured Work"
             layout="fill"
             objectFit="contain"
             src={user.userProfile.featuredWork}

@@ -12,7 +12,7 @@ export default function TabItem({ tab, setSelectedTab, isSelected }: Props) {
       <button
         onClick={() => setSelectedTab(tab)}
         className={
-          'text-lg hover:underline p-2 hover:bg-gray-200 duration-300' +
+          'text-lg hover:underline p-2 hover:bg-slate-300 duration-300' +
           (isSelected
             ? ' text-cyan-500 border rounded-l border-cyan-500 font-bold'
             : ' rounded')
@@ -21,7 +21,7 @@ export default function TabItem({ tab, setSelectedTab, isSelected }: Props) {
         {tab.toString()}
       </button>
       {isSelected && (
-        <button className="w-10 aspect-square border-r border-y border-slate-400 rounded-r text-lg font-light">
+        <button className="w-10 aspect-square border-r border-y border-slate-400 rounded-r text-lg font-light hover:bg-slate-300 duration-300">
           +
         </button>
       )}

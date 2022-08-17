@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { WorkSample } from '../../types/WorkSample';
 import FloatingMediaDetails from './workSamples/FloatingMediaDetails';
-import MediaPagination from './workSamples/MediaPagination';
+import WorkSamplesTab from './workSamples/WorkSamplesTab';
 import { UserData } from '../../types/UserData';
 import Image from 'next/image';
 import Avatar from '../Avatar';
@@ -29,20 +29,20 @@ export default function UserProfile({ user, canEdit }: Props) {
   const [showEditAvatarPopup, setShowEditAvatarPopup] = useState(false);
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
-    <MediaPagination
+    <WorkSamplesTab
       media={user.workSamples}
       setMediaDetails={setMediaDetails}
-    ></MediaPagination>
+    ></WorkSamplesTab>
   );
 
   useEffect(() => {
     switch (selectedTab) {
       case Tabs.WorkSamples:
         setSelectedTabComponent(
-          <MediaPagination
+          <WorkSamplesTab
             media={user.workSamples}
             setMediaDetails={setMediaDetails}
-          ></MediaPagination>
+          ></WorkSamplesTab>
         );
         break;
       case Tabs.Skills:
@@ -64,11 +64,12 @@ export default function UserProfile({ user, canEdit }: Props) {
           tab={tab}
           setSelectedTab={setSelectedTab}
           isSelected={tab === selectedTab}
+          canEdit={canEdit}
         ></TabItem>
       );
     }
     setTabs(newTabs);
-  }, [selectedTab, user]);
+  }, [selectedTab, user, canEdit]);
 
   let featuredWork = <div className="hidden"></div>;
   if (user.userProfile.featuredWork !== '') {

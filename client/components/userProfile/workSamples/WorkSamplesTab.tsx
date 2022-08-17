@@ -2,7 +2,7 @@ import { MediaResult } from '../../../types/MediaResult';
 import { WorkSample } from '../../../types/WorkSample';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { MediaPaginationNav } from './MediaPaginationNav';
+import { MediaPaginationNav } from './WorkSamplePagination';
 import useWindowDimensions from '../../../utils/windowSizeUtils';
 import Link from 'next/link';
 
@@ -11,7 +11,7 @@ interface Props {
   setMediaDetails: (val: WorkSample) => void;
 }
 
-export default function MediaPagination({
+export default function WorkSamplesTab({
   media,
   setMediaDetails: setMediaDetails,
 }: Props) {
@@ -82,7 +82,7 @@ export default function MediaPagination({
   ));
 
   return (
-    <div>
+    <div className="mb-16">
       <ul className="flex flex-col md2:flex-row md2:flex-wrap gap-10 justify-center items-center">
         {items}
         {fillerElements}

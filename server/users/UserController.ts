@@ -9,7 +9,6 @@ import experienceService = require('./experience/ExperienceService');
 import skillsService = require('./skills/SkillsService');
 import { User } from './User.entity';
 
-
 export const updateUserInfo = async (req: Request, res: Response) => {
     try {
         const errors = validationResult(req);
@@ -96,6 +95,7 @@ export const getCurrentUserData = async (req: Request, res: Response) => {
         education: true,
         experience: true,
         userProfile: true,
+        skills: true,
         links: true,
     });
     res.status(200).json(userService.scrubUserData(user!));

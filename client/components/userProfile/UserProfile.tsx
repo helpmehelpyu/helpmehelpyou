@@ -64,11 +64,12 @@ export default function UserProfile({ user, canEdit }: Props) {
           tab={tab}
           setSelectedTab={setSelectedTab}
           isSelected={tab === selectedTab}
+          canEdit={canEdit}
         ></TabItem>
       );
     }
     setTabs(newTabs);
-  }, [selectedTab, user]);
+  }, [selectedTab, user, canEdit]);
 
   let featuredWork = <div className="hidden"></div>;
   if (user.userProfile.featuredWork !== '') {

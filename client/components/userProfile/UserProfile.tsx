@@ -10,9 +10,10 @@ import EditAvatarPopup from './avatar/EditAvatarPopup';
 import TabItem from '../TabItem';
 import SkillsTab from './skills/SkillsTab';
 import AddSkillPopup from './skills/AddSkillPopup';
+import axios from '../../config/axios';
 
 interface Props {
-  user: UserData;
+  initialUserData: UserData;
   canEdit: boolean;
 }
 
@@ -23,14 +24,18 @@ export enum Tabs {
   Education = 'Education',
 }
 
-export default function UserProfile({ user, canEdit }: Props) {
+export default function UserProfile({ initialUserData, canEdit }: Props) {
+  const [user, setUser] = useState(initialUserData);
   const [selectedTab, setSelectedTab] = useState(Tabs.WorkSamples);
   const [tabs, setTabs] = useState<JSX.Element[]>([]);
   const [mediaDetails, setMediaDetails] = useState<WorkSample | null>(null);
   const [showContactInfo, setShowContactInfo] = useState(false);
   const [showEditAvatarPopup, setShowEditAvatarPopup] = useState(false);
   const [addItem, setAddItem] = useState(false);
-  const [addItemPopup, setAddItemPopup] = useState<JSX.Element>();
+  const [addItemPopup, setAddItemPopup] = useState<JSX.Element>(
+    <span className="hidden"></span>
+  );
+  const [refetchUserData, setRefetchUserData] = useState(false);
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <WorkSamplesTab
@@ -38,6 +43,20 @@ export default function UserProfile({ user, canEdit }: Props) {
       setMediaDetails={setMediaDetails}
     ></WorkSamplesTab>
   );
+
+  useEffect(() => {
+    if (refetchUserData) {
+      axios.get('/users/' + user.id).then((res) => {
+        if (res.status === 200) {
+          setUser(res.data);
+        } else {
+          console.log('unable to update user data');
+        }
+      });
+    }
+
+    setRefetchUserData(false);
+  }, [refetchUserData, user.id]);
 
   useEffect(() => {
     switch (selectedTab) {
@@ -77,15 +96,33 @@ export default function UserProfile({ user, canEdit }: Props) {
   }, [selectedTab, user, canEdit]);
 
   useEffect(() => {
-    if (!addItem) return;
+    if (!addItem) {
+      setAddItemPopup(<span className="hidden"></span>);
+      return;
+    }
+
     switch (selectedTab) {
       case Tabs.WorkSamples:
         document.location.href = '/media/upload';
         break;
       case Tabs.Skills:
         setAddItemPopup(
-          <AddSkillPopup setShowAddPopup={setAddItem}></AddSkillPopup>
+          <AddSkillPopup
+            setShowAddPopup={setAddItem}
+            setRefetchUserData={setRefetchUserData}
+          ></AddSkillPopup>
         );
+        break;
+      case Tabs.Education:
+        setAddItemPopup(
+          <AddEducationPopup setShowAddPopup={setAddItem}></AddEducationPopup>
+        );
+        break;
+      case Tabs.Experience:
+        setAddItemPopup(
+          <AddExperiencePopup setShowAddPopup={setAddItem}></AddExperiencePopup>
+        );
+        break;
     }
   }, [addItem, selectedTab]);
 

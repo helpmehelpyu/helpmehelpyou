@@ -12,7 +12,7 @@ export default function SkillsTab({ skills }: Props) {
     const tmpSkillsList = [];
     for (const skill of skills) {
       tmpSkillsList.push(
-        <li>
+        <li key={skill.id}>
           <h1>{skill.name}</h1>
         </li>
       );

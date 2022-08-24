@@ -10,7 +10,9 @@ interface Props {
 
 export default function UserIdProfile({ user, isCurrentUser }: Props) {
   if (user) {
-    return <UserProfile user={user} canEdit={isCurrentUser}></UserProfile>;
+    return (
+      <UserProfile initialUserData={user} canEdit={isCurrentUser}></UserProfile>
+    );
   }
 
   return <h1>404 user not found</h1>;

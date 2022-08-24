@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function Me({ user }: Props) {
-  return <UserProfile user={user} canEdit={true}></UserProfile>;
+  return <UserProfile initialUserData={user} canEdit={true}></UserProfile>;
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {

@@ -9,6 +9,7 @@ import ContactInfo from './contact/ContactInfo';
 import EditAvatarPopup from './avatar/EditAvatarPopup';
 import TabItem from '../TabItem';
 import SkillsTab from './skills/SkillsTab';
+import AddSkillPopup from './skills/AddSkillPopup';
 
 interface Props {
   user: UserData;
@@ -28,6 +29,8 @@ export default function UserProfile({ user, canEdit }: Props) {
   const [mediaDetails, setMediaDetails] = useState<WorkSample | null>(null);
   const [showContactInfo, setShowContactInfo] = useState(false);
   const [showEditAvatarPopup, setShowEditAvatarPopup] = useState(false);
+  const [addItem, setAddItem] = useState(false);
+  const [addItemPopup, setAddItemPopup] = useState<JSX.Element>();
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <WorkSamplesTab
@@ -65,12 +68,26 @@ export default function UserProfile({ user, canEdit }: Props) {
           tab={tab}
           setSelectedTab={setSelectedTab}
           isSelected={tab === selectedTab}
+          onAddItem={() => setAddItem(true)}
           canEdit={canEdit}
         ></TabItem>
       );
     }
     setTabs(newTabs);
   }, [selectedTab, user, canEdit]);
+
+  useEffect(() => {
+    if (!addItem) return;
+    switch (selectedTab) {
+      case Tabs.WorkSamples:
+        document.location.href = '/media/upload';
+        break;
+      case Tabs.Skills:
+        setAddItemPopup(
+          <AddSkillPopup setShowAddPopup={setAddItem}></AddSkillPopup>
+        );
+    }
+  }, [addItem, selectedTab]);
 
   let featuredWork = <div className="hidden"></div>;
   if (user.userProfile.featuredWork !== '') {
@@ -91,6 +108,7 @@ export default function UserProfile({ user, canEdit }: Props) {
 
   return (
     <div>
+      {addItem && addItemPopup}
       {showContactInfo && (
         <ContactInfo
           setShowContactInfo={setShowContactInfo}

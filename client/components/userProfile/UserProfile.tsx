@@ -10,6 +10,8 @@ import EditAvatarPopup from './avatar/EditAvatarPopup';
 import TabItem from '../TabItem';
 import SkillsTab from './skills/SkillsTab';
 import AddSkillPopup from './skills/AddSkillPopup';
+import AddEducationPopup from './education/AddEducationPopup';
+import AddExperiencePopup from './experience/AddExperiencePopup';
 import axios from '../../config/axios';
 
 interface Props {

@@ -1,7 +1,7 @@
 interface Props {
   type: string;
   isRequired: boolean;
-  setValue: (val: string) => void;
+  setValue: (val: any) => void;
   placeholder: string;
 }
 

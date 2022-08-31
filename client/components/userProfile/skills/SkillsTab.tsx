@@ -1,24 +1,38 @@
 import { useEffect, useState } from 'react';
 import { Skill } from '../../../types/Skill';
+import SkillCard from './SkillCard';
 
 interface Props {
   skills: Skill[];
+  canEdit: boolean;
+  openDeleteConfirmation: () => void;
+  setSkillName: (val: string) => void;
 }
 
-export default function SkillsTab({ skills }: Props) {
+export default function SkillsTab({
+  skills,
+  canEdit,
+  openDeleteConfirmation,
+  setSkillName,
+}: Props) {
   const [skillsList, setSkillsList] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     const tmpSkillsList = [];
     for (const skill of skills) {
       tmpSkillsList.push(
-        <li key={skill.id}>
-          <h1>{skill.name}</h1>
-        </li>
+        <SkillCard
+          skill={skill}
+          canEdit={canEdit}
+          openDeleteConfirmation={() => {
+            openDeleteConfirmation();
+            setSkillName(skill.name);
+          }}
+        ></SkillCard>
       );
     }
     setSkillsList(tmpSkillsList);
-  }, [skills]);
+  }, [skills, canEdit, openDeleteConfirmation, setSkillName]);
 
   if (skills.length === 0) {
     return (
@@ -30,7 +44,7 @@ export default function SkillsTab({ skills }: Props) {
 
   return (
     <div>
-      <ul>{skillsList}</ul>
+      <ul className="flex gap-5 flex-wrap">{skillsList}</ul>
     </div>
   );
 }

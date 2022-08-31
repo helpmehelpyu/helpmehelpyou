@@ -15,6 +15,7 @@ import AddExperiencePopup from './experience/AddExperiencePopup';
 import axios from '../../config/axios';
 import DeleteConfirmationPopup from './skills/DeleteConfirmation';
 import { getAuthCookie } from '../../auth/auth';
+import ExperienceTab from './experience/ExperienceTab';
 
 interface Props {
   initialUserData: UserData;
@@ -85,7 +86,12 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
         );
         break;
       case Tabs.Experience:
-        setSelectedTabComponent(<h1>Experience tab is selected</h1>);
+        setSelectedTabComponent(
+          <ExperienceTab
+            rawExperiences={user.experience}
+            canEdit={canEdit}
+          ></ExperienceTab>
+        );
         break;
       case Tabs.Education:
         setSelectedTabComponent(<h1>Education tab is selected</h1>);

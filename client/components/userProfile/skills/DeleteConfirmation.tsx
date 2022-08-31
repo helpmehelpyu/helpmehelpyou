@@ -26,7 +26,10 @@ export default function DeleteConfirmationPopup({
       showCloseIcon={false}
     >
       <div className="fixed drop-shadow-lg w-1/3 h-1/3 rounded p-10 space-y-5 bg-white top-0 left-0 right-0 bottom-0 m-auto overflow-auto">
-        <div className="absolute top-0 left-2 text-black text-sm md:text-lg mt-2 ml-2 text-center duration-300 transition-colors hover:text-red-400 cursor-pointer select-none">
+        <div
+          onClick={closePopup}
+          className="absolute top-0 left-2 text-black text-sm md:text-lg mt-2 ml-2 text-center duration-300 transition-colors hover:text-red-400 cursor-pointer select-none"
+        >
           ✕
         </div>
         {deleteError ? (

@@ -19,7 +19,6 @@ export default function WorkSamplesTab({
   const totalPages = Math.ceil(media.length / itemsPerPage);
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
   const [splicedList, setSplicedList] = useState(media);
-  const [fillerElements, setFillerElements] = useState<JSX.Element[]>([]);
   const { width } = useWindowDimensions();
 
   useEffect(() => {
@@ -34,19 +33,6 @@ export default function WorkSamplesTab({
       setSplicedList(media);
     }
   }, [width, currentPageNumber, media]);
-
-  useEffect(() => {
-    const data = [];
-    for (let i = 0; i < ((-splicedList.length % 5) + 5) % 5; i++) {
-      data.push(
-        <li
-          key={'filler' + i}
-          className="h-[10px] w-[10px] flex-[0_0_16.3%] hidden md2:block"
-        ></li>
-      );
-    }
-    setFillerElements(data);
-  }, [splicedList]);
 
   if (media.length === 0) {
     return (
@@ -64,7 +50,7 @@ export default function WorkSamplesTab({
   const items = splicedList.reverse().map((media) => (
     <li
       key={media.id}
-      className="flex-[0_0_16.3%] select-none duration-500 hover:scale-105"
+      className="select-none duration-500 hover:scale-105"
       onClick={() => setMediaDetails(media)}
     >
       <Image
@@ -83,9 +69,8 @@ export default function WorkSamplesTab({
 
   return (
     <div className="mb-16">
-      <ul className="flex flex-col md2:flex-row md2:flex-wrap gap-10 justify-center items-center">
+      <ul className="grid md2:grid-cols-5 grid-cols-1 w-full gap-10 justify-center items-center">
         {items}
-        {fillerElements}
       </ul>
       <MediaPaginationNav
         currentPageNumber={currentPageNumber}

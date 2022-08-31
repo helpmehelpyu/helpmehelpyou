@@ -37,7 +37,7 @@ export default function SkillsTab({
   if (skills.length === 0) {
     return (
       <h1 className="text-4xl text-center p-16 font-light">
-        This user has no skill
+        This user has no listed skills
       </h1>
     );
   }

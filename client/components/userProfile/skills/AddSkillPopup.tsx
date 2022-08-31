@@ -14,6 +14,7 @@ export default function AddSkillPopup({
   setRefetchUserData,
 }: Props) {
   const [skillName, setSkillName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleAddSkill = async (event: FormEvent) => {
     event.preventDefault();
@@ -32,6 +33,8 @@ export default function AddSkillPopup({
     if (response.status === 200) {
       setRefetchUserData(true);
       setShowAddPopup(false);
+    } else {
+      setErrorMessage(response.data.message);
     }
   };
 
@@ -55,6 +58,7 @@ export default function AddSkillPopup({
             >
               Add
             </button>
+            <p className="text-red-500 text-sm mx-2 px-1">{errorMessage}</p>
           </form>
         </div>
       </div>

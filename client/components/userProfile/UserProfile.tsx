@@ -13,6 +13,8 @@ import AddSkillPopup from './skills/AddSkillPopup';
 import AddEducationPopup from './education/AddEducationPopup';
 import AddExperiencePopup from './experience/AddExperiencePopup';
 import axios from '../../config/axios';
+import DeleteConfirmationPopup from './skills/DeleteConfirmation';
+import { getAuthCookie } from '../../auth/auth';
 
 interface Props {
   initialUserData: UserData;
@@ -38,6 +40,8 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
     <span className="hidden"></span>
   );
   const [refetchUserData, setRefetchUserData] = useState(false);
+  const [deleteSkillConfirmation, setDeleteSkillConfirmation] = useState(false);
+  const [deleteSkillName, setDeleteSkillName] = useState('');
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <WorkSamplesTab
@@ -71,7 +75,14 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
         );
         break;
       case Tabs.Skills:
-        setSelectedTabComponent(<SkillsTab skills={user.skills}></SkillsTab>);
+        setSelectedTabComponent(
+          <SkillsTab
+            skills={user.skills}
+            canEdit={canEdit}
+            openDeleteConfirmation={() => setDeleteSkillConfirmation(true)}
+            setSkillName={setDeleteSkillName}
+          ></SkillsTab>
+        );
         break;
       case Tabs.Experience:
         setSelectedTabComponent(<h1>Experience tab is selected</h1>);
@@ -145,8 +156,34 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
     );
   }
 
+  const deleteItem = async (): Promise<boolean> => {
+    const res = await axios.delete('/users/skills', {
+      data: {
+        name: deleteSkillName,
+      },
+      headers: {
+        Authorization: 'Bearer ' + getAuthCookie(),
+      },
+    });
+
+    if (res.status === 200) {
+      setRefetchUserData(true);
+      setDeleteSkillConfirmation(false);
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <div>
+      {deleteSkillConfirmation && (
+        <DeleteConfirmationPopup
+          closePopup={() => setDeleteSkillConfirmation(false)}
+          deleteItem={deleteItem}
+          deletedItemName={'the skill "' + deleteSkillName + '"'}
+        ></DeleteConfirmationPopup>
+      )}
       {addItem && addItemPopup}
       {showContactInfo && (
         <ContactInfo

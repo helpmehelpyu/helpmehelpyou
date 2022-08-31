@@ -133,7 +133,10 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
         break;
       case Tabs.Experience:
         setAddItemPopup(
-          <AddExperiencePopup setShowAddPopup={setAddItem}></AddExperiencePopup>
+          <AddExperiencePopup
+            setShowAddPopup={setAddItem}
+            setRefetchUserData={setRefetchUserData}
+          ></AddExperiencePopup>
         );
         break;
     }

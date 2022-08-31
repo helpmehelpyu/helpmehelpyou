@@ -34,7 +34,11 @@ export default function AddSkillPopup({
       setRefetchUserData(true);
       setShowAddPopup(false);
     } else {
-      setErrorMessage(response.data.message);
+      if (response.data.message) {
+        setErrorMessage(response.data.message);
+      } else {
+        setErrorMessage(response.data.errors[0].msg);
+      }
     }
   };
 
@@ -53,7 +57,7 @@ export default function AddSkillPopup({
               type="text"
             ></FloatingLabelInput>
             <button
-              className="bg-cyan-700 bg-opacity-50 rounded border-2 border-cyan-700 text-lg text-cyan-700 hover:border-cyan-900 hover:bg-cyan-900 hover:text-cyan-200 w-full p-1 m-2 duration-150"
+              className="font-bold bg-cyan-700 bg-opacity-20 rounded border-2 border-cyan-700 text-lg text-cyan-700 hover:border-cyan-900 hover:bg-cyan-900 hover:text-cyan-200 w-full p-1 m-2 duration-150"
               onClick={handleAddSkill}
             >
               Add

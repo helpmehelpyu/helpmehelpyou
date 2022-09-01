@@ -16,6 +16,8 @@ import axios from '../../config/axios';
 import DeleteConfirmationPopup from './skills/DeleteConfirmation';
 import { getAuthCookie } from '../../auth/auth';
 import ExperienceTab from './experience/ExperienceTab';
+import EditExperiencePopup from './experience/EditExperiencePopup';
+import { Experience } from '../../types/Experience';
 
 interface Props {
   initialUserData: UserData;
@@ -43,6 +45,8 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
   const [refetchUserData, setRefetchUserData] = useState(false);
   const [deleteSkillConfirmation, setDeleteSkillConfirmation] = useState(false);
   const [deleteSkillName, setDeleteSkillName] = useState('');
+  const [showEditExperiencePopup, setShowEditExperiencePopup] = useState(false);
+  const [experienceToEdit, setExperienceToEdit] = useState<Experience>();
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <WorkSamplesTab
@@ -88,6 +92,8 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
       case Tabs.Experience:
         setSelectedTabComponent(
           <ExperienceTab
+            setExperienceToEdit={setExperienceToEdit}
+            showEditPopup={() => setShowEditExperiencePopup(true)}
             rawExperiences={user.experience}
             canEdit={canEdit}
           ></ExperienceTab>
@@ -186,6 +192,13 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
 
   return (
     <div>
+      {showEditExperiencePopup && experienceToEdit && (
+        <EditExperiencePopup
+          experienceToEdit={experienceToEdit}
+          setShowPopup={setShowEditExperiencePopup}
+          setRefetchUserData={setRefetchUserData}
+        ></EditExperiencePopup>
+      )}
       {deleteSkillConfirmation && (
         <DeleteConfirmationPopup
           closePopup={() => setDeleteSkillConfirmation(false)}

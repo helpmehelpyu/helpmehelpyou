@@ -1,5 +1,5 @@
 interface Props {
-  value: any;
+  value?: any;
   type: string;
   isRequired: boolean;
   setValue: (val: any) => void;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function FloatingLabelInput({
-  value = undefined,
+  value = '',
   type,
   isRequired,
   setValue,

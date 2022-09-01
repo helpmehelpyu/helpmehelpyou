@@ -4,6 +4,7 @@ import { AxiosResponse } from 'axios';
 import { Experience } from '../../../types/Experience';
 
 interface Props {
+  handleDelete?: () => void;
   experience?: Experience;
   submitData: (val: {
     jobTitle: string;
@@ -21,6 +22,7 @@ export default function ExperienceForm({
   submitData,
   setShowPopup,
   setRefetchUserData,
+  handleDelete,
 }: Props) {
   const [jobTitle, setJobTitle] = useState('');
   const [jobTitleErrors, setJobTitleErrors] = useState('');
@@ -167,10 +169,8 @@ export default function ExperienceForm({
         type="text"
         value={experience ? workDescription : ''}
       ></FloatingLabelInput>
-      <p className="text-red-500 text-xs mx-2 mb-2 px-1">
-        {workDescriptionErrors}
-      </p>
-      <div className="flex gap-2 m-2 mt-8">
+      <p className="text-red-500 text-xs mx-2 px-1">{workDescriptionErrors}</p>
+      <div className="flex justify-center items-center w-full gap-2 m-2 mt-10">
         <input
           type="submit"
           className="w-20 p-1 text-cyan-500 border-2 rounded border-cyan-500  hover:bg-slate-200 hover:cursor-pointer"
@@ -181,6 +181,14 @@ export default function ExperienceForm({
           value="Clear"
           onClick={clearData}
         ></input>
+        {handleDelete && (
+          <input
+            onClick={handleDelete}
+            className="w-20 p-1 text-red-600 border-2 rounded border-red-600  hover:bg-slate-200 hover:cursor-pointer"
+            value="Delete"
+            type="button"
+          ></input>
+        )}
       </div>
       <p className="text-red-500 text-xs mx-2 px-1">{generalError}</p>
     </form>

@@ -31,7 +31,7 @@ export default function PopupOverlay({
       onClick={() => setShowPopup(false)}
     >
       {showCloseIcon && (
-        <div className="fixed top-0 left-2 text-white text-xl md:text-3xl mt-2 ml-2 text-center duration-300 transition-colors hover:text-red-400 cursor-pointer select-none">
+        <div className="fixed top-0 left-2 text-white text-xs sm:text-3xl text-center duration-300 transition-colors hover:text-red-400 cursor-pointer select-none">
           ✕
         </div>
       )}

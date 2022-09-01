@@ -3,22 +3,35 @@ import { Experience } from '../../../types/Experience';
 import ExperienceCard from './ExperienceCard';
 
 interface Props {
+  setExperienceToEdit: (val: Experience) => void;
+  showEditPopup: () => void;
   rawExperiences: Experience[];
   canEdit: boolean;
 }
 
-export default function ExperienceTab({ rawExperiences, canEdit }: Props) {
+export default function ExperienceTab({
+  setExperienceToEdit,
+  rawExperiences,
+  canEdit,
+  showEditPopup,
+}: Props) {
   const [experiences, setExperiences] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     const experienceItems: JSX.Element[] = [];
     for (const experience of rawExperiences) {
       experienceItems.push(
-        <ExperienceCard experience={experience}></ExperienceCard>
+        <ExperienceCard
+          key={experience.id}
+          setExperienceToEdit={setExperienceToEdit}
+          showEditPopup={showEditPopup}
+          experience={experience}
+          canEdit={canEdit}
+        ></ExperienceCard>
       );
     }
     setExperiences(experienceItems);
-  }, [rawExperiences]);
+  }, [rawExperiences, canEdit, showEditPopup, setExperienceToEdit]);
 
   return (
     <div>

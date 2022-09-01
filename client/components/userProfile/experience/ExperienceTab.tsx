@@ -22,6 +22,7 @@ export default function ExperienceTab({
     for (const experience of rawExperiences) {
       experienceItems.push(
         <ExperienceCard
+          key={experience.id}
           setExperienceToEdit={setExperienceToEdit}
           showEditPopup={showEditPopup}
           experience={experience}

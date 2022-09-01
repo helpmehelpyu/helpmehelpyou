@@ -1,4 +1,5 @@
 interface Props {
+  value: any;
   type: string;
   isRequired: boolean;
   setValue: (val: any) => void;
@@ -6,6 +7,7 @@ interface Props {
 }
 
 export default function FloatingLabelInput({
+  value = undefined,
   type,
   isRequired,
   setValue,
@@ -20,6 +22,7 @@ export default function FloatingLabelInput({
         required={isRequired}
         onChange={(e) => setValue(e.target.value)}
         placeholder=" "
+        value={value}
       ></input>
       <label
         htmlFor={placeholder.toLowerCase()}

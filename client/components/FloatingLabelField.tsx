@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function FloatingLabelInput({
-  value = '',
+  value,
   type,
   isRequired,
   setValue,

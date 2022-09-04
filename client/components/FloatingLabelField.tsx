@@ -4,7 +4,10 @@ interface Props {
   isRequired: boolean;
   setValue: (val: any) => void;
   placeholder: string;
+  min?: number;
+  max?: number;
   error?: string;
+  step?: number;
 }
 
 export default function FloatingLabelInput({
@@ -13,7 +16,10 @@ export default function FloatingLabelInput({
   isRequired,
   setValue,
   placeholder,
+  min = 0,
+  max,
   error = '',
+  step = 1,
 }: Props) {
   return (
     <div className="relative">
@@ -25,6 +31,9 @@ export default function FloatingLabelInput({
         onChange={(e) => setValue(e.target.value)}
         placeholder=" "
         value={value}
+        min={min}
+        max={max}
+        step={step}
       ></input>
       <label
         htmlFor={placeholder.toLowerCase()}

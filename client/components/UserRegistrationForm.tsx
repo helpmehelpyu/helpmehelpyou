@@ -80,7 +80,7 @@ export default function UserRegistrationForm() {
       data.phoneNumber = phoneNumber;
     }
 
-    const response = await axios.post('/auth/signup', data);
+    const response = await axios.post('/auth/register', data);
 
     clearValidationErrors();
     if (response.status === 400) {
@@ -126,44 +126,43 @@ export default function UserRegistrationForm() {
           placeholder="First Name"
           isRequired={true}
           setValue={setFirstName}
+          error={firstNameError}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-sm mx-2 px-1">{firstNameError}</p>
         <FloatingLabelInput
           type="text"
           placeholder="Last Name"
           isRequired={true}
           setValue={setLastName}
+          error={lastNameError}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-sm mx-2 px-1">{lastNameError}</p>
         <FloatingLabelInput
           type="email"
           placeholder="Email"
           isRequired={true}
           setValue={setEmail}
+          error={emailError}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-sm mx-2 px-1">{emailError}</p>
         <FloatingLabelInput
           type="tel"
           placeholder="Phone Number"
           isRequired={false}
           setValue={setPhoneNumber}
+          error={phoneNumberError}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-xs">{phoneNumberError}</p>
         <FloatingLabelInput
           type="password"
           placeholder="Password"
           isRequired={true}
           setValue={setPassword}
+          error={passwordError}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-sm mx-2 px-1">{passwordError}</p>
         <FloatingLabelInput
           type="password"
           placeholder="Confirm Password"
           isRequired={true}
           setValue={setConfirmPassword}
+          error={confirmPasswordError}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-sm mx-2 px-1">{confirmPasswordError}</p>
-
         <input
           type="submit"
           className="m-2 p-1 text-cyan-500 border-2 rounded border-cyan-500"

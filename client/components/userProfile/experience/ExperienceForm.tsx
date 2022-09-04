@@ -89,8 +89,8 @@ export default function ExperienceForm({
     });
 
     if (response.status === 200) {
-      setShowPopup(false);
       setRefetchUserData(true);
+      setShowPopup(false);
     } else if (response.data.errors) {
       handleValidationErrors(response.data.errors);
     } else if (response.status === 401) {
@@ -126,18 +126,16 @@ export default function ExperienceForm({
         setValue={setJobTitle}
         type="text"
         value={experience ? jobTitle : ''}
+        error={jobTitleErrors}
       ></FloatingLabelInput>
-      <p className="text-red-500 text-xs mx-2 mb-2 px-1">{jobTitleErrors}</p>
       <FloatingLabelInput
         placeholder="Organization"
         isRequired={true}
         setValue={setOrganization}
         type="text"
         value={experience ? organization : ''}
+        error={organizationErrors}
       ></FloatingLabelInput>
-      <p className="text-red-500 text-xs mx-2 mb-2 px-1">
-        {organizationErrors}
-      </p>
       <FloatingLabelInput
         placeholder="Start Date"
         isRequired={true}
@@ -148,8 +146,8 @@ export default function ExperienceForm({
             ? new Date(startDate).toISOString().substring(0, 10)
             : ''
         }
+        error={startDateErrors}
       ></FloatingLabelInput>
-      <p className="text-red-500 text-xs mx-2 mb-2 px-1">{startDateErrors}</p>
       <FloatingLabelInput
         placeholder="End Date"
         isRequired={false}
@@ -160,16 +158,16 @@ export default function ExperienceForm({
             ? new Date(endDate).toISOString().substring(0, 10)
             : ''
         }
+        error={endDateErrors}
       ></FloatingLabelInput>
-      <p className="text-red-500 text-xs mx-2 mb-2 px-1">{endDateErrors}</p>
       <FloatingLabelInput
         placeholder="Work Description"
         isRequired={false}
         setValue={setWorkDescription}
         type="text"
         value={experience ? workDescription : ''}
+        error={workDescriptionErrors}
       ></FloatingLabelInput>
-      <p className="text-red-500 text-xs mx-2 px-1">{workDescriptionErrors}</p>
       <div className="flex justify-center items-center w-full gap-2 m-2 mt-10">
         <input
           type="submit"

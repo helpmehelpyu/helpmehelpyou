@@ -4,6 +4,7 @@ interface Props {
   isRequired: boolean;
   setValue: (val: any) => void;
   placeholder: string;
+  error?: string;
 }
 
 export default function FloatingLabelInput({
@@ -12,6 +13,7 @@ export default function FloatingLabelInput({
   isRequired,
   setValue,
   placeholder,
+  error = '',
 }: Props) {
   return (
     <div className="relative">
@@ -49,6 +51,7 @@ export default function FloatingLabelInput({
       >
         {placeholder}
       </label>
+      <p className="text-red-500 text-xs mx-2 mb-2 px-1">{error}</p>
     </div>
   );
 }

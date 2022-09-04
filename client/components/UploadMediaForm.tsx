@@ -56,15 +56,15 @@ export default function UploadMediaForm() {
           isRequired={true}
           setValue={() => {}}
           placeholder="Title"
+          error={titleErrors}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-sm mx-2 px-1">{titleErrors}</p>
         <FloatingLabelInput
           type={'text'}
           isRequired={false}
           setValue={() => {}}
           placeholder="Description"
+          error={descriptionErrors}
         ></FloatingLabelInput>
-        <p className="text-red-500 text-sm mx-2 px-1">{descriptionErrors}</p>
         <input
           type="file"
           name="media"

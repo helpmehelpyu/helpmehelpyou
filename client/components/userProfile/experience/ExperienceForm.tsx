@@ -125,7 +125,7 @@ export default function ExperienceForm({
         isRequired={true}
         setValue={setJobTitle}
         type="text"
-        value={experience ? jobTitle : ''}
+        value={jobTitle}
         error={jobTitleErrors}
       ></FloatingLabelInput>
       <FloatingLabelInput
@@ -133,7 +133,7 @@ export default function ExperienceForm({
         isRequired={true}
         setValue={setOrganization}
         type="text"
-        value={experience ? organization : ''}
+        value={organization}
         error={organizationErrors}
       ></FloatingLabelInput>
       <FloatingLabelInput
@@ -142,9 +142,7 @@ export default function ExperienceForm({
         setValue={setStartDate}
         type="date"
         value={
-          experience && startDate
-            ? new Date(startDate).toISOString().substring(0, 10)
-            : ''
+          startDate ? new Date(startDate).toISOString().substring(0, 10) : ''
         }
         error={startDateErrors}
       ></FloatingLabelInput>
@@ -153,11 +151,7 @@ export default function ExperienceForm({
         isRequired={false}
         setValue={setEndDate}
         type="date"
-        value={
-          experience && endDate
-            ? new Date(endDate).toISOString().substring(0, 10)
-            : ''
-        }
+        value={endDate ? new Date(endDate).toISOString().substring(0, 10) : ''}
         error={endDateErrors}
       ></FloatingLabelInput>
       <FloatingLabelInput
@@ -165,7 +159,7 @@ export default function ExperienceForm({
         isRequired={false}
         setValue={setWorkDescription}
         type="text"
-        value={experience ? workDescription : ''}
+        value={workDescription}
         error={workDescriptionErrors}
       ></FloatingLabelInput>
       <div className="flex justify-center items-center w-full gap-2 m-2 mt-10">

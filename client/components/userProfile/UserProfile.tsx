@@ -140,7 +140,10 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
         break;
       case Tabs.Education:
         setAddItemPopup(
-          <AddEducationPopup setShowAddPopup={setAddItem}></AddEducationPopup>
+          <AddEducationPopup
+            setShowAddPopup={setAddItem}
+            setRefetchUserData={setRefetchUserData}
+          ></AddEducationPopup>
         );
         break;
       case Tabs.Experience:

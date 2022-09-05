@@ -18,6 +18,8 @@ import { getAuthCookie } from '../../auth/auth';
 import ExperienceTab from './experience/ExperienceTab';
 import EditExperiencePopup from './experience/EditExperiencePopup';
 import { Experience } from '../../types/Experience';
+import EducationTab from './education/EducationTab';
+import { Education } from '../../types/Education';
 
 interface Props {
   initialUserData: UserData;
@@ -46,7 +48,9 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
   const [deleteSkillConfirmation, setDeleteSkillConfirmation] = useState(false);
   const [deleteSkillName, setDeleteSkillName] = useState('');
   const [showEditExperiencePopup, setShowEditExperiencePopup] = useState(false);
+  const [showEditEducationPopup, setShowEditEducationPopup] = useState(false);
   const [experienceToEdit, setExperienceToEdit] = useState<Experience>();
+  const [educationToEdit, setEducationToEdit] = useState<Education>();
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <WorkSamplesTab
@@ -100,7 +104,14 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
         );
         break;
       case Tabs.Education:
-        setSelectedTabComponent(<h1>Education tab is selected</h1>);
+        setSelectedTabComponent(
+          <EducationTab
+            canEdit={canEdit}
+            rawEducation={user.education}
+            setEducationToEdit={setEducationToEdit}
+            setShowEditPopup={setShowEditEducationPopup}
+          ></EducationTab>
+        );
         break;
     }
 

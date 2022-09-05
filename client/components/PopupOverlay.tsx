@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 interface Props {
   setShowPopup: (val: boolean) => void;
   children?: JSX.Element | JSX.Element[];
-  backgroundOpacity?: number;
+  opaqueBackground?: boolean;
   stopPropagation?: boolean;
   showCloseIcon?: boolean;
 }
@@ -11,7 +11,7 @@ interface Props {
 export default function PopupOverlay({
   setShowPopup,
   children,
-  backgroundOpacity = 90,
+  opaqueBackground = true,
   stopPropagation = true,
   showCloseIcon = true,
 }: Props) {
@@ -26,7 +26,8 @@ export default function PopupOverlay({
   return (
     <div
       className={
-        'fixed w-full h-full bg-black z-10' + ` bg-opacity-${backgroundOpacity}`
+        'fixed w-full h-full bg-black z-10' +
+        (opaqueBackground ? ' bg-opacity-90' : ' bg-opacity1')
       }
       onClick={() => setShowPopup(false)}
     >

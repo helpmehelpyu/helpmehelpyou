@@ -62,6 +62,17 @@ export default function EducationForm({
     setDegreeOptions(options);
   }, []);
 
+  useEffect(() => {
+    if (education) {
+      setSchool(education.school);
+      setDegree(education.degree);
+      setFieldOfStudy(education.fieldOfStudy);
+      setStartYear(education.startYear);
+      setEndYear(education.endYear);
+      setGpa(education.gpa ? education.gpa.toString() : null);
+    }
+  }, [education]);
+
   const clearData = () => {
     setSchool('');
     setFieldOfStudy('');
@@ -161,6 +172,7 @@ export default function EducationForm({
         isRequired={true}
         placeholder="Start Year"
         setValue={setStartYear}
+        value={startYear || ''}
         type="number"
         error={startYearError}
       ></FloatingLabelInput>
@@ -168,6 +180,7 @@ export default function EducationForm({
         isRequired={false}
         placeholder="End Year"
         setValue={setEndYear}
+        value={endYear || ''}
         type="number"
         error={endYearError}
       ></FloatingLabelInput>
@@ -180,6 +193,7 @@ export default function EducationForm({
         min={0}
         max={4.0}
         step={0.01}
+        value={gpa || ''}
       ></FloatingLabelInput>
       <div className="flex justify-center items-center w-full gap-2 m-2 mt-10">
         <input
@@ -201,6 +215,7 @@ export default function EducationForm({
           ></input>
         )}
       </div>
+      <p className="text-red-500 text-xs mx-2 mb-2 px-1">{generalError}</p>
     </form>
   );
 }

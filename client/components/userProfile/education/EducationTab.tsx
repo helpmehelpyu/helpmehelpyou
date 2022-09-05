@@ -20,12 +20,21 @@ export default function EducationTab({
   useEffect(() => {
     const temp: JSX.Element[] = [];
     for (const education of rawEducation) {
-      temp.push(<EducationCard education={education}></EducationCard>);
+      temp.push(
+        <EducationCard
+          education={education}
+          canEdit={canEdit}
+          setEducationToEdit={setEducationToEdit}
+          showEditPopup={() => setShowEditPopup(true)}
+        ></EducationCard>
+      );
     }
     setEducationEntries(temp);
-  }, [rawEducation]);
+  }, [rawEducation, canEdit, setEducationToEdit, setShowEditPopup]);
 
   return (
-    <div className="w-full grid grid-cols-5 gap-10">{educationEntries}</div>
+    <div className="w-full grid md2:grid-cols-4 grid-cols-1 gap-10">
+      {educationEntries}
+    </div>
   );
 }

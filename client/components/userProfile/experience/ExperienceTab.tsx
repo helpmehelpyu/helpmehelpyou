@@ -34,8 +34,8 @@ export default function ExperienceTab({
   }, [rawExperiences, canEdit, showEditPopup, setExperienceToEdit]);
 
   return (
-    <div>
-      <div className="grid grid-cols-4 w-full gap-10">{experiences}</div>
+    <div className="grid md2:grid-cols-4 grid-cols-1 w-full gap-10">
+      {experiences}
     </div>
   );
 }

@@ -29,7 +29,7 @@ export default function AddEducationPopup({
 
   return (
     <PopupOverlay setShowPopup={setShowAddPopup}>
-      <div className="fixed p-10 left-0 right-0 top-0 bottom-0 m-auto rounded bg-white h-1/2 sm:h-2/3 w-1/4 space-y-10 min-w-min overflow-auto transparent-scrollbar">
+      <div className="fixed p-10 left-0 right-0 top-0 bottom-0 m-auto rounded bg-white h-1/2 sm:h-3/4 w-1/4 space-y-10 min-w-min overflow-auto transparent-scrollbar">
         <div className="w-full h-full flex flex-col">
           <div className="m-auto">
             <h1 className="w-full mb-10 text-2xl text-center font-semibold m-auto">

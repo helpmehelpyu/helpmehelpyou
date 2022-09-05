@@ -45,7 +45,7 @@ export default function EducationForm({
   const [endYear, setEndYear] = useState<number | null>(null);
   const [endYearError, setEndYearError] = useState('');
   const [generalError, setGeneralError] = useState('');
-  const [gpa, setGpa] = useState<number | null>(null);
+  const [gpa, setGpa] = useState<string | null>(null);
   const [gpaErrors, setGpaErrors] = useState('');
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function EducationForm({
       degree: degree,
       startYear: startYear,
       endYear: endYear,
-      gpa: gpa,
+      gpa: gpa ? parseFloat(gpa) : null,
     });
 
     if (response.status === 200) {

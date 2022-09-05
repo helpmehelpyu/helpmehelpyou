@@ -59,6 +59,7 @@ export default function FloatingLabelInput({
 				"
       >
         {placeholder}
+        {isRequired && <span className="text-red-500">*</span>}
       </label>
       <p className="text-red-500 text-xs mx-2 mb-2 px-1">{error}</p>
     </div>

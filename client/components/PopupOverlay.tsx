@@ -27,7 +27,7 @@ export default function PopupOverlay({
     <div
       className={
         'fixed w-full h-full bg-black z-10' +
-        (opaqueBackground ? ' bg-opacity-90' : ' bg-opacity1')
+        (opaqueBackground ? ' bg-opacity-90' : ' bg-opacity-0')
       }
       onClick={() => setShowPopup(false)}
     >

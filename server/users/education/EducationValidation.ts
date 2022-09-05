@@ -5,14 +5,14 @@ export const validateEducation = [
     body('school')
         .exists()
         .withMessage('school name is a required field')
-        .isAlpha()
+        .isAlpha('en-US', { ignore: [' '] })
         .withMessage('School name can only contain alphabet letters')
         .trim()
         .escape(),
     body('fieldOfStudy')
         .exists()
         .withMessage('field of study is a required field')
-        .isAlpha()
+        .isAlpha('en-US', { ignore: [' '] })
         .withMessage('field of study can only contain alphabet letters')
         .trim()
         .escape(),

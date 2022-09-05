@@ -20,6 +20,7 @@ import EditExperiencePopup from './experience/EditExperiencePopup';
 import { Experience } from '../../types/Experience';
 import EducationTab from './education/EducationTab';
 import { Education } from '../../types/Education';
+import { EditEducationPopup } from './education/EditEducationPopup';
 
 interface Props {
   initialUserData: UserData;
@@ -206,6 +207,13 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
 
   return (
     <div>
+      {showEditEducationPopup && educationToEdit && (
+        <EditEducationPopup
+          setShowPopup={setShowEditEducationPopup}
+          education={educationToEdit}
+          setRefetchUserData={setRefetchUserData}
+        ></EditEducationPopup>
+      )}
       {showEditExperiencePopup && experienceToEdit && (
         <EditExperiencePopup
           experienceToEdit={experienceToEdit}

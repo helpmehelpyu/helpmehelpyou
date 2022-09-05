@@ -66,6 +66,7 @@ export default function UploadMediaForm() {
           error={descriptionErrors}
         ></FloatingLabelInput>
         <input
+          required={true}
           type="file"
           name="media"
           className="rounded focus:outline-cyan-500 w-full border-2 focus:bg-slate-100 p-1 m-2"

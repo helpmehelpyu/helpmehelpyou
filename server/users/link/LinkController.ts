@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { matchedData, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import linkService = require('./LinkService');
 import userService = require('../UserService');
 
@@ -44,7 +44,7 @@ export const authorizeUser = async (
     res: Response,
     next: NextFunction
 ) => {
-    const link = await linkService.findById(parseInt(req.params.linkId, 10));
+    const link = await linkService.findById(req.body.linkId);
 
     if (!link) {
         return res.status(400).json({
@@ -65,9 +65,7 @@ export const authorizeUser = async (
 };
 
 export const deleteLink = async (req: Request, res: Response) => {
-    const rowsDeleted = await linkService.deleteLink(
-        parseInt(req.params.linkId, 10)
-    );
+    const rowsDeleted = await linkService.deleteLink(req.body.linkId);
 
     if (rowsDeleted !== 1) {
         return res.status(500).json({

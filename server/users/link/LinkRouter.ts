@@ -23,7 +23,7 @@ router.put(
 );
 
 router.delete(
-    '/:linkId',
+    '/',
     authenticateUser,
     linkController.authorizeUser,
     linkController.deleteLink

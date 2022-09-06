@@ -21,6 +21,7 @@ import { Experience } from '../../types/Experience';
 import EducationTab from './education/EducationTab';
 import { Education } from '../../types/Education';
 import { EditEducationPopup } from './education/EditEducationPopup';
+import AddLinkPopup from './contact/AddLinkPopup';
 
 interface Props {
   initialUserData: UserData;
@@ -52,6 +53,7 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
   const [showEditEducationPopup, setShowEditEducationPopup] = useState(false);
   const [experienceToEdit, setExperienceToEdit] = useState<Experience>();
   const [educationToEdit, setEducationToEdit] = useState<Education>();
+  const [showAddLinkPopup, setShowAddLinkPopup] = useState(false);
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <WorkSamplesTab
@@ -207,6 +209,12 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
 
   return (
     <div>
+      {showAddLinkPopup && (
+        <AddLinkPopup
+          setShowAddLinkPopup={setShowAddLinkPopup}
+          setRefetchUserData={setRefetchUserData}
+        ></AddLinkPopup>
+      )}
       {showEditEducationPopup && educationToEdit && (
         <EditEducationPopup
           setShowPopup={setShowEditEducationPopup}
@@ -231,6 +239,8 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
       {addItem && addItemPopup}
       {showContactInfo && (
         <ContactInfo
+          openAddLinkPopup={() => setShowAddLinkPopup(true)}
+          canEdit={canEdit}
           setShowContactInfo={setShowContactInfo}
           email={user.email}
           phoneNumber={user.phoneNumber}

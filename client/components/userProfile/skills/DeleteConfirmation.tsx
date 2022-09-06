@@ -25,7 +25,7 @@ export default function DeleteConfirmationPopup({
       opaqueBackground={true}
       showCloseIcon={false}
     >
-      <div className="fixed drop-shadow-lg w-1/3 h-1/3 rounded p-10 space-y-5 bg-white top-0 left-0 right-0 bottom-0 m-auto overflow-auto">
+      <div className="fixed drop-shadow-lg w-1/3 h-1/3 text-xl rounded p-10 space-y-5 bg-white top-0 left-0 right-0 bottom-0 m-auto min-w-min overflow-auto transparent-scrollbar">
         {deleteError ? (
           <p className="text-red-600">
             The request resource could not be deleted. Try Again Later.

@@ -22,6 +22,7 @@ import EducationTab from './education/EducationTab';
 import { Education } from '../../types/Education';
 import { EditEducationPopup } from './education/EditEducationPopup';
 import AddLinkPopup from './contact/AddLinkPopup';
+import { Link } from '../../types/Link';
 
 interface Props {
   initialUserData: UserData;
@@ -54,6 +55,9 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
   const [experienceToEdit, setExperienceToEdit] = useState<Experience>();
   const [educationToEdit, setEducationToEdit] = useState<Education>();
   const [showAddLinkPopup, setShowAddLinkPopup] = useState(false);
+  const [showDeleteLinkConfirmation, setShowDeleteLinkConfirmation] =
+    useState(false);
+  const [linkToBeDeleted, setLinkToBeDeleted] = useState<Link | null>(null);
 
   const [selectedTabComponent, setSelectedTabComponent] = useState(
     <WorkSamplesTab
@@ -207,8 +211,38 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
     return false;
   };
 
+  const deleteLink = async (): Promise<boolean> => {
+    if (!linkToBeDeleted) return false;
+
+    const response = await axios.delete('/users/links', {
+      data: { linkId: linkToBeDeleted.id },
+      headers: { Authorization: 'Bearer ' + getAuthCookie() },
+    });
+
+    if (response.status === 200) {
+      setRefetchUserData(true);
+      setShowDeleteLinkConfirmation(false);
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <div>
+      {showDeleteLinkConfirmation && linkToBeDeleted && (
+        <DeleteConfirmationPopup
+          closePopup={() => setShowDeleteLinkConfirmation(false)}
+          deleteItem={deleteLink}
+          deletedItemName={
+            'link "' +
+            linkToBeDeleted.name +
+            '" with the url "' +
+            linkToBeDeleted.url +
+            '"'
+          }
+        ></DeleteConfirmationPopup>
+      )}
       {showAddLinkPopup && (
         <AddLinkPopup
           setShowAddLinkPopup={setShowAddLinkPopup}
@@ -239,6 +273,8 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
       {addItem && addItemPopup}
       {showContactInfo && (
         <ContactInfo
+          openDeleteConfirmation={() => setShowDeleteLinkConfirmation(true)}
+          setLinkToBeDeleted={setLinkToBeDeleted}
           openAddLinkPopup={() => setShowAddLinkPopup(true)}
           canEdit={canEdit}
           setShowContactInfo={setShowContactInfo}

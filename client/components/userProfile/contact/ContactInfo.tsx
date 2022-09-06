@@ -1,4 +1,5 @@
 import Image from 'next/future/image';
+import { useEffect, useState } from 'react';
 import { Link } from '../../../types/Link';
 import PopupOverlay from '../../PopupOverlay';
 import ContactInfoItem from './ContactInfoItem';
@@ -10,6 +11,8 @@ interface Props {
   email: string;
   phoneNumber: string;
   links: Link[];
+  setLinkToBeDeleted: (val: Link) => void;
+  openDeleteConfirmation: () => void;
 }
 
 export default function ContactInfo({
@@ -19,32 +22,59 @@ export default function ContactInfo({
   email,
   phoneNumber,
   links,
+  setLinkToBeDeleted,
+  openDeleteConfirmation,
 }: Props) {
-  const contactItems: JSX.Element[] = [];
+  const [contactItems, setContactItems] = useState<JSX.Element[]>([]);
+  useEffect(() => {
+    const temp: JSX.Element[] = [];
 
-  contactItems.push(
-    <ContactInfoItem key="email" name="email" value={email}></ContactInfoItem>
-  );
-
-  if (phoneNumber !== '') {
-    contactItems.push(
+    temp.push(
       <ContactInfoItem
-        key="phone"
-        name="phone number"
-        value={phoneNumber}
+        canEdit={canEdit}
+        key="email"
+        name="email"
+        value={email}
       ></ContactInfoItem>
     );
-  }
 
-  for (const link of links) {
-    contactItems.push(
-      <ContactInfoItem
-        key={link.id}
-        name={link.name}
-        value={link.url} // TODO make a warning page before redirect
-      ></ContactInfoItem>
-    );
-  }
+    if (phoneNumber !== '') {
+      temp.push(
+        <ContactInfoItem
+          canEdit={canEdit}
+          key="phone"
+          name="phone number"
+          value={phoneNumber}
+        ></ContactInfoItem>
+      );
+    }
+
+    for (const link of links) {
+      temp.push(
+        <ContactInfoItem
+          initiateDeleteLink={() => {
+            setLinkToBeDeleted(link);
+            setShowContactInfo(false);
+            openDeleteConfirmation();
+          }}
+          canEdit={canEdit}
+          key={link.id}
+          name={link.name}
+          value={link.url} // TODO make a warning page before redirect
+        ></ContactInfoItem>
+      );
+    }
+
+    setContactItems(temp);
+  }, [
+    canEdit,
+    email,
+    links,
+    openDeleteConfirmation,
+    phoneNumber,
+    setLinkToBeDeleted,
+    setShowContactInfo,
+  ]);
 
   return (
     <PopupOverlay setShowPopup={setShowContactInfo}>
@@ -64,7 +94,7 @@ export default function ContactInfo({
           ></Image>
         )}
         <h1 className="text-3xl text-center font-semibold">Contact Info</h1>
-        <ul>{contactItems}</ul>
+        <ul className="space-y-5">{contactItems}</ul>
       </div>
     </PopupOverlay>
   );

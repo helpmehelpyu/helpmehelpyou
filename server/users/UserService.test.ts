@@ -171,6 +171,10 @@ test('Casting a User to an Author', () => {
         id: mockUser.id,
         firstName: mockUser.firstName,
         lastName: mockUser.lastName,
+        avatar: mockUser.avatar,
+        email: mockUser.email,
+        phoneNumber: mockUser.phoneNumber,
+        rating: mockUser.rating,
     });
 
     expect(author).not.toEqual(mockUser);

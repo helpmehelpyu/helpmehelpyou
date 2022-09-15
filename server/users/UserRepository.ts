@@ -44,7 +44,7 @@ export const deleteUser = async (user: User): Promise<DeleteResult> => {
     return userDAO.delete({ id: user.id });
 };
 
-export const getUsers = (limit: number, page: number) => {
+export const getUsers = (limit: number, page: number): Promise<User[]> => {
     return userDAO
         .createQueryBuilder('users')
         .select([

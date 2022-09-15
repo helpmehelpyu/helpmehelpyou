@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { matchedData, validationResult } from 'express-validator';
+import { Media } from './Media.entity';
 import mediaService = require('./MediaService');
 
 export const findMediaById = async (req: Request, res: Response) => {
@@ -109,4 +110,34 @@ export const deleteMedia = async (req: Request, res: Response) => {
     }
 
     res.sendStatus(200);
+};
+
+export const getMedia = async (req: Request, res: Response) => {
+    const orderBy = req.query.orderBy || 'newest';
+
+    if (!req.query.limit || !req.query.page) {
+        return res.status(400).json({
+            message: 'limit and page are required query parameters',
+        });
+    }
+    const limit = Number.parseInt(req.query.limit.toString());
+    const page = Number.parseInt(req.query.page.toString()) - 1;
+
+    let media: Media[] = [];
+    switch (orderBy) {
+        case 'recommended':
+            // TODO add a way to return recommended content
+            break;
+        case 'oldest':
+        case 'newest':
+            media = await mediaService.getMedia(orderBy as string, page, limit);
+            break;
+        default:
+            media = await mediaService.getMedia('newest', page, limit);
+            break;
+    }
+
+    res.status(200).json({
+        media: media,
+    });
 };

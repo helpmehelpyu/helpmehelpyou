@@ -118,3 +118,10 @@ export const uploadImageToCloud = async (
         chunk_size: 6000000,
     });
 };
+export const getMedia = async (
+    orderBy: string,
+    page: number,
+    limit: number
+): Promise<Media[]> => {
+    return mediaRepository.getMedia(orderBy === 'newest', page, limit);
+};

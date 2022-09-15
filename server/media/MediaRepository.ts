@@ -50,3 +50,26 @@ export const deleteAllByAuthorId = async (authorId: string) => {
         .where('authorId = :authorId', { authorId: authorId })
         .execute();
 };
+
+export const getMedia = async (
+    ascending: boolean,
+    page: number,
+    limit: number
+): Promise<Media[]> => {
+    return mediaDAO
+        .createQueryBuilder('media')
+        .leftJoin('media.author', 'author')
+        .addSelect([
+            'author.id',
+            'author.firstName',
+            'author.lastName',
+            'author.email',
+            'author.phoneNumber',
+            'author.rating',
+            'author.avatar',
+        ])
+        .offset(limit * page)
+        .limit(limit)
+        .orderBy('media.uploadDate',  ascending ? 'ASC' : 'DESC')
+        .getMany();
+};

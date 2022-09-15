@@ -9,6 +9,8 @@ const router = Router();
 // GET media by id
 router.get('/:mediaId', mediaController.findMediaById);
 
+router.get('', mediaController.getMedia);
+
 // CREATE a new media object
 router.post(
     '/',

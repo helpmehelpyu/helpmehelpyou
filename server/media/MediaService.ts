@@ -123,5 +123,5 @@ export const getMedia = async (
     page: number,
     limit: number
 ): Promise<Media[]> => {
-    return mediaRepository.getMedia(orderBy === 'newest', page, limit);
+    return mediaRepository.getMedia(orderBy !== 'newest', page, limit);
 };

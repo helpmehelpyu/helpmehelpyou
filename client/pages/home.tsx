@@ -21,6 +21,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [mediaCards, setMediaCards] = useState<JSX.Element[]>([]);
   const [dataState, setDataState] = useState(DataState.init);
+  const [dataError, setDataError] = useState('');
   const limit = 10;
 
   useEffect(() => {
@@ -34,7 +35,12 @@ export default function Home() {
           setDataState(DataState.success);
         } else {
           setDataState(DataState.failure);
+          setDataError(response.data.message);
         }
+      })
+      .catch((err) => {
+        setDataState(DataState.failure);
+        setDataError(err.message || err.response.data.message);
       });
   }, [orderBy, page]);
 
@@ -48,8 +54,9 @@ export default function Home() {
   }, [media]);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10 w-full h-full">
+    <div className="flex flex-col justify-center items-center gap-10 py-10 bg-slate-50 min-h-screen">
       {mediaCards}
+      {dataState == DataState.failure && dataError !== '' && <p>{dataError}</p>}
     </div>
   );
 }

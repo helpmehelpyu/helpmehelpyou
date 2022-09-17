@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import { UserData } from '../types/UserData';
+import { Author } from '../types/Author';
 
 interface Props {
-  user: UserData;
+  user: Author;
 }
 
 export default function Avatar({ user }: Props) {
   let userAvatar = (
-    <h1 className=" text-sky-900 font-bold">
+    <h1 className=" text-sky-900 font-bold text-center">
       {user.firstName[0]}
       {user.lastName[0]}
     </h1>

@@ -54,6 +54,10 @@ export const castUserToAuthor = function (user: User): Author {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
+        avatar: user.avatar,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        rating: user.rating,
     };
 };
 

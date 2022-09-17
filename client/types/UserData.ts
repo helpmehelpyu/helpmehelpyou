@@ -7,14 +7,10 @@ import { UserProfile } from './UserProfile';
 import { WorkSample } from './WorkSample';
 
 export interface UserData extends Author {
-  email: string;
-  phoneNumber: string;
-  rating: number;
   links: Link[];
   workSamples: WorkSample[];
   experience: Experience[];
   education: Education[];
   skills: Skill[];
-  avatar: { source: string; id: string };
   userProfile: UserProfile;
 }

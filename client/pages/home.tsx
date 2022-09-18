@@ -45,13 +45,28 @@ export default function Home() {
   }, [orderBy, page]);
 
   useEffect(() => {
+    const newMediaCards = [];
     for (const mediaItem of media) {
-      setMediaCards((oldMediaCards) => [
-        ...oldMediaCards,
-        <HomeItem key={mediaItem.id} media={mediaItem}></HomeItem>,
-      ]);
+      newMediaCards.push(
+        <HomeItem key={mediaItem.id} media={mediaItem}></HomeItem>
+      );
     }
+    setMediaCards(newMediaCards);
   }, [media]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        Math.floor(window.innerHeight + document.documentElement.scrollTop) ===
+        document.documentElement.offsetHeight
+      ) {
+        setPage((page) => page + 1);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center gap-10 py-10 bg-slate-50 min-h-screen">

@@ -9,10 +9,10 @@ enum OrderBy {
 }
 
 enum DataState {
-  init,
   loading,
   success,
   failure,
+  nodata,
 }
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
   const [orderBy, setOrderBy] = useState<OrderBy>(OrderBy.newest);
   const [page, setPage] = useState(1);
   const [mediaCards, setMediaCards] = useState<JSX.Element[]>([]);
-  const [dataState, setDataState] = useState(DataState.init);
+  const [dataState, setDataState] = useState(DataState.loading);
   const [dataError, setDataError] = useState('');
   const limit = 10;
 
@@ -30,9 +30,13 @@ export default function Home() {
       .get(`/media?orderBy=${orderBy}&limit=${limit}&page=${page}`)
       .then((response) => {
         if (response.status === 200) {
-          const newMedia = response.data.media;
-          setMedia((oldMedia) => [...oldMedia, ...newMedia]);
-          setDataState(DataState.success);
+          const newMedia: MediaResult[] = response.data.media;
+          if (newMedia.length === 0) {
+            setDataState(DataState.nodata);
+          } else {
+            setMedia((oldMedia) => [...oldMedia, ...newMedia]);
+            setDataState(DataState.success);
+          }
         } else {
           setDataState(DataState.failure);
           setDataError(response.data.message);
@@ -71,7 +75,17 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center gap-10 py-10 bg-slate-50 min-h-screen">
       {mediaCards}
-      {dataState == DataState.failure && dataError !== '' && <p>{dataError}</p>}
+      {dataState === DataState.failure && dataError !== '' && (
+        <p className="text-center text-3xl font-bold text-red-500">
+          {dataError}
+        </p>
+      )}
+      {dataState === DataState.nodata && (
+        <p className="text-3xl font-light">That&apos;s all folks!</p>
+      )}
+      {dataState === DataState.loading && (
+        <p className="text-xl font-light">Loading...</p>
+      )}
     </div>
   );
 }

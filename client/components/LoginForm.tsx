@@ -21,7 +21,7 @@ export default function LoginForm() {
 
     if (response.status === 200) {
       setAuthCookie(response.data.auth_token);
-      // set cookies or something here, handle success
+      document.location.href = '/home';
     } else {
       setLoginErrors(response.data.message);
     }

@@ -61,8 +61,9 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        Math.floor(window.innerHeight + document.documentElement.scrollTop) ===
-        document.documentElement.offsetHeight
+        Math.floor(window.innerHeight + document.documentElement.scrollTop) >=
+          document.documentElement.offsetHeight &&
+        dataState === DataState.success
       ) {
         setPage((page) => page + 1);
       }
@@ -70,7 +71,7 @@ export default function Home() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [dataState]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-10 py-10 bg-slate-50 min-h-screen">
@@ -84,7 +85,7 @@ export default function Home() {
         <p className="text-3xl font-light">That&apos;s all folks!</p>
       )}
       {dataState === DataState.loading && (
-        <p className="text-xl font-light">Loading...</p>
+        <p className="text-3xl font-light">Loading...</p>
       )}
     </div>
   );

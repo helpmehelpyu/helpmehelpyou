@@ -22,7 +22,7 @@ const UserOptions = ({ closeDropdown }: Props) => {
         </li>
       </Link>
 
-      <Link href="/user/settings">
+      <Link href="/users/me/settings">
         <li
           className="hover:cursor-pointer hover:underline"
           onClick={closeDropdown}

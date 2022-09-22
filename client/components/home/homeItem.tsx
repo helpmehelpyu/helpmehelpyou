@@ -48,7 +48,7 @@ export default function HomeItem({ media }: Props) {
         <h2 className="text-2xl group-hover:underline">
           {media.author.firstName} {media.author.lastName}
         </h2>
-        <div className="absolute rounded top-16 p-4 left-24 drop-shadow-md group-hover:block opacity-0 transition-opacity group-hover:opacity-100 duration-500 ease-out delay-500 bg-white border-2 w-full">
+        <div className="absolute rounded top-16 p-4 left-24 drop-shadow-md group-hover:block hidden bg-white border-2 w-full">
           <UserMiniProfile author={media.author}></UserMiniProfile>
         </div>
       </div>

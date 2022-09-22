@@ -7,9 +7,9 @@ interface Props {
   user: UserData;
 }
 
-export default function Me({ user }: Props) {
+const Me = ({ user }: Props) => {
   return <UserProfile initialUserData={user} canEdit={true}></UserProfile>;
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const response = await axios.get('/users/me', {
@@ -36,3 +36,5 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     },
   };
 };
+
+export default Me;

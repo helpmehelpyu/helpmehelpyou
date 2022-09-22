@@ -8,7 +8,7 @@ export default function RedirectConfirmation() {
   const decodedUrl = decodeURIComponent(encodedUrl);
 
   return (
-    <div className="flex flex-col h-screen w-screen text-center">
+    <div className="flex flex-col text-center">
       <div className="m-auto space-y-5">
         <h1 className="font-black text-8xl">Wait !</h1>
         <h1 className="text-center text-2xl">

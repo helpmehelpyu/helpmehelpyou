@@ -7,7 +7,7 @@ interface Props {
 
 export default function Avatar({ user }: Props) {
   let userAvatar = (
-    <h1 className=" text-sky-900 font-bold text-center">
+    <h1 className=" text-sky-900 font-bold text-center bg-white w-full rounded-full p-1">
       {user.firstName[0]}
       {user.lastName[0]}
     </h1>

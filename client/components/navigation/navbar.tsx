@@ -42,7 +42,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <ul className="flex w-full justify-between border-2 gap-10 p-1 items-center text-center text-xl px-4">
+    <ul className="flex w-full justify-between border-2 gap-10 p-1 items-center text-center text-xl px-4 bg-white text-black">
       <Link href="/home">
         <a>
           <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-1">
@@ -72,7 +72,7 @@ export default function Navbar() {
             </a>
           </Link>
           <li
-            className="relative hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-2 group"
+            className="relative hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-2"
             onClick={() => setShowUserDropdown(true)}
             id="user"
           >
@@ -80,15 +80,17 @@ export default function Navbar() {
               <Avatar user={user}></Avatar>
             </span>
             {user.firstName}
-            {showUserDropdown && (
-              <div
-                className="absolute top-11 bg-white w-full p-4 rounded border-2 shadow-lg text-left"
-                id="userDropdown"
-              >
-                <UserOptions></UserOptions>
-              </div>
-            )}
           </li>
+          {showUserDropdown && (
+            <div
+              className="absolute top-14 right-4 bg-white p-4 rounded shadow-lg border-2 text-left z-10"
+              id="userDropdown"
+            >
+              <UserOptions
+                closeDropdown={() => setShowUserDropdown(false)}
+              ></UserOptions>
+            </div>
+          )}
         </div>
       ) : (
         <Link href="/login">

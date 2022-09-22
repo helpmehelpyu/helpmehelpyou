@@ -1,4 +1,5 @@
 import { Skill } from '../../../types/Skill';
+import { htmlDecode } from '../../../utils/stringUtils';
 
 interface Props {
   skill: Skill;
@@ -21,7 +22,7 @@ export default function SkillCard({
           ✕
         </div>
       )}
-      <h1>{skill.name}</h1>
+      <h1>{htmlDecode(skill.name)}</h1>
     </li>
   );
 }

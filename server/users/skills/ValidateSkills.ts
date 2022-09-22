@@ -7,8 +7,8 @@ export const validateSkillName = [
         .not()
         .isIn([''])
         .withMessage('name is a required field')
-        .isAlphanumeric('en-US', { ignore: ' ' })
-        .withMessage('name must be a alphanumeric value')
+        .isString()
+        .withMessage('name must be a string')
         .toLowerCase()
         .trim()
         .escape(),

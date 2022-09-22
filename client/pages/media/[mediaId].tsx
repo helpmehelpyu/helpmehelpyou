@@ -14,7 +14,7 @@ export default function Media({ media, isAuthor }: Props) {
     return <h1>No media</h1>;
   }
   return (
-    <div className="flex items-center justify-center h-screen bg-slate-100">
+    <div className="flex items-center justify-center w-screen">
       <div className="flex items-center justify-center p-10 rounded-lg bg-white border-2">
         <div className="w-[50vw] h-[50vh] relative">
           <Image

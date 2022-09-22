@@ -295,7 +295,7 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
           setShowEditAvatarPopup={setShowEditAvatarPopup}
         ></EditAvatarPopup>
       )}
-      <div className="bg-gray-50 space-y-10 p-5 md2:p-10 min-h-screen md2:min-w-0 min-w-min">
+      <div className="bg-gray-50 space-y-10 p-5 md2:p-10 min-h-screen md2:min-w-0 min-w-min w-screen">
         <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
           <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
             <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2 select-none">

@@ -61,8 +61,8 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        Math.floor(window.innerHeight + document.documentElement.scrollTop) >=
-          document.documentElement.offsetHeight &&
+        window.innerHeight + window.pageYOffset >=
+          document.body.offsetHeight - 2 &&
         dataState === DataState.success
       ) {
         setPage((page) => page + 1);

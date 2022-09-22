@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getAuthCookie } from '../../auth/auth';
 import { UserData } from '../../types/UserData';
+import Avatar from '../Avatar';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [user, setUser] = useState<UserData>();
@@ -22,22 +24,45 @@ export default function Navbar() {
   }, []);
 
   return (
-    <ul className="flex w-full justify-between border-2 gap-10 p-5 items-center text-center text-xl">
+    <ul className="flex w-full justify-between border-2 gap-10 p-1 items-center text-center text-xl px-4">
       <Link href="/home">
-        <li className="hover:cursor-pointer">Home</li>
+        <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-1">
+          <Image
+            src="/home.svg"
+            alt="home symbol"
+            width={22}
+            height={22}
+          ></Image>
+          Home
+        </li>
       </Link>
       {user ? (
         <div className="flex gap-6">
           <Link href="/media/upload">
-            <li className="hover:cursor-pointer">Upload</li>
+            <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-1">
+              <Image
+                src="/upload.svg"
+                alt="upload symbol"
+                width={22}
+                height={22}
+              ></Image>
+              Upload
+            </li>
           </Link>
           <Link href={'/users/me'}>
-            <li className="hover:cursor-pointer">{user.firstName}</li>
+            <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-2">
+              <span className="flex items-center justify-center border-2 rounded-full w-8 aspect-square text-sm">
+                <Avatar user={user}></Avatar>
+              </span>
+              {user.firstName}
+            </li>
           </Link>
         </div>
       ) : (
         <Link href="/login">
-          <li className="hover:cursor-pointer">Login</li>
+          <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1">
+            Login
+          </li>
         </Link>
       )}
     </ul>

@@ -9,14 +9,17 @@ interface Props {
 }
 
 export default function UserIdProfile({ user, isCurrentUser }: Props) {
+  let page;
   if (user) {
-    return (
+    page = (
       <UserProfile initialUserData={user} canEdit={isCurrentUser}></UserProfile>
     );
+    // return <UserNotFoundPage></UserNotFoundPage>; // TODO create user not found page
+  } else {
+    page = <h1>404 user not found</h1>;
   }
 
-  return <h1>404 user not found</h1>;
-  // return <UserNotFoundPage></UserNotFoundPage>; // TODO create user not found page
+  return page;
 }
 
 export const getServerSideProps: GetServerSideProps = async ({

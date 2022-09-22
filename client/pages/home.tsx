@@ -15,7 +15,7 @@ enum DataState {
   nodata,
 }
 
-export default function Home() {
+const Home = () => {
   const [media, setMedia] = useState<MediaResult[]>([]);
   const [orderBy, setOrderBy] = useState<OrderBy>(OrderBy.newest);
   const [page, setPage] = useState(1);
@@ -89,4 +89,6 @@ export default function Home() {
       )}
     </div>
   );
-}
+};
+
+export default Home;

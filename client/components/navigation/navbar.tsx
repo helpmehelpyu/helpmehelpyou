@@ -26,43 +26,51 @@ export default function Navbar() {
   return (
     <ul className="flex w-full justify-between border-2 gap-10 p-1 items-center text-center text-xl px-4">
       <Link href="/home">
-        <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-1">
-          <Image
-            src="/home.svg"
-            alt="home symbol"
-            width={22}
-            height={22}
-          ></Image>
-          Home
-        </li>
+        <a>
+          <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-1">
+            <Image
+              src="/home.svg"
+              alt="home symbol"
+              width={22}
+              height={22}
+            ></Image>
+            Home
+          </li>
+        </a>
       </Link>
       {user ? (
         <div className="flex gap-6">
           <Link href="/media/upload">
-            <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-1">
-              <Image
-                src="/upload.svg"
-                alt="upload symbol"
-                width={22}
-                height={22}
-              ></Image>
-              Upload
-            </li>
+            <a>
+              <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-1">
+                <Image
+                  src="/upload.svg"
+                  alt="upload symbol"
+                  width={22}
+                  height={22}
+                ></Image>
+                Upload
+              </li>
+            </a>
           </Link>
           <Link href={'/users/me'}>
-            <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-2">
-              <span className="flex items-center justify-center border-2 rounded-full w-8 aspect-square text-sm">
-                <Avatar user={user}></Avatar>
-              </span>
-              {user.firstName}
-            </li>
+            <a>
+              <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1 flex justify-center items-center gap-2">
+                <span className="flex items-center justify-center border-2 rounded-full w-8 aspect-square text-sm">
+                  <Avatar user={user}></Avatar>
+                </span>
+                {user.firstName}
+              </li>
+            </a>
           </Link>
         </div>
       ) : (
         <Link href="/login">
-          <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1">
-            Login
-          </li>
+          <a>
+            <li className="hover:cursor-pointer hover:bg-slate-200 rounded p-1">
+              Login
+            </li>
+          </a>
         </Link>
       )}
     </ul>

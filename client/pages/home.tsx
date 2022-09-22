@@ -74,7 +74,7 @@ const Home = () => {
   }, [dataState]);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10 py-10 bg-slate-50 min-h-screen">
+    <div className="flex flex-col justify-center items-center gap-10 py-10 bg-slate-50 min-h-screen w-full">
       {mediaCards}
       {dataState === DataState.failure && dataError !== '' && (
         <p className="text-center text-3xl font-bold text-red-500">

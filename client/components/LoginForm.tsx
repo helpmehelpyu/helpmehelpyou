@@ -47,6 +47,7 @@ export default function LoginForm() {
         <input
           type="submit"
           className="m-2 p-1 text-cyan-500 border-2 rounded border-cyan-500  hover:bg-slate-200"
+          value={'Submit'}
         ></input>
         <p className="mx-2 px-1">
           Don&apos;t have an account?{' '}

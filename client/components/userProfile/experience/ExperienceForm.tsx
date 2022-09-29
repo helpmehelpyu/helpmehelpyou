@@ -166,6 +166,7 @@ export default function ExperienceForm({
         <input
           type="submit"
           className="w-20 p-1 text-cyan-500 border-2 rounded border-cyan-500  hover:bg-slate-200 hover:cursor-pointer"
+          value="Submit"
         ></input>
         <input
           type="button"

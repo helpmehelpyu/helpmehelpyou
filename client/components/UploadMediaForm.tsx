@@ -75,6 +75,7 @@ export default function UploadMediaForm() {
         <input
           type="submit"
           className="m-2 p-1 text-cyan-500 border-2 rounded border-cyan-500"
+          value="Submit"
         ></input>
       </form>
     </div>

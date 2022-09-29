@@ -89,6 +89,7 @@ export default function AddLinkPopup({
               <input
                 type="submit"
                 className="w-full mt-5 p-1 mx-2 text-cyan-500 border-2 rounded border-cyan-500  hover:bg-slate-200 hover:cursor-pointer"
+                value="Submit"
               ></input>
             </form>
           </div>

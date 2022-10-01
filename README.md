@@ -4,7 +4,7 @@
 [![Sever CI](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/server.yml/badge.svg)](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/server.yml)
 [![Trigger Heroku to wake up](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/trigger-heroku.yml/badge.svg)](https://github.com/helpmehelpyu/helpmehelpyou/actions/workflows/trigger-heroku.yml)
 
-App deployed [here](https://main--helpmehelpyou.netlify.app/home)
+App deployed [here](https://helpmehelpyou.netlify.app/home)
 
 Backend Server deployed [here](https://helpmehelpyou.herokuapp.com/)
 

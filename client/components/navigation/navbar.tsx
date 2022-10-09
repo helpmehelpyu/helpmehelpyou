@@ -76,7 +76,7 @@ export default function Navbar() {
             onClick={() => setShowUserDropdown(true)}
             id="user"
           >
-            <span className="flex items-center justify-center border-2 rounded-full w-8 aspect-square text-sm">
+            <span className="relative flex items-center justify-center border-2 rounded-full w-8 aspect-square text-sm">
               <Avatar user={user}></Avatar>
             </span>
             {user.firstName}

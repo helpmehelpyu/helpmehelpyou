@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Avatar from '../Avatar';
 import ContactInfo from './contact/ContactInfo';
 import EditAvatarPopup from './avatar/EditAvatarPopup';
-import TabItem from '../TabItem';
+import TabItem from './workSamples/TabItem';
 import SkillsTab from './skills/SkillsTab';
 import AddSkillPopup from './skills/AddSkillPopup';
 import AddEducationPopup from './education/AddEducationPopup';
@@ -229,7 +229,7 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
   };
 
   return (
-    <div>
+    <div className="w-full">
       {showDeleteLinkConfirmation && linkToBeDeleted && (
         <DeleteConfirmationPopup
           closePopup={() => setShowDeleteLinkConfirmation(false)}
@@ -295,7 +295,7 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
           setShowEditAvatarPopup={setShowEditAvatarPopup}
         ></EditAvatarPopup>
       )}
-      <div className="bg-gray-50 space-y-10 p-5 md2:p-10 min-h-screen md2:min-w-0 min-w-min w-screen">
+      <div className="bg-gray-50 space-y-10 p-10 min-h-screen w-full min-w-min">
         <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
           <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
             <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2 select-none">
@@ -341,8 +341,8 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
           </div>
           {featuredWork}
         </div>
-        <div className="w-full border-2 rounded p-10">
-          <ul className="flex w-full justify-center items-center space-x-20 text-center">
+        <div className="border-2 rounded p-10">
+          <ul className="flex justify-evenly items-center text-center">
             {tabs}
           </ul>
         </div>

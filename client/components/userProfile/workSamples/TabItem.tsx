@@ -1,4 +1,4 @@
-import { Tabs } from './userProfile/UserProfile';
+import { Tabs } from '../UserProfile';
 
 interface Props {
   tab: Tabs;

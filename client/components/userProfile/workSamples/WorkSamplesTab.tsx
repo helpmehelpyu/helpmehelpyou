@@ -61,8 +61,10 @@ export default function WorkSamplesTab({
 
   if (media.length === 0) {
     return (
-      <div className="text-center">
-        <h1 className="text-4xl font-light p-16">No Work Samples</h1>
+      <div className="w-full text-center">
+        <h1 className="text-2xl lg:text-4xl font-light p-16 m-auto">
+          No Work Samples
+        </h1>
         <Link href={'/media/upload'}>
           <p className="inline-block text-3xl font-light underline p-2 hover:text-cyan-400 duration-200 hover:cursor-pointer">
             Add Some Here

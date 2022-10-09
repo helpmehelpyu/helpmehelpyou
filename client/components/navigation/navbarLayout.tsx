@@ -5,9 +5,9 @@ interface Props {
 
 export default function NavbarLayout({ children }: Props) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen min-w-min">
       <Navbar></Navbar>
-      <main className="flex justify-center items-center flex-grow">
+      <main className="flex justify-center items-center flex-grow min-w-min">
         {children}
       </main>
     </div>

@@ -339,7 +339,6 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
               </button>
             </div>
           </div>
-<!--           {featuredWork} -->
         </div>
         <div className="border-2 rounded p-10">
           <ul className="flex justify-evenly items-center text-center">

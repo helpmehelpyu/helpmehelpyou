@@ -175,22 +175,22 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
     }
   }, [addItem, selectedTab]);
 
-  let featuredWork = <div className="hidden"></div>;
-  if (user.userProfile.featuredWork !== '') {
-    featuredWork = (
-      <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
-        <h1 className="text-3xl font-bold text-center">Featured Work</h1>
-        <div className="relative md2:h-[70%] h-[50vw]">
-          <Image
-            alt="Featured Work"
-            layout="fill"
-            objectFit="contain"
-            src={user.userProfile.featuredWork}
-          ></Image>
-        </div>
-      </div>
-    );
-  }
+//   let featuredWork = <div className="hidden"></div>;
+//   if (user.userProfile.featuredWork !== '') {
+//     featuredWork = (
+//       <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
+//         <h1 className="text-3xl font-bold text-center">Featured Work</h1>
+//         <div className="relative md2:h-[70%] h-[50vw]">
+//           <Image
+//             alt="Featured Work"
+//             layout="fill"
+//             objectFit="contain"
+//             src={user.userProfile.featuredWork}
+//           ></Image>
+//         </div>
+//       </div>
+//     );
+//   }
 
   const deleteItem = async (): Promise<boolean> => {
     const res = await axios.delete('/users/skills', {
@@ -339,7 +339,6 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
               </button>
             </div>
           </div>
-          {featuredWork}
         </div>
         <div className="border-2 rounded p-10">
           <ul className="flex justify-evenly items-center text-center">

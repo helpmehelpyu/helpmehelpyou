@@ -175,22 +175,22 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
     }
   }, [addItem, selectedTab]);
 
-//   let featuredWork = <div className="hidden"></div>;
-//   if (user.userProfile.featuredWork !== '') {
-//     featuredWork = (
-//       <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
-//         <h1 className="text-3xl font-bold text-center">Featured Work</h1>
-//         <div className="relative md2:h-[70%] h-[50vw]">
-//           <Image
-//             alt="Featured Work"
-//             layout="fill"
-//             objectFit="contain"
-//             src={user.userProfile.featuredWork}
-//           ></Image>
-//         </div>
-//       </div>
-//     );
-//   }
+  //   let featuredWork = <div className="hidden"></div>;
+  //   if (user.userProfile.featuredWork !== '') {
+  //     featuredWork = (
+  //       <div className="space-y-10 md2:w-2/3 border-2 md2:rounded-l-2xl bg-white rounded min-w-max pt-5">
+  //         <h1 className="text-3xl font-bold text-center">Featured Work</h1>
+  //         <div className="relative md2:h-[70%] h-[50vw]">
+  //           <Image
+  //             alt="Featured Work"
+  //             layout="fill"
+  //             objectFit="contain"
+  //             src={user.userProfile.featuredWork}
+  //           ></Image>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
 
   const deleteItem = async (): Promise<boolean> => {
     const res = await axios.delete('/users/skills', {
@@ -296,9 +296,9 @@ export default function UserProfile({ initialUserData, canEdit }: Props) {
         ></EditAvatarPopup>
       )}
       <div className="bg-gray-50 space-y-10 p-10 min-h-screen w-full min-w-min">
-        <div className="flex flex-col md2:flex-row md2:space-x-5 md2:justify-center md2:items-stretch space-y-10 md2:space-y-0">
-          <div className="md2:rounded-r-2md2 border-2 md2:bg-white w-full rounded">
-            <div className="relative h-56 bg-slate-200 md2:rounded-tr-md2 select-none">
+        <div className="flex flex-col justify-center items-stretch space-y-10 md2:space-y-0">
+          <div className="border-2 md2:bg-white w-full rounded">
+            <div className="relative h-56 bg-slate-200 select-none">
               <div className="peer absolute border-4 border-slate-900 shadow rounded-full -bottom-20 left-0 right-0 m-auto bg-white h-60 w-60">
                 <div className="flex justify-center items-center h-full text-7xl">
                   <Avatar user={user}></Avatar>

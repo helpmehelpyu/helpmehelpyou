@@ -35,7 +35,7 @@ export default function HomeItem({ media }: Props) {
           <Link href={'/users/' + media.author.id}>
             <a>
               <div className="relative flex rounded items-center gap-2 hover:bg-slate-100 p-2 w-fit group">
-                <span className="flex items-center justify-center border-2 rounded-full w-10 aspect-square">
+                <span className="relative flex items-center justify-center border-2 rounded-full w-10 aspect-square">
                   <Avatar user={media.author}></Avatar>
                 </span>
                 <h2 className="text-2xl group-hover:underline">

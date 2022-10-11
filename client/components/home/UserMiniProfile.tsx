@@ -9,7 +9,7 @@ interface Props {
 export default function UserMiniProfile({ author }: Props) {
   return (
     <div className="flex flex-col justify-center gap-2 items-center w-full p-2">
-      <div className="flex items-center justify-center border-2 rounded-full w-10 aspect-square">
+      <div className="relative flex items-center justify-center border-2 rounded-full w-20 aspect-square">
         <Avatar user={author}></Avatar>
       </div>
       <h1 className="text-xl">

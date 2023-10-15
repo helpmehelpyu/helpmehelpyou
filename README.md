@@ -6,6 +6,8 @@
 
 App deployed [here](https://helpmehelpyou.netlify.app/home)
 
-Backend Server deployed [here](https://helpmehelpyou.herokuapp.com/)
+~~Backend Server deployed [here](https://helpmehelpyou.herokuapp.com/)~~
+Update: Heroku Free Tier doesn't exist anymore, so neither does my backend.
 
 Documentation can be found [here](https://helpmehelpyu.github.io/helpmehelpyou-docs/#/)
+
